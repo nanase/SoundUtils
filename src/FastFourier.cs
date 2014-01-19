@@ -32,7 +32,7 @@ namespace SoundUtils
         {
             int m, mh, i, j, k;
             double wr, wi, xr, xi,
-                   theta = -8.0 * Math.Atan(1.0) / n;
+                   theta = -Math.PI * 2.0 / n;
 
             for (m = n; (mh = m >> 1) >= 1; m = mh, theta *= 2.0)
                 for (i = 0; i < mh; i++)
@@ -66,8 +66,8 @@ namespace SoundUtils
         {
             int m, mh, i, j, k;
             double wr, wi, xr, xi,
-                   nd = (double)n,
-                   theta = 8.0 * Math.Atan(1.0) / nd;
+                   nd = 1.0 / (double)n,
+                   theta = Math.PI * 2.0 * nd;
 
             for (m = n; (mh = m >> 1) >= 1; m = mh, theta *= 2.0)
                 for (i = 0; i < mh; i++)
@@ -98,8 +98,8 @@ namespace SoundUtils
 
             for (i = 0; i < n; i++)
             {
-                ar[i] /= nd;
-                ai[i] /= nd;
+                ar[i] *= nd;
+                ai[i] *= nd;
             }
         }
     }
