@@ -34,7 +34,7 @@ namespace SoundUtils
             double wr, wi, xr, xi,
                    theta = -Math.PI * 2.0 / n;
 
-            for (m = n; (mh = m >> 1) >= 1; m = mh, theta *= 2.0)
+            for (m = n; (mh = m / 2) >= 1; m = mh, theta *= 2.0)
                 for (i = 0; i < mh; i++)
                     for (wr = Math.Cos(theta * i), wi = Math.Sin(theta * i), j = i; j < n; j += m)
                     {
@@ -49,7 +49,7 @@ namespace SoundUtils
 
             for (i = 0, j = 1; j < n - 1; j++)
             {
-                for (k = n >> 1; k > (i ^= k); k >>= 1) ;
+                for (k = n / 2; k > (i ^= k); k /= 2) ;
                 if (j < i)
                 {
                     xr = ar[j];
@@ -69,7 +69,7 @@ namespace SoundUtils
                    nd = 1.0 / (double)n,
                    theta = Math.PI * 2.0 * nd;
 
-            for (m = n; (mh = m >> 1) >= 1; m = mh, theta *= 2.0)
+            for (m = n; (mh = m / 2) >= 1; m = mh, theta *= 2.0)
                 for (i = 0; i < mh; i++)
                     for (wr = Math.Cos(theta * i), wi = Math.Sin(theta * i), j = i; j < n; j += m)
                     {
@@ -84,7 +84,7 @@ namespace SoundUtils
 
             for (i = 0, j = 1; j < n - 1; j++)
             {
-                for (k = n >> 1; k > (i ^= k); k >>= 1) ;
+                for (k = n / 2; k > (i ^= k); k /= 2) ;
                 if (j < i)
                 {
                     xr = ar[j];
