@@ -28,20 +28,27 @@ namespace SoundUtils
 {
     public class FilterBuffer<T>
     {
+        #region -- Private Fields --
         private readonly int length;
         private readonly T[] data;
         private readonly Action<T[]> action;
         private int index;
+        #endregion
 
+        #region -- Public Properties --
         public T[] Data { get { return this.data; } }
+        #endregion
 
+        #region -- Constructors --
         public FilterBuffer(int length, Action<T[]> action)
         {
             this.length = length;
             this.data = new T[length];
             this.action = action;
         }
+        #endregion
 
+        #region -- Public Methods --
         public void Push(T[] input)
         {
             if (input == null)
@@ -65,7 +72,7 @@ namespace SoundUtils
                 }
             }
         }
-
+        
         public void Close()
         {
             if (this.index > 0)
@@ -76,5 +83,6 @@ namespace SoundUtils
                 this.index = 0;
             }
         }
+        #endregion
     }
 }
