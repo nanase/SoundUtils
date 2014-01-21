@@ -37,6 +37,8 @@ namespace SoundUtils
 
         #region -- Public Properties --
         public T[] Data { get { return this.data; } }
+
+        public int Length { get { return this.length; } }
         #endregion
 
         #region -- Constructors --
@@ -72,7 +74,7 @@ namespace SoundUtils
                 }
             }
         }
-        
+
         public void Close()
         {
             if (this.index > 0)
