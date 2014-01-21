@@ -28,6 +28,7 @@ namespace SoundUtils
 {
     public class FastFourier
     {
+        #region -- Public Static Methods --
         public static void FFT(int n, double[] ar, double[] ai)
         {
             int m, mh, i, j, k;
@@ -102,5 +103,6 @@ namespace SoundUtils
                 ai[i] *= nd;
             }
         }
+        #endregion
     }
 }
