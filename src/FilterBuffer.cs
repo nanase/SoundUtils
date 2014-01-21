@@ -26,6 +26,10 @@ using System;
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// データ型 T の配列に対する固定バッファを提供します。
+    /// </summary>
+    /// <typeparam name="T">バッファとして確保されるデータ型。</typeparam>
     public class FilterBuffer<T>
     {
         #region -- Private Fields --
@@ -36,12 +40,23 @@ namespace SoundUtils
         #endregion
 
         #region -- Public Properties --
+        /// <summary>
+        /// バッファに対する生の配列を取得します。
+        /// </summary>
         public T[] Data { get { return this.data; } }
 
+        /// <summary>
+        /// バッファの長さを取得します。
+        /// </summary>
         public int Length { get { return this.length; } }
         #endregion
 
         #region -- Constructors --
+        /// <summary>
+        /// バッファの長さと実行される処理を指定して新しい FilterBuffer クラスのインスタンスを初期化します。
+        /// </summary>
+        /// <param name="length">バッファの長さ。</param>
+        /// <param name="action">バッファが length に達した時に実行される処理。</param>
         public FilterBuffer(int length, Action<T[]> action)
         {
             this.length = length;
@@ -51,6 +66,10 @@ namespace SoundUtils
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// バッファにデータを格納します。
+        /// </summary>
+        /// <param name="input">格納されるデータ型 T の配列。</param>
         public void Push(T[] input)
         {
             if (input == null)
@@ -75,6 +94,9 @@ namespace SoundUtils
             }
         }
 
+        /// <summary>
+        /// バッファのデータ格納を終了し、足りない領域をクリアして指定された処理を実行します。
+        /// </summary>
         public void Close()
         {
             if (this.index > 0)
