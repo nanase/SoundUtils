@@ -27,7 +27,7 @@ namespace SoundUtils
     public class Channel
     {
         #region -- Public Static Methods --
-        public static void Split(double[] source, double[] lch, double[] rch)
+        public static void Split<T>(T[] source, T[] lch, T[] rch)
         {
             for (int i = 0; i < source.Length / 2; i++)
             {
@@ -36,7 +36,7 @@ namespace SoundUtils
             }
         }
 
-        public static void Join(double[] lch, double[] rch, double[] dest)
+        public static void Join<T>(T[] lch, T[] rch, T[] dest)
         {
             for (int i = 0; i < dest.Length; i++)
             {
