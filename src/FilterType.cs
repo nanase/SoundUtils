@@ -24,12 +24,34 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// フィルタの種類です。
+    /// </summary>
     public enum FilterType
     {
+        /// <summary>
+        /// インパルスを生成しません。
+        /// </summary>
         None,
+
+        /// <summary>
+        /// ローパスフィルタ。
+        /// </summary>
         LowPass,
+
+        /// <summary>
+        /// ハイパスフィルタ。
+        /// </summary>
         HighPass,
+
+        /// <summary>
+        /// バンドパスフィルタ。
+        /// </summary>
         BandPass,
+
+        /// <summary>
+        /// バンドエリミネーションフィルタ。
+        /// </summary>
         BandElimination
     }
 }
