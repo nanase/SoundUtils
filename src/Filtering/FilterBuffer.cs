@@ -24,7 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 
-namespace SoundUtils
+namespace SoundUtils.Filtering
 {
     /// <summary>
     /// データ型 T の配列に対する固定バッファを提供します。
