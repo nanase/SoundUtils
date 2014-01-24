@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Channel.cs" />
+    <Compile Include="Filtering\FIR\BandFilter.cs" />
     <Compile Include="Filtering\FIR\CutoffFilter.cs" />
     <Compile Include="Math\FastFourier.cs" />
     <Compile Include="Filtering\FFTFiltering.cs" />
