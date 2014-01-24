@@ -22,37 +22,94 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+
 namespace SoundUtils.Filtering.FIR
 {
     public abstract class ImpulseResponse
     {
-        public abstract double[] Generate(double delta);
+        #region -- Public Properties --
+        public double SamplingRate { get; set; }
+        #endregion
+        
+        #region -- Public Methods --
+        public double[] Generate(double delta)
+        {
+            return this.Generate(ImpulseResponse.GetFilterSize(this.SamplingRate, delta));
+        }
 
-        public abstract double[] Generate(int length);
+        public double[] Generate(int length)
+        {
+            if ((length & 1) == 1)
+                length--;
 
-        public abstract void Generate(double[] array, double delta);
+            // length は偶数
+            double[] array = new double[length + 1];
 
-        public abstract void Generate(double[] array, int length);
+            this.GenerateValues(array, length);
+
+            return array;
+        }
+
+        public void Generate(double[] array)
+        {
+            int length = array.Length;
+
+            if ((length & 1) == 1)
+                length--;
+
+            // length は偶数
+            this.GenerateValues(array, length);
+        }
+
+        public void Generate(double[] array, double delta)
+        {
+            this.Generate(array, ImpulseResponse.GetFilterSize(this.SamplingRate, delta));
+        }
+
+        public void Generate(double[] array, int length)
+        {
+            if (array.Length < length)
+                throw new ArgumentOutOfRangeException("length");
+
+            int arrayLength = array.Length;
+
+            if ((arrayLength & 1) == 1)
+                arrayLength--;
+
+            if ((length & 1) == 1)
+                length--;
+
+            // length は偶数
+            this.GenerateValues(array, Math.Min(arrayLength, length));
+        }
+        #endregion
 
         #region -- Public Static Methods --
-        public static double GetDelta(double samplingFreq, int delayer)
+        public static double GetDelta(double samplingRate, int delayer)
         {
+            // 奇数で返す
             if ((delayer & 1) == 0)
                 delayer--;
 
-            return (3.1 / (delayer - 0.5)) * samplingFreq;
+            return (3.1 / (delayer - 0.5)) * samplingRate;
         }
 
-        public static int GetFilterSize(double samplingFreq, double delta)
+        public static int GetFilterSize(double samplingRate, double delta)
         {
-            delta /= samplingFreq;
+            delta /= samplingRate;
             int delayer = (int)(3.1 / delta + 0.5) - 1;
 
+            // 偶数で返す
             if ((delayer & 1) == 1)
                 delayer++;
 
             return delayer;
         }
+        #endregion
+
+        #region -- Protected Methods --
+        protected abstract void GenerateValues(double[] array, int size);
         #endregion
     }
 }
