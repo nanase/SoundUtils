@@ -57,6 +57,7 @@
     <Compile Include="Channel.cs" />
     <Compile Include="Filtering\FIR\LowPassFilter.cs" />
     <Compile Include="Filtering\FIR\HighPassFilter.cs" />
+    <Compile Include="Filtering\FIR\BandPassFilter.cs" />
     <Compile Include="Filtering\FIR\BandFilter.cs" />
     <Compile Include="Filtering\FIR\CutoffFilter.cs" />
     <Compile Include="Math\FastFourier.cs" />
