@@ -53,12 +53,14 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Public Methods --
-        public void SetFilter(FilterType type, double fe1, double fe2)
+        public void SetFilter(double[] impulseResponses)
         {
-            this.lfilter.SetFilter(type, fe1, fe2);
+            this.lfilter.SetFilter(impulseResponses);
 
             if (this.stereo)
-                this.rfilter.SetFilter(type, fe1, fe2);
+                this.rfilter.SetFilter(impulseResponses);
+        }
+
         }
 
         public void Filtering(double[] input, double[] output)
