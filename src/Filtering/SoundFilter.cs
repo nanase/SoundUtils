@@ -26,12 +26,6 @@ namespace SoundUtils.Filtering
 {
     public class SoundFilter
     {
-        #region -- Public Fields --
-        public const int DefaultFilterSize = 2048 / 4;
-        public const int DefaultSegmentSize = 2048 / 4;
-        public const int DefaultFFTSize = 4096 / 4;
-        #endregion
-
         #region -- Private Fields --
         private readonly FFTFiltering lfilter, rfilter;
         private readonly bool stereo;
@@ -44,15 +38,15 @@ namespace SoundUtils.Filtering
             this.stereo = stereo;
             if (stereo)
             {
-                this.lfilter = new FFTFiltering(samplingFreq, DefaultFilterSize, DefaultSegmentSize, DefaultFFTSize, bufferSize / 2);
-                this.rfilter = new FFTFiltering(samplingFreq, DefaultFilterSize, DefaultSegmentSize, DefaultFFTSize, bufferSize / 2);
+                this.lfilter = new FFTFiltering(samplingFreq, bufferSize / 32, bufferSize / 16, bufferSize / 2, bufferSize / 2);
+                this.rfilter = new FFTFiltering(samplingFreq, bufferSize / 32, bufferSize / 16, bufferSize / 2, bufferSize / 2);
 
                 this.lbuffer = new double[bufferSize / 2];
                 this.rbuffer = new double[bufferSize / 2];
             }
             else
             {
-                this.lfilter = new FFTFiltering(samplingFreq, DefaultFilterSize, DefaultSegmentSize, DefaultFFTSize, bufferSize);
+                this.lfilter = new FFTFiltering(samplingFreq, bufferSize / 16, bufferSize / 8, bufferSize, bufferSize);
                 this.lbuffer = new double[bufferSize];
             }
         }
