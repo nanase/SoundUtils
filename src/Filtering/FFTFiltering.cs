@@ -65,6 +65,11 @@ namespace SoundUtils.Filtering
         #region -- Public Methods --
         public void SetFilter(double[] impulseResponses)
         {
+            Array.Clear(this.fr, 0, this.fftSize);
+            Array.Clear(this.fi, 0, this.fftSize);
+            Array.Clear(this.overlap, 0, this.overlapSize);
+            Array.Clear(this.output, 0, this.bufferSize);
+
             Array.Copy(impulseResponses, this.fr, Math.Min(impulseResponses.Length, this.fftSize));
             FastFourier.FFT(this.fftSize, this.fr, this.fi);
         }
