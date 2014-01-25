@@ -61,6 +61,7 @@
     <Compile Include="Filtering\FIR\BandEliminationFilter.cs" />
     <Compile Include="Filtering\FIR\BandFilter.cs" />
     <Compile Include="Filtering\FIR\CutoffFilter.cs" />
+    <Compile Include="Filtering\FIR\CombFilter.cs" />
     <Compile Include="Math\FastFourier.cs" />
     <Compile Include="Filtering\FFTFiltering.cs" />
     <Compile Include="Filtering\FilterBuffer.cs" />
