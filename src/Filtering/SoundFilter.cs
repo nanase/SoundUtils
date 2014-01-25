@@ -61,6 +61,19 @@ namespace SoundUtils.Filtering
                 this.rfilter.SetFilter(impulseResponses);
         }
 
+        public void Filtering(double[] buffer)
+        {
+            if (this.stereo)
+            {
+                Channel.Split(buffer, this.lbuffer, this.rbuffer);
+                this.lfilter.Apply(this.lbuffer);
+                this.rfilter.Apply(this.rbuffer);
+                Channel.Join(this.lbuffer, this.rbuffer, buffer);
+            }
+            else
+            {
+                this.lfilter.Apply(buffer);
+            }
         }
 
         public void Filtering(double[] input, double[] output)
