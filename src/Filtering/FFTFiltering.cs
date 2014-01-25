@@ -63,11 +63,9 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Public Methods --
-        public void SetFilter(FilterType type, double fe1, double fe2)
+        public void SetFilter(double[] impulseResponses)
         {
-            var delta = GetDelta(this.sfreq, this.filterSize + 1);
-            var filter = GetFilter(FilterType.LowPass, this.sfreq, delta, fe1, fe2);
-            filter.CopyTo(this.fr, 0);
+            Array.Copy(impulseResponses, this.fr, Math.Min(impulseResponses.Length, this.fftSize));
             FastFourier.FFT(this.fftSize, this.fr, this.fi);
         }
 
