@@ -76,21 +76,19 @@ namespace SoundUtils.Filtering
 
         public void Apply(double[] buffer)
         {
-            double dbl_R, dbl_I;
             for (int iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {
                 Array.Clear(xr, 0, fftSize);
                 Array.Clear(xi, 0, fftSize);
 
-                for (int i = 0; i < segmentSize; i++)
-                    xr[i] = buffer[iOffset + i];
+                Array.Copy(buffer, iOffset, xr, 0, segmentSize);
 
                 FastFourier.FFT(fftSize, xr, xi);
 
                 for (int i = 0; i < fftSize; i++)
                 {
-                    dbl_R = fr[i] * xr[i] - fi[i] * xi[i];
-                    dbl_I = fr[i] * xi[i] + fi[i] * xr[i];
+                    double dbl_R = fr[i] * xr[i] - fi[i] * xi[i];
+                    double dbl_I = fr[i] * xi[i] + fi[i] * xr[i];
                     xr[i] = dbl_R;
                     xi[i] = dbl_I;
                 }
@@ -103,11 +101,8 @@ namespace SoundUtils.Filtering
                 for (int i = segmentSize; i < fftSize; i++)
                     overlap[i - segmentSize] = xr[i];
 
-                for (int i = 0; i < segmentSize; i++)
-                    output[iOffset + i] = xr[i];
+                Array.Copy(xr, 0, buffer, iOffset, segmentSize);
             }
-
-            output.CopyTo(buffer, 0);
         }
         #endregion
 
