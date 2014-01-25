@@ -31,15 +31,13 @@ namespace SoundUtils.Filtering.FIR
         #region -- Protected Methods --
         protected override void GenerateValues(double[] array, int size)
         {
-            // size は奇数
-
             int offset = size / 2;
             double feL_2 = 2.0 * (this.FrequencyLow / this.SamplingRate);
             double feH_2 = 2.0 * (this.FrequencyHigh / this.SamplingRate);
             double feL_PI2 = Math.PI * feL_2;
             double feH_PI2 = Math.PI * feH_2;
 
-            for (int i = 0, j = -offset; j <= offset; i++, j++)
+            for (int i = 0, j = -offset; i < size && j <= offset; i++, j++)
                 array[i] = feH_2 * SoundMath.Sinc(feH_PI2 * j) - feL_2 * SoundMath.Sinc(feL_PI2 * j);
         }
         #endregion
