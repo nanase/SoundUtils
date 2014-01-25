@@ -40,10 +40,6 @@ namespace SoundUtils.Filtering.FIR
 
         public double[] Generate(int length)
         {
-            //if ((length & 1) == 1)
-            //    length--;
-
-            // length は偶数
             double[] array = new double[length];
 
             this.GenerateValues(array, length);
@@ -55,10 +51,6 @@ namespace SoundUtils.Filtering.FIR
         {
             int length = array.Length;
 
-            //if ((length & 1) == 1)
-            //    length--;
-
-            // length は偶数
             this.GenerateValues(array, length);
         }
 
@@ -74,13 +66,6 @@ namespace SoundUtils.Filtering.FIR
 
             int arrayLength = array.Length;
 
-            //if ((arrayLength & 1) == 1)
-            //    arrayLength--;
-
-            //if ((length & 1) == 1)
-            //    length--;
-
-            // length は偶数
             this.GenerateValues(array, Math.Min(arrayLength, length));
         }
         #endregion
