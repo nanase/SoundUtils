@@ -32,6 +32,8 @@ namespace SoundUtils.Filtering
         private readonly double sfreq;
         private readonly int filterSize, segmentSize, fftSize, overlapSize, bufferSize;
         private readonly double[] fr, fi, xr, xi, overlap, output;
+
+        private readonly FastFourier fft;
         #endregion
 
         #region -- Constructors --
@@ -59,6 +61,8 @@ namespace SoundUtils.Filtering
             this.xi = new double[fftSize];
             this.overlap = new double[overlapSize];
             this.output = new double[bufferSize];
+
+            this.fft = new FastFourier(fftSize * 2);
         }
         #endregion
 
@@ -71,7 +75,9 @@ namespace SoundUtils.Filtering
             Array.Clear(this.output, 0, this.bufferSize);
 
             Array.Copy(impulseResponses, this.fr, Math.Min(impulseResponses.Length, this.fftSize));
-            FastFourier.FFT(this.fftSize, this.fr, this.fi);
+            
+            //FastFourier.FFT(this.fftSize, this.fr, this.fi);
+            this.fft.TransformComprex(false, this.fr, this.fi);
         }
 
         public void Apply(double[] buffer)
@@ -83,7 +89,8 @@ namespace SoundUtils.Filtering
 
                 Array.Copy(buffer, iOffset, xr, 0, segmentSize);
 
-                FastFourier.FFT(fftSize, xr, xi);
+                //FastFourier.FFT(fftSize, xr, xi);
+                this.fft.TransformComprex(false, this.xr, this.xi);
 
                 for (int i = 0; i < fftSize; i++)
                 {
@@ -93,7 +100,8 @@ namespace SoundUtils.Filtering
                     xi[i] = dbl_I;
                 }
 
-                FastFourier.IFFT(fftSize, xr, xi);
+                //FastFourier.IFFT(fftSize, xr, xi);
+                this.fft.TransformComprex(true, this.xr, this.xi);
 
                 for (int i = 0; i < overlapSize; i++)
                     xr[i] += overlap[i];
