@@ -87,8 +87,8 @@ namespace SoundUtils.Filtering
             }
             else
             {
-                this.lfilter.Apply(input);
                 input.CopyTo(output, 0);
+                this.lfilter.Apply(output);
             }
         }
         #endregion
