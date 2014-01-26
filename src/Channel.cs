@@ -38,12 +38,10 @@ namespace SoundUtils
 
         public static void Join<T>(T[] lch, T[] rch, T[] dest)
         {
-            for (int i = 0; i < dest.Length; i++)
+            for (int i = 0, j = 0; i < dest.Length; j++)
             {
-                if ((i & 1) == 0)
-                    dest[i] = lch[i / 2];
-                else
-                    dest[i] = rch[i / 2];
+                dest[i++] = lch[j];
+                dest[i++] = rch[j];
             }
         }
         #endregion
