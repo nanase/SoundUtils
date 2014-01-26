@@ -29,10 +29,10 @@ namespace SoundUtils
         #region -- Public Static Methods --
         public static void Split<T>(T[] source, T[] lch, T[] rch)
         {
-            for (int i = 0; i < source.Length / 2; i++)
+            for (int i = 0, j = 0; i < source.Length / 2; i++)
             {
-                lch[i] = source[i * 2];
-                rch[i] = source[i * 2 + 1];
+                lch[i] = source[j++];
+                rch[i] = source[j++];
             }
         }
 
