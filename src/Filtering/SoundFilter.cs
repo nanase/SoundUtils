@@ -33,7 +33,7 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Constructors --
-        public SoundFilter(bool stereo, double samplingFreq, int bufferSize)
+        public SoundFilter(bool stereo, int bufferSize)
         {
             this.stereo = stereo;
             if (stereo)
