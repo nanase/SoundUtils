@@ -28,10 +28,18 @@ namespace SoundUtils.Filtering.FIR
 {
     public abstract class ImpulseResponse
     {
-        #region -- Public Properties --
-        public double SamplingRate { get; set; }
+        #region -- Protected Fields --
+        protected double samplingRate;
         #endregion
-        
+
+        #region -- Public Properties --
+        public double SamplingRate
+        {
+            get { return this.samplingRate / 0.918; }
+            set { this.samplingRate = value * 0.918; }
+        }
+        #endregion
+
         #region -- Public Methods --
         public double[] Generate(double delta)
         {
