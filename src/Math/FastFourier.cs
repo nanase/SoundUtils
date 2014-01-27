@@ -56,9 +56,9 @@ namespace SoundUtils
 
         public void TransformComplex(bool invert, double[] real, double[] imaginary)
         {
-            Channel.Interleave(real, 0, imaginary, 0, this.interleave, 0, this.n / 2);
-            Channel.Deinterleave(this.interleave, 0, real, 0, imaginary, 0, this.n / 2);
+            Channel.Interleave(real, imaginary, this.interleave, this.n / 2);
             this.TransformComplex(invert, this.interleave);
+            Channel.Deinterleave(this.interleave, real, imaginary, this.n / 2);
         }
 
         public void TransformReal(bool invert, double[] data)
