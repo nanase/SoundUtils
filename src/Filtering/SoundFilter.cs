@@ -36,19 +36,16 @@ namespace SoundUtils.Filtering
         public SoundFilter(bool stereo, int bufferSize)
         {
             this.stereo = stereo;
+
             if (stereo)
             {
-                this.lfilter = new FFTFiltering(samplingFreq, bufferSize / 32, bufferSize / 16, bufferSize / 2, bufferSize / 2);
-                this.rfilter = new FFTFiltering(samplingFreq, bufferSize / 32, bufferSize / 16, bufferSize / 2, bufferSize / 2);
+                bufferSize /= 2;
+                this.rfilter = new FFTFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+                this.rbuffer = new double[bufferSize];
+            }
 
-                this.lbuffer = new double[bufferSize / 2];
-                this.rbuffer = new double[bufferSize / 2];
-            }
-            else
-            {
-                this.lfilter = new FFTFiltering(samplingFreq, bufferSize / 16, bufferSize / 8, bufferSize, bufferSize);
-                this.lbuffer = new double[bufferSize];
-            }
+            this.lfilter = new FFTFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+            this.lbuffer = new double[bufferSize];
         }
         #endregion
 
