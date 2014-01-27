@@ -30,7 +30,7 @@ namespace SoundUtils.Filtering
     {
         #region -- Private Fields --
         private readonly int filterSize, segmentSize, fftSize, overlapSize, bufferSize;
-        private readonly double[] fr, fi, xr, xi, overlap, output;
+        private readonly double[] fr, fi, xr, fft_c, overlap, output;
 
         private readonly FastFourier fft;
         #endregion
@@ -56,7 +56,7 @@ namespace SoundUtils.Filtering
             this.fr = new double[fftSize];
             this.fi = new double[fftSize];
             this.xr = new double[fftSize];
-            this.xi = new double[fftSize];
+            this.fft_c = new double[fftSize * 2];
             this.overlap = new double[overlapSize];
             this.output = new double[bufferSize];
 
@@ -73,8 +73,6 @@ namespace SoundUtils.Filtering
             Array.Clear(this.output, 0, this.bufferSize);
 
             Array.Copy(impulseResponses, this.fr, Math.Min(impulseResponses.Length, this.fftSize));
-
-            //FastFourier.FFT(this.fftSize, this.fr, this.fi);
             this.fft.TransformComprex(false, this.fr, this.fi);
         }
 
@@ -82,24 +80,21 @@ namespace SoundUtils.Filtering
         {
             for (int iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {
-                Array.Clear(xr, 0, fftSize);
-                Array.Clear(xi, 0, fftSize);
+                Array.Clear(this.fft_c, this.segmentSize, fftSize * 2 - this.segmentSize);
+                Channel.Interleave(buffer, iOffset, this.fft_c, 0, this.segmentSize);
 
-                Array.Copy(buffer, iOffset, xr, 0, segmentSize);
+                this.fft.TransformComprex(false, this.fft_c);
 
-                //FastFourier.FFT(fftSize, xr, xi);
-                this.fft.TransformComprex(false, this.xr, this.xi);
-
-                for (int i = 0; i < fftSize; i++)
+                for (int i = 0, j = 1, k = 0, l = fftSize * 2; i < l; i += 2, j += 2, k++)
                 {
-                    double dbl_R = fr[i] * xr[i] - fi[i] * xi[i];
-                    double dbl_I = fr[i] * xi[i] + fi[i] * xr[i];
-                    xr[i] = dbl_R;
-                    xi[i] = dbl_I;
+                    double dbl_R = fr[k] * fft_c[i] - fi[k] * fft_c[j];
+                    double dbl_I = fr[k] * fft_c[j] + fi[k] * fft_c[i];
+                    fft_c[i] = dbl_R;
+                    fft_c[j] = dbl_I;
                 }
 
-                //FastFourier.IFFT(fftSize, xr, xi);
-                this.fft.TransformComprex(true, this.xr, this.xi);
+                this.fft.TransformComprex(true, this.fft_c);
+                Channel.Deinterleave(this.fft_c, this.xr, this.fftSize);
 
                 for (int i = 0; i < overlapSize; i++)
                     xr[i] += overlap[i];
