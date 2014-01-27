@@ -77,10 +77,25 @@ namespace SoundUtils
             }
         }
 
+        public static void Deinterleave<T>(T[] src, T[] dest, int count)
+        {
+            for (int i = 0, j = 0, k = 0; i < count; i++, j += 2, k++)
+                dest[k] = src[j];
+        }
+
         public static void Deinterleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
         {
             for (int i = 0, j = srcOffset, k = dest_offset; i < count; i++, j += 2, k++)
                 dest[k] = src[j];
+        }
+
+        public static void Deinterleave<T>(T[] src, T[] destR, T[] destI, int count)
+        {
+            for (int i = 0, j = 0, k = 0, l = 0; i < count; i++, j += 2, k++, l++)
+            {
+                destR[k] = src[j];
+                destI[l] = src[j + 1];
+            }
         }
 
         public static void Deinterleave<T>(T[] src, int srcOffset, T[] destR, int destR_offset, T[] destI, int destI_offset, int count)
