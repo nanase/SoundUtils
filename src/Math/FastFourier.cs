@@ -41,7 +41,7 @@ namespace SoundUtils
             this.interleave = new double[n];
         }
 
-        public void TransformComprex(bool invert, double[] data)
+        public void TransformComplex(bool invert, double[] data)
         {
             FastFourier.cdft(this.n, invert, data, this.ip, this.w);
 
@@ -54,11 +54,11 @@ namespace SoundUtils
             }
         }
 
-        public void TransformComprex(bool invert, double[] real, double[] imaginary)
+        public void TransformComplex(bool invert, double[] real, double[] imaginary)
         {
             Channel.Interleave(real, 0, imaginary, 0, this.interleave, 0, this.n / 2);
-            this.TransformComprex(invert, this.interleave);
             Channel.Deinterleave(this.interleave, 0, real, 0, imaginary, 0, this.n / 2);
+            this.TransformComplex(invert, this.interleave);
         }
 
         public void TransformReal(bool invert, double[] data)
