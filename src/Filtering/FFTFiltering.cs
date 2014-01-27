@@ -29,7 +29,6 @@ namespace SoundUtils.Filtering
     public class FFTFiltering
     {
         #region -- Private Fields --
-        private readonly double sfreq;
         private readonly int filterSize, segmentSize, fftSize, overlapSize, bufferSize;
         private readonly double[] fr, fi, xr, xi, overlap, output;
 
@@ -37,7 +36,7 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Constructors --
-        public FFTFiltering(double samplingFrequency, int filterSize, int segmentSize, int fftSize, int bufferSize)
+        public FFTFiltering(int filterSize, int segmentSize, int fftSize, int bufferSize)
         {
             if (segmentSize < filterSize)
                 throw new ArgumentException("segmentSize は filterSize 未満でなくてはなりません。");
@@ -48,7 +47,6 @@ namespace SoundUtils.Filtering
             if (fftSize > bufferSize)
                 throw new ArgumentException("fftSize は bufferSize 未満でなくてはなりません。");
 
-            this.sfreq = samplingFrequency;
             this.filterSize = filterSize;
             this.segmentSize = segmentSize;
             this.fftSize = fftSize;
@@ -75,7 +73,7 @@ namespace SoundUtils.Filtering
             Array.Clear(this.output, 0, this.bufferSize);
 
             Array.Copy(impulseResponses, this.fr, Math.Min(impulseResponses.Length, this.fftSize));
-            
+
             //FastFourier.FFT(this.fftSize, this.fr, this.fi);
             this.fft.TransformComprex(false, this.fr, this.fi);
         }
