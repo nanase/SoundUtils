@@ -56,8 +56,12 @@ namespace SoundUtils
 
         public static void Interleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
         {
-            for (int i = 0, j = srcOffset, k = dest_offset; i < count; i++, j++, k += 2)
+            for (int i = 0, j = srcOffset, k = dest_offset; i < count; i++, j++, k++)
+            {
                 dest[k] = src[j];
+                dest[++k] = default(T);
+            }
+        }
 
         public static void Interleave<T>(T[] srcR, T[] srcI, T[] dest, int count)
         {
