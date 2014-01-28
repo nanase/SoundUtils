@@ -40,5 +40,19 @@ namespace SoundUtils
                 for (int i = 0; i < length; i++)
                     array[i] *= 0.5 - 0.5 * Math.Cos(factor * (i + 0.5));
         }
+
+        public static void Hamming(double[] array)
+        {
+            int length = array.Length;
+            double factor = 2.0 * Math.PI / (double)length;
+
+            if (length % 2 == 0)
+                for (int i = 0; i < length; i++)
+                    array[i] *= 0.54 - 0.46 * Math.Cos(factor * i);
+            else
+                for (int i = 0; i < length; i++)
+                    array[i] *= 0.54 - 0.46 * Math.Cos(factor * (i + 0.5));
+        }
+
     }
 }
