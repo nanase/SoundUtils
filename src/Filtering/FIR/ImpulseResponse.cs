@@ -35,8 +35,8 @@ namespace SoundUtils.Filtering.FIR
         #region -- Public Properties --
         public double SamplingRate
         {
-            get { return this.samplingRate / 0.918; }
-            set { this.samplingRate = value * 0.918; }
+            get { return this.samplingRate; }
+            set { this.samplingRate = value; }
         }
         #endregion
 
