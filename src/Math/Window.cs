@@ -54,5 +54,16 @@ namespace SoundUtils
                     array[i] *= 0.54 - 0.46 * Math.Cos(factor * (i + 0.5));
         }
 
+        public static void Bartlett(double[] array)
+        {
+            int length = array.Length;
+
+            if (length % 2 == 0)
+                for (int i = 0; i < length; i++)
+                    array[i] *= 1.0 - 2.0 * Math.Abs(i / (double)length - 0.5);
+            else
+                for (int i = 0; i < length; i++)
+                    array[i] *= 1.0 - 2.0 * Math.Abs((i + 0.5) / (double)length - 0.5);
+        }
     }
 }
