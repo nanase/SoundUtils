@@ -347,7 +347,7 @@ namespace SoundUtils.IO
         /// このオブジェクトによって使用されているアンマネージリソースを解放し、オプションでマネージリソースも解放します。
         /// </summary>
         /// <param name="disposing">マネージリソースとアンマネージリソースの両方を解放する場合は true。アンマネージリソースだけを解放する場合は false。</param>
-        protected override void Dispose(bool disposing)
+        protected void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
