@@ -304,40 +304,40 @@ namespace SoundUtils.IO
             using (BinaryWriter bw = new BinaryWriter(this.BaseStream))
             {
                 // 4 bytes, offset 4
-                bw.Write(BitOperate.Reverse((int)0x52494646, little));
+                bw.Write(BitOperate.ReverseBytes((int)0x52494646, little));
 
                 // 4 bytes, offset 8
-                bw.Write(BitOperate.Reverse((int)(this.WrittenBytes + 36), big));
+                bw.Write(BitOperate.ReverseBytes((int)(this.WrittenBytes + 36), big));
 
                 // 8 bytes, offset 16
-                bw.Write(BitOperate.Reverse((long)0x57415645666D7420, little));
+                bw.Write(BitOperate.ReverseBytes((long)0x57415645666D7420, little));
 
                 // 4 bytes, offset 20
-                bw.Write(BitOperate.Reverse((int)16, big));
+                bw.Write(BitOperate.ReverseBytes((int)16, big));
 
                 // 2 bytes, offset 22
-                bw.Write(BitOperate.Reverse((short)1, big));
+                bw.Write(BitOperate.ReverseBytes((short)1, big));
 
                 // 2 bytes, offset 24
-                bw.Write(BitOperate.Reverse((short)this.ChannelCount, big));
+                bw.Write(BitOperate.ReverseBytes((short)this.ChannelCount, big));
 
                 // 4 bytes, offset 28
-                bw.Write(BitOperate.Reverse((int)this.SamplingRate, big));
+                bw.Write(BitOperate.ReverseBytes((int)this.SamplingRate, big));
 
                 // 4 bytes, offset 32
-                bw.Write(BitOperate.Reverse((int)(this.SamplingRate * this.ChannelCount * (this.BitPerSample / 8)), big));
+                bw.Write(BitOperate.ReverseBytes((int)(this.SamplingRate * this.ChannelCount * (this.BitPerSample / 8)), big));
 
                 // 2 bytes, offset 34
-                bw.Write(BitOperate.Reverse((short)(this.ChannelCount * (this.BitPerSample / 8)), big));
+                bw.Write(BitOperate.ReverseBytes((short)(this.ChannelCount * (this.BitPerSample / 8)), big));
 
                 // 2 bytes, offset 36
-                bw.Write(BitOperate.Reverse((short)this.BitPerSample, big));
+                bw.Write(BitOperate.ReverseBytes((short)this.BitPerSample, big));
 
                 // 4 bytes, offset 40
-                bw.Write(BitOperate.Reverse((int)0x64617461, little));
+                bw.Write(BitOperate.ReverseBytes((int)0x64617461, little));
 
                 // 4 bytes, offset 44
-                bw.Write(BitOperate.Reverse((int)this.WrittenBytes, big));
+                bw.Write(BitOperate.ReverseBytes((int)this.WrittenBytes, big));
             }
         }
         #endregion

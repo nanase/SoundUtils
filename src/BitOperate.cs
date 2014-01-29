@@ -8,7 +8,7 @@ namespace SoundUtils
     public unsafe static class BitOperate
     {
         #region -- Public Static Methods --
-        public static long Reverse(long value, bool reverse)
+        public static long ReverseBytes(long value, bool reverse)
         {
             if (reverse)
             {
@@ -23,7 +23,7 @@ namespace SoundUtils
                 return value;
         }
 
-        public static int Reverse(int value, bool reverse)
+        public static int ReverseBytes(int value, bool reverse)
         {
             if (reverse)
             {
@@ -34,7 +34,7 @@ namespace SoundUtils
                 return value;
         }
 
-        public static short Reverse(short value, bool reverse)
+        public static short ReverseBytes(short value, bool reverse)
         {
             if (reverse)
             {
