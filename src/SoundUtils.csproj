@@ -58,6 +58,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitOperate.cs" />
     <Compile Include="Channel.cs" />
     <Compile Include="Filtering\FIR\LowPassFilter.cs" />
     <Compile Include="Filtering\FIR\HighPassFilter.cs" />
