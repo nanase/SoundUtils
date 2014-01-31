@@ -35,5 +35,20 @@ namespace SoundUtils
         {
             return x == 0.0 ? 1.0 : Math.Sin(x) / x;
         }
+
+        public static double Bessel0(double x, int iterate = 100)
+        {
+            double y = 0.0;
+            double f;
+
+            for (int i = 0; i < iterate; i++)
+            {
+                f = InvertedFactorial(i);
+
+                y += (f * f) * Math.Pow(x / 2.0, 2.0 * i);
+            }
+
+            return y;
+        }
     }
 }
