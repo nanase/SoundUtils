@@ -26,6 +26,9 @@ using System;
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// 各種の窓関数を畳み込むためのメソッド群を提供します。
+    /// </summary>
     public static class Window
     {
         public static void Hanning(double[] array)
