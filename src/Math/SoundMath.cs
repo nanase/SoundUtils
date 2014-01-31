@@ -50,5 +50,18 @@ namespace SoundUtils
 
             return y;
         }
+
+        public static double InvertedFactorial(int n)
+        {
+            double y = 1.0;
+
+            while (n > 1)
+            {
+                y *= 1.0 / (double)n;
+                n--;
+            }
+
+            return y;
+        }
     }
 }
