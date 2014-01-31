@@ -26,6 +26,9 @@ using System;
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// 信号処理に用いられる汎用的な数学関数を提供します。
+    /// </summary>
     public static class SoundMath
     {
         public static double Sinc(double x)
