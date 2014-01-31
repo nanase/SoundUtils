@@ -81,5 +81,28 @@ namespace SoundUtils
                 for (int i = 0; i < length; i++)
                     array[i] *= 0.42 - 0.5 * Math.Cos(factor * (i + 0.5)) + 0.08 * Math.Cos(2.0 * factor * (i + 0.5));
         }
+
+        public static void Kaiser(double[] array, double alpha)
+        {
+            int length = array.Length;
+            double tmp;
+            alpha *= Math.PI;
+
+            if (alpha == 0.0)
+                return;
+
+            if (length % 2 == 0)
+                for (int i = 0; i < length; i++)
+                {
+                    tmp = 2.0 * i / (double)length - 1.0;
+                    array[i] *= SoundMath.Bessel0(alpha * Math.Sqrt(1.0 - tmp * tmp)) / SoundMath.Bessel0(alpha);
+                }
+            else
+                for (int i = 0; i < length; i++)
+                {
+                    tmp = 2.0 * (i + 0.5) / (double)length - 1.0;
+                    array[i] *= SoundMath.Bessel0(alpha * Math.Sqrt(1.0 - tmp * tmp)) / SoundMath.Bessel0(alpha);
+                }
+        }
     }
 }
