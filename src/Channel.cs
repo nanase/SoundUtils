@@ -24,7 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace SoundUtils
 {
-    public class Channel
+    public static class Channel
     {
         #region -- Public Static Methods --
         public static void Split<T>(T[] source, T[] lch, T[] rch)
