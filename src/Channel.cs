@@ -24,6 +24,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// インターリーブされた配列に対する操作を提供します。
+    /// </summary>
     public static class Channel
     {
         #region -- Public Static Methods --
