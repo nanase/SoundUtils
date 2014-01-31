@@ -24,6 +24,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// 値型に対してビットまたはバイト単位での操作を提供します。
+    /// </summary>
     public unsafe static class BitOperate
     {
         #region -- Public Static Methods --
