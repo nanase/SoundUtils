@@ -26,6 +26,9 @@ using System;
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// 高速フーリエ変換と作業テーブルを保持するオブジェクトを提供します。
+    /// </summary>
     public class FastFourier
     {
         private readonly int[] ip;
