@@ -76,6 +76,7 @@
     <Compile Include="Filtering\SoundFilter.cs" />
     <Compile Include="Math\SoundMath.cs" />
     <Compile Include="Math\Window.cs" />
+    <Compile Include="ArrayConvert.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
