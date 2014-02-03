@@ -65,13 +65,10 @@ namespace SoundUtils
         {
             int length = array.Length;
             double factor = 2.0 * Math.PI / (double)length;
+            double k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            if (length % 2 == 0)
-                for (int i = 0; i < length; i++)
-                    array[i] *= 0.42 - 0.5 * Math.Cos(factor * i) + 0.08 * Math.Cos(2.0 * factor * i);
-            else
-                for (int i = 0; i < length; i++)
-                    array[i] *= 0.42 - 0.5 * Math.Cos(factor * (i + 0.5)) + 0.08 * Math.Cos(2.0 * factor * (i + 0.5));
+            for (int i = 0; i < length; i++, k++)
+                array[i] *= 0.42 - 0.5 * Math.Cos(factor * k) + 0.08 * Math.Cos(2.0 * factor * k);
         }
 
         public static void Kaiser(double[] array, double alpha)
