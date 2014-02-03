@@ -54,13 +54,11 @@ namespace SoundUtils
         public static void Bartlett(double[] array)
         {
             int length = array.Length;
+            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            double n = 1.0 / length;
 
-            if (length % 2 == 0)
-                for (int i = 0; i < length; i++)
-                    array[i] *= 1.0 - 2.0 * Math.Abs(i / (double)length - 0.5);
-            else
-                for (int i = 0; i < length; i++)
-                    array[i] *= 1.0 - 2.0 * Math.Abs((i + 0.5) / (double)length - 0.5);
+            for (int i = 0; i < length; i++, k++)
+                array[i] *= 1.0 - 2.0 * Math.Abs(k * n - 0.5);
         }
 
         public static void Blackman(double[] array)
