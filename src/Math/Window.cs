@@ -96,6 +96,19 @@ namespace SoundUtils
                             0.14128 * Math.Cos(2.0 * factor * k) -
                             0.01168 * Math.Cos(3.0 * factor * k);
         }
+
+        public static void BlackmanNuttall(double[] array)
+        {
+            int length = array.Length;
+            double factor = 2.0 * Math.PI / (double)length;
+            double k = (length & 1) == 0 ? 0.0 : 0.5;
+
+            for (int i = 0; i < length; i++, k++)
+                array[i] *= 0.3635819 -
+                            0.4891775 * Math.Cos(factor * k) +
+                            0.1365995 * Math.Cos(2.0 * factor * k) -
+                            0.0106411 * Math.Cos(3.0 * factor * k);
+        }
         public static void Kaiser(double[] array, double alpha)
         {
             int length = array.Length;
