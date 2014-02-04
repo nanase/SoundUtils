@@ -109,6 +109,20 @@ namespace SoundUtils
                             0.1365995 * Math.Cos(2.0 * factor * k) -
                             0.0106411 * Math.Cos(3.0 * factor * k);
         }
+
+        public static void FlatTop(double[] array)
+        {
+            int length = array.Length;
+            double factor = 2.0 * Math.PI / (double)length;
+            double k = (length & 1) == 0 ? 0.0 : 0.5;
+
+            for (int i = 0; i < length; i++, k++)
+                array[i] *= 1 -
+                            1.93 * Math.Cos(factor * k) +
+                            1.29 * Math.Cos(2.0 * factor * k) -
+                            0.388 * Math.Cos(3.0 * factor * k) +
+                            0.032 * Math.Cos(4.0 * factor * k);
+        }
         public static void Kaiser(double[] array, double alpha)
         {
             int length = array.Length;
