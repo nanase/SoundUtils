@@ -123,6 +123,17 @@ namespace SoundUtils
                             0.388 * Math.Cos(3.0 * factor * k) +
                             0.032 * Math.Cos(4.0 * factor * k);
         }
+
+        public static void Welch(double[] array)
+        {
+            int length = array.Length;
+            double factor = 1.0 / (double)length;
+            double k = (length & 1) == 0 ? 0.0 : 0.5;
+
+            for (int i = 0; i < length; i++, k++)
+                array[i] *= 4.0 * (factor * k) * (1.0 - factor * k);
+        }
+
         public static void Kaiser(double[] array, double alpha)
         {
             int length = array.Length;
