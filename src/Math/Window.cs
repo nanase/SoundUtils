@@ -84,6 +84,18 @@ namespace SoundUtils
                 array[i] *= 0.42 - 0.5 * Math.Cos(factor * k) + 0.08 * Math.Cos(2.0 * factor * k);
         }
 
+        public static void BlackmanHarris(double[] array)
+        {
+            int length = array.Length;
+            double factor = 2.0 * Math.PI / (double)length;
+            double k = (length & 1) == 0 ? 0.0 : 0.5;
+
+            for (int i = 0; i < length; i++, k++)
+                array[i] *= 0.35875 -
+                            0.48829 * Math.Cos(factor * k) +
+                            0.14128 * Math.Cos(2.0 * factor * k) -
+                            0.01168 * Math.Cos(3.0 * factor * k);
+        }
         public static void Kaiser(double[] array, double alpha)
         {
             int length = array.Length;
