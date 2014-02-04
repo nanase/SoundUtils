@@ -61,6 +61,19 @@ namespace SoundUtils
                 array[i] *= 1.0 - 2.0 * Math.Abs(k * n - 0.5);
         }
 
+        public static void Nuttall(double[] array)
+        {
+            int length = array.Length;
+            double factor = 2.0 * Math.PI / (double)length;
+            double k = (length & 1) == 0 ? 0.0 : 0.5;
+
+            for (int i = 0; i < length; i++, k++)
+                array[i] *= 0.355768 -
+                            0.487396 * Math.Cos(factor * k) +
+                            0.144232 * Math.Cos(2.0 * factor * k) -
+                            0.012604 * Math.Cos(3.0 * factor * k);
+        }
+
         public static void Blackman(double[] array)
         {
             int length = array.Length;
