@@ -77,7 +77,7 @@ namespace SoundUtils
             }
         }
 
-        public static void cdft(int n, bool invert, double[] a, int[] ip, double[] w)
+        private static void cdft(int n, bool invert, double[] a, int[] ip, double[] w)
         {
             if (n > (ip[0] << 2))
                 makewt(n >> 2, ip, w);
@@ -100,7 +100,7 @@ namespace SoundUtils
                 cftfsub(n, a, w);
         }
 
-        public static void rdft(int n, bool invert, double[] a, int[] ip, double[] w)
+        private static void rdft(int n, bool invert, double[] a, int[] ip, double[] w)
         {
             int nw, nc;
             double xi;
@@ -152,7 +152,7 @@ namespace SoundUtils
         }
 
         /* -------- initializing routines -------- */
-        public static void makewt(int nw, int[] ip, double[] w)
+        private static void makewt(int nw, int[] ip, double[] w)
         {
             //void bitrv2(int n, int *ip, double *a);
             int j, nwh;
@@ -184,7 +184,7 @@ namespace SoundUtils
             }
         }
 
-        public static void makect(int nc, int[] ip, double[] c, int offset)
+        private static void makect(int nc, int[] ip, double[] c, int offset)
         {
             int j, nch;
             double delta;
@@ -205,8 +205,7 @@ namespace SoundUtils
         }
 
         /* -------- child routines -------- */
-
-        public static void bitrv2(int n, int[] ip, int offset, double[] a)
+        private static void bitrv2(int n, int[] ip, int offset, double[] a)
         {
             int j, j1, k, k1, l, m, m2;
             double xr, xi, yr, yi;
@@ -314,7 +313,7 @@ namespace SoundUtils
             }
         }
 
-        public static void bitrv2conj(int n, int[] ip, int offset, double[] a)
+        private static void bitrv2conj(int n, int[] ip, int offset, double[] a)
         {
             int j, j1, k, k1, l, m, m2;
             double xr, xi, yr, yi;
@@ -431,7 +430,7 @@ namespace SoundUtils
             }
         }
 
-        public static void cftfsub(int n, double[] a, double[] w)
+        private static void cftfsub(int n, double[] a, double[] w)
         {
             //void cft1st(int n, double *a, double *w);
             //void cftmdl(int n, int l, double *a, double *w);
@@ -489,7 +488,7 @@ namespace SoundUtils
             }
         }
 
-        public static void cftbsub(int n, double[] a, double[] w)
+        private static void cftbsub(int n, double[] a, double[] w)
         {
             //void cft1st(int n, double *a, double *w);
             //void cftmdl(int n, int l, double *a, double *w);
@@ -547,7 +546,7 @@ namespace SoundUtils
             }
         }
 
-        public static void cft1st(int n, double[] a, double[] w)
+        private static void cft1st(int n, double[] a, double[] w)
         {
             int j, k1, k2;
             double wk1r, wk1i, wk2r, wk2i, wk3r, wk3i;
@@ -652,7 +651,7 @@ namespace SoundUtils
             }
         }
 
-        public static void cftmdl(int n, int l, double[] a, double[] w)
+        private static void cftmdl(int n, int l, double[] a, double[] w)
         {
             int j, j1, j2, j3, k, k1, k2, m, m2;
             double wk1r, wk1i, wk2r, wk2i, wk3r, wk3i;
@@ -783,7 +782,7 @@ namespace SoundUtils
             }
         }
 
-        public static void rftfsub(int n, double[] a, int nc, double[] c, int offset)
+        private static void rftfsub(int n, double[] a, int nc, double[] c, int offset)
         {
             int j, k, kk, ks, m;
             double wkr, wki, xr, xi, yr, yi;
@@ -808,7 +807,7 @@ namespace SoundUtils
             }
         }
 
-        public static void rftbsub(int n, double[] a, int nc, double[] c, int offset)
+        private static void rftbsub(int n, double[] a, int nc, double[] c, int offset)
         {
             int j, k, kk, ks, m;
             double wkr, wki, xr, xi, yr, yi;
