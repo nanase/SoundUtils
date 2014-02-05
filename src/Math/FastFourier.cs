@@ -154,7 +154,6 @@ namespace SoundUtils
         /* -------- initializing routines -------- */
         private static void makewt(int nw, int[] ip, double[] w)
         {
-            //void bitrv2(int n, int *ip, double *a);
             int j, nwh;
             double delta, x, y;
 
@@ -432,8 +431,6 @@ namespace SoundUtils
 
         private static void cftfsub(int n, double[] a, double[] w)
         {
-            //void cft1st(int n, double *a, double *w);
-            //void cftmdl(int n, int l, double *a, double *w);
             int j, j1, j2, j3, l;
             double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
 
