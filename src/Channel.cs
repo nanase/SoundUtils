@@ -48,6 +48,7 @@ namespace SoundUtils
             }
         }
 
+        #region Interleave
         public static void Interleave<T>(T[] src, T[] dest, int count)
         {
             for (int i = 0, j = 0, k = 0; i < count; i++, j++, k++)
@@ -83,7 +84,9 @@ namespace SoundUtils
                 dest[l + 1] = srcI[k];
             }
         }
+        #endregion
 
+        #region Deinterleave
         public static void Deinterleave<T>(T[] src, T[] dest, int count)
         {
             for (int i = 0, j = 0, k = 0; i < count; i++, j += 2, k++)
@@ -113,6 +116,7 @@ namespace SoundUtils
                 destI[l] = src[j + 1];
             }
         }
+        #endregion
         #endregion
     }
 }
