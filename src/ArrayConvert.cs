@@ -27,13 +27,21 @@ namespace SoundUtils
     public static class ArrayConvert
     {
         #region -- Public Static Methods --
+        #region ToDouble
+        public static void ToDouble(float[] src, double[] dst)
+        {
+            for (int i = 0, l = src.Length; i < l; i++)
+                dst[i] = (double)src[i];
+        }
+        #endregion
+
         #region ToSingle
         public static void ToSingle(double[] src, float[] dst)
         {
             for (int i = 0, l = src.Length; i < l; i++)
                 dst[i] = (float)src[i];
         }
-        #endregion        
+        #endregion
         #endregion
     }
 }
