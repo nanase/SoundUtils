@@ -159,6 +159,7 @@ namespace SoundUtils
 
             ip[0] = nw;
             ip[1] = 1;
+
             if (nw > 2)
             {
                 nwh = nw >> 1;
@@ -167,6 +168,7 @@ namespace SoundUtils
                 w[1] = 0;
                 w[nwh] = Math.Cos(delta * nwh);
                 w[nwh + 1] = w[nwh];
+
                 if (nwh > 2)
                 {
                     for (j = 2; j < nwh; j += 2)
@@ -178,6 +180,7 @@ namespace SoundUtils
                         w[nw - j] = y;
                         w[nw - j + 1] = x;
                     }
+
                     bitrv2(nw, ip, 2, w);
                 }
             }
@@ -189,12 +192,14 @@ namespace SoundUtils
             double delta;
 
             ip[1] = nc;
+
             if (nc > 1)
             {
                 nch = nc >> 1;
                 delta = Math.Atan(1.0) / nch;
                 c[offset] = Math.Cos(delta * nch);
                 c[offset + nch] = 0.5 * c[offset];
+
                 for (j = 1; j < nch; j++)
                 {
                     c[offset + j] = 0.5 * Math.Cos(delta * j);
@@ -212,16 +217,21 @@ namespace SoundUtils
             ip[offset] = 0;
             l = n;
             m = 1;
+
             while ((m << 3) < l)
             {
                 l >>= 1;
+
                 for (j = 0; j < m; j++)
                 {
                     ip[offset + m + j] = ip[offset + j] + l;
                 }
+
                 m <<= 1;
             }
+
             m2 = 2 * m;
+
             if ((m << 3) == l)
             {
                 for (k = 0; k < m; k++)
@@ -269,6 +279,7 @@ namespace SoundUtils
                         a[k1] = xr;
                         a[k1 + 1] = xi;
                     }
+
                     j1 = 2 * k + m2 + ip[offset + k];
                     k1 = j1 + m2;
                     xr = a[j1];
@@ -320,16 +331,21 @@ namespace SoundUtils
             ip[offset] = 0;
             l = n;
             m = 1;
+
             while ((m << 3) < l)
             {
                 l >>= 1;
+
                 for (j = 0; j < m; j++)
                 {
                     ip[offset + m + j] = ip[offset + j] + l;
                 }
+
                 m <<= 1;
             }
+
             m2 = 2 * m;
+
             if ((m << 3) == l)
             {
                 for (k = 0; k < m; k++)
@@ -377,6 +393,7 @@ namespace SoundUtils
                         a[k1] = xr;
                         a[k1 + 1] = xi;
                     }
+
                     k1 = 2 * k + ip[offset + k];
                     a[k1 + 1] = -a[k1 + 1];
                     j1 = k1 + m2;
@@ -397,6 +414,7 @@ namespace SoundUtils
             {
                 a[1] = -a[1];
                 a[m2 + 1] = -a[m2 + 1];
+
                 for (k = 1; k < m; k++)
                 {
                     for (j = 0; j < k; j++)
@@ -422,6 +440,7 @@ namespace SoundUtils
                         a[k1] = xr;
                         a[k1 + 1] = xi;
                     }
+
                     k1 = 2 * k + ip[offset + k];
                     a[k1 + 1] = -a[k1 + 1];
                     a[k1 + m2 + 1] = -a[k1 + m2 + 1];
@@ -435,6 +454,7 @@ namespace SoundUtils
             double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
 
             l = 2;
+
             if (n > 8)
             {
                 cft1st(n, a, w);
@@ -445,6 +465,7 @@ namespace SoundUtils
                     l <<= 2;
                 }
             }
+
             if ((l << 2) == n)
             {
                 for (j = 0; j < l; j += 2)
@@ -493,16 +514,19 @@ namespace SoundUtils
             double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
 
             l = 2;
+
             if (n > 8)
             {
                 cft1st(n, a, w);
                 l = 8;
+
                 while ((l << 2) < n)
                 {
                     cftmdl(n, l, a, w);
                     l <<= 2;
                 }
             }
+
             if ((l << 2) == n)
             {
                 for (j = 0; j < l; j += 2)
@@ -587,6 +611,7 @@ namespace SoundUtils
             a[14] = wk1r * (x0i - x0r);
             a[15] = wk1r * (x0i + x0r);
             k1 = 0;
+
             for (j = 16; j < n; j += 16)
             {
                 k1 += 2;
@@ -655,6 +680,7 @@ namespace SoundUtils
             double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
 
             m = l << 2;
+
             for (j = 0; j < l; j += 2)
             {
                 j1 = j + l;
@@ -677,7 +703,9 @@ namespace SoundUtils
                 a[j3] = x1r + x3i;
                 a[j3 + 1] = x1i - x3r;
             }
+
             wk1r = w[2];
+
             for (j = m; j < l + m; j += 2)
             {
                 j1 = j + l;
@@ -704,8 +732,10 @@ namespace SoundUtils
                 a[j3] = wk1r * (x0i - x0r);
                 a[j3 + 1] = wk1r * (x0i + x0r);
             }
+
             k1 = 0;
             m2 = 2 * m;
+
             for (k = m2; k < n; k += m2)
             {
                 k1 += 2;
@@ -716,6 +746,7 @@ namespace SoundUtils
                 wk1i = w[k2 + 1];
                 wk3r = wk1r - 2 * wk2i * wk1i;
                 wk3i = 2 * wk2i * wk1r - wk1i;
+
                 for (j = k; j < l + k; j += 2)
                 {
                     j1 = j + l;
@@ -744,10 +775,12 @@ namespace SoundUtils
                     a[j3] = wk3r * x0r - wk3i * x0i;
                     a[j3 + 1] = wk3r * x0i + wk3i * x0r;
                 }
+
                 wk1r = w[k2 + 2];
                 wk1i = w[k2 + 3];
                 wk3r = wk1r - 2 * wk2r * wk1i;
                 wk3i = 2 * wk2r * wk1r - wk1i;
+
                 for (j = k + m; j < l + (k + m); j += 2)
                 {
                     j1 = j + l;
@@ -787,6 +820,7 @@ namespace SoundUtils
             m = n >> 1;
             ks = 2 * nc / m;
             kk = 0;
+
             for (j = 2; j < m; j += 2)
             {
                 k = n - j;
@@ -813,6 +847,7 @@ namespace SoundUtils
             m = n >> 1;
             ks = 2 * nc / m;
             kk = 0;
+
             for (j = 2; j < m; j += 2)
             {
                 k = n - j;
@@ -828,10 +863,8 @@ namespace SoundUtils
                 a[k] += yr;
                 a[k + 1] = yi - a[k + 1];
             }
+
             a[m + 1] = -a[m + 1];
-        }
-
-
         }
     }
 }
