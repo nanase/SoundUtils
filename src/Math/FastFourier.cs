@@ -31,11 +31,14 @@ namespace SoundUtils
     /// </summary>
     public class FastFourier
     {
+        #region -- Private Fields --
         private readonly int[] ip;
         private readonly double[] w;
         private readonly int n;
         private readonly double[] interleave;
+        #endregion
 
+        #region -- Constructors --
         public FastFourier(int n)
         {
             this.n = n;
@@ -43,7 +46,9 @@ namespace SoundUtils
             this.w = new double[n / 2];
             this.interleave = new double[n];
         }
+        #endregion
 
+        #region -- Public Methods --
         public void TransformComplex(bool invert, double[] data)
         {
             FastFourier.cdft(this.n, invert, data, this.ip, this.w);
@@ -76,7 +81,9 @@ namespace SoundUtils
                     data[j] *= f;
             }
         }
+        #endregion
 
+        #region -- Private Static Methods --
         private static void cdft(int n, bool invert, double[] a, int[] ip, double[] w)
         {
             if (n > (ip[0] << 2))
@@ -866,5 +873,6 @@ namespace SoundUtils
 
             a[m + 1] = -a[m + 1];
         }
+        #endregion
     }
 }
