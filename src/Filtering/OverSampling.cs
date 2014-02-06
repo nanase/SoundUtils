@@ -28,12 +28,15 @@ namespace SoundUtils.Filtering
 {
     public class OverSampling
     {
+        #region -- Private Fields --
         private readonly double samplingRate;
         private readonly bool stereo;
         private readonly int magnification, filterSize;
 
         private readonly SoundFilter filter;
+        #endregion
 
+        #region -- Constructors --
         public OverSampling(double samplingRate, int magnification, bool stereo, int filterSize)
         {
             this.samplingRate = samplingRate;
@@ -53,7 +56,9 @@ namespace SoundUtils.Filtering
             Window.Blackman(impulse);
             filter.SetFilter(impulse);
         }
+        #endregion
 
+        #region -- Public Methods --        
         public int Apply(double[] buffer)
         {
             if (this.magnification == 1)
@@ -61,7 +66,7 @@ namespace SoundUtils.Filtering
 
             filter.Filtering(buffer);
 
-            for (int i = 0, j = 0, inc =  this.magnification * (this.stereo ? 2 : 1); i < filterSize; i += inc)
+            for (int i = 0, j = 0, inc = this.magnification * (this.stereo ? 2 : 1); i < filterSize; i += inc)
             {
                 buffer[j++] = buffer[i];
                 buffer[j++] = buffer[i + 1];
@@ -69,5 +74,6 @@ namespace SoundUtils.Filtering
 
             return this.filterSize / this.magnification;
         }
+        #endregion
     }
 }
