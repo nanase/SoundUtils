@@ -22,6 +22,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
 using SoundUtils.Filtering.FIR;
 
 namespace SoundUtils.Filtering
@@ -39,6 +40,18 @@ namespace SoundUtils.Filtering
         #region -- Constructors --
         public OverSampling(double samplingRate, int magnification, bool stereo, int filterSize)
         {
+            if (samplingRate <= 0.0)
+                throw new ArgumentOutOfRangeException("samplingRate");
+
+            if (magnification <= 0)
+                throw new ArgumentOutOfRangeException("magnification");
+
+            if (filterSize <= 0)
+                throw new ArgumentOutOfRangeException("filterSize");
+
+            if (filterSize % 2 != 0)
+                throw new ArgumentException();
+
             this.samplingRate = samplingRate;
             this.magnification = magnification;
             this.stereo = stereo;
@@ -58,9 +71,12 @@ namespace SoundUtils.Filtering
         }
         #endregion
 
-        #region -- Public Methods --        
+        #region -- Public Methods --
         public int Apply(double[] buffer)
         {
+            if (buffer == null)
+                throw new ArgumentNullException("buffer");
+
             if (this.magnification == 1)
                 return this.filterSize;
 
