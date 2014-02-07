@@ -34,29 +34,7 @@ namespace SoundUtils
         #region -- Public Static Methods --
         public static void Split<T>(T[] source, T[] lch, T[] rch)
         {
-            if (source == null)
-                throw new ArgumentNullException("source");
-
-            if (lch == null)
-                throw new ArgumentNullException("lch");
-
-            if (rch == null)
-                throw new ArgumentNullException("rch");
-
-            if (source.Length % 2 == 1)
-                throw new ArgumentException();
-
-            if (source.Length / 2 > lch.Length)
-                throw new ArgumentException();
-
-            if (source.Length / 2 > rch.Length)
-                throw new ArgumentException();
-
-            for (int i = 0, j = 0; i < source.Length / 2; i++)
-            {
-                lch[i] = source[j++];
-                rch[i] = source[j++];
-            }
+            Deinterleave(source, lch, rch, source.Length / 2);
         }
 
         public static void Join<T>(T[] lch, T[] rch, T[] dest)
