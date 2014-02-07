@@ -153,10 +153,10 @@ namespace SoundUtils
                 (dest.Length - dest_offset) < count)
                 throw new ArgumentOutOfRangeException("count");
 
-            for (int i = 0, j = srcROffset, k = srcIOffset, l = dest_offset; i < count; i++, j++, k++, l += 2)
+            for (int i = 0, j = srcROffset, k = srcIOffset, l = dest_offset; i < count; i++, j++, k++)
             {
-                dest[l] = srcR[j];
-                dest[l + 1] = srcI[k];
+                dest[l++] = srcR[j];
+                dest[l++] = srcI[k];
             }
         }
         #endregion
