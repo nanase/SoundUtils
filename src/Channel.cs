@@ -39,29 +39,7 @@ namespace SoundUtils
 
         public static void Join<T>(T[] lch, T[] rch, T[] dest)
         {
-            if (lch == null)
-                throw new ArgumentNullException("lch");
-
-            if (rch == null)
-                throw new ArgumentNullException("rch");
-
-            if (dest == null)
-                throw new ArgumentNullException("dest");
-
-            if (lch.Length * 2 > dest.Length)
-                throw new ArgumentException();
-
-            if (rch.Length * 2 > dest.Length)
-                throw new ArgumentException();
-
-            if (lch.Length + rch.Length > dest.Length)
-                throw new ArgumentException();
-
-            for (int i = 0, j = 0; i < dest.Length; j++)
-            {
-                dest[i++] = lch[j];
-                dest[i++] = rch[j];
-            }
+            Interleave(lch, rch, dest, dest.Length / 2);
         }
 
         #region Interleave
