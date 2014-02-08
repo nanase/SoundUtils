@@ -22,6 +22,14 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/* このプログラムは以下のページのプログラムを移植したものである。
+ * [FFT畳み込み積分(FFT Convolution), Overlap-Add Method]
+ * http://www.softist.com/programming/overlap-add-method/overlap-add-method.htm
+ *
+ * [免責事項]
+ * http://www.softist.com/disclaimer.htm
+ */
+
 using System;
 
 namespace SoundUtils.Filtering
