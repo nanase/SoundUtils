@@ -22,6 +22,24 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+/* このクラスは「汎用FFTパッケージ」を C# に移植したものである。
+ * 以下のURLより取得したソースについて
+ * をオブジェクト化、未使用の関数の削除を行った。
+ * http://www.kurims.kyoto-u.ac.jp/~ooura/fft-j.html
+ * 
+ * 実用的で素晴らしいライブラリを公開してくださった作者に感謝の意を表する。
+ */
+
+/* General Purpose FFT (Fast Fourier/Cosine/Sine Transform) Package
+
+Copyright:
+    Copyright(C) 1996-2001 Takuya OOURA
+    email: ooura@mmm.t.u-tokyo.ac.jp
+    download: http://momonga.t.u-tokyo.ac.jp/~ooura/fft.html
+    You may use, copy, modify this code for any purpose and 
+    without fee. You may distribute this ORIGINAL package.
+ */
+
 using System;
 
 namespace SoundUtils
