@@ -62,7 +62,8 @@ namespace SoundUtils.Filtering
             var filterGenerator = new LowPassFilter()
             {
                 SamplingRate = samplingRate * magnification,
-                CutoffFrequency = samplingRate / 2 - ImpulseResponse.GetDelta(samplingRate * magnification, filterSize)
+                CutoffFrequency = samplingRate / 2 -
+                                  FiniteImpulseResponse.GetDelta(samplingRate * magnification, filterSize)
             };
             double[] impulse = filterGenerator.Generate(filterSize / 2);
 
