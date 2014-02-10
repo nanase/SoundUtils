@@ -30,6 +30,12 @@ namespace SoundUtils
     public unsafe static class BitOperate
     {
         #region -- Public Static Methods --
+        /// <summary>
+        /// 指定された値のバイトオーダを逆転させます。
+        /// </summary>
+        /// <param name="value">逆転されるデータ値。</param>
+        /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
+        /// <returns>逆転されたデータ値。</returns>
         public static long ReverseBytes(long value, bool reverse)
         {
             if (reverse)
@@ -51,6 +57,12 @@ namespace SoundUtils
                 return value;
         }
 
+        /// <summary>
+        /// 指定された値のバイトオーダを逆転させます。
+        /// </summary>
+        /// <param name="value">逆転されるデータ値。</param>
+        /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
+        /// <returns>逆転されたデータ値。</returns>
         public static int ReverseBytes(int value, bool reverse)
         {
             if (reverse)
@@ -68,6 +80,12 @@ namespace SoundUtils
                 return value;
         }
 
+        /// <summary>
+        /// 指定された値のバイトオーダを逆転させます。
+        /// </summary>
+        /// <param name="value">逆転されるデータ値。</param>
+        /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
+        /// <returns>逆転されたデータ値。</returns>
         public static short ReverseBytes(short value, bool reverse)
         {
             if (reverse)
