@@ -24,28 +24,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 
-namespace SoundUtils.Filtering.FIR
+namespace SoundUtils.Filtering
 {
     public abstract class ImpulseResponse
     {
-        #region -- Protected Fields --
-        protected double samplingRate;
-        #endregion
-
         #region -- Public Properties --
-        public double SamplingRate
-        {
-            get { return this.samplingRate; }
-            set { this.samplingRate = value; }
-        }
+        public double SamplingRate { get; set; }
         #endregion
 
         #region -- Public Methods --
-        public double[] Generate(double delta)
-        {
-            return this.Generate(ImpulseResponse.GetFilterSize(this.SamplingRate, delta));
-        }
-
         public double[] Generate(int length)
         {
             double[] array = new double[length];
@@ -62,11 +49,6 @@ namespace SoundUtils.Filtering.FIR
             this.GenerateValues(array, length);
         }
 
-        public void Generate(double[] array, double delta)
-        {
-            this.Generate(array, ImpulseResponse.GetFilterSize(this.SamplingRate, delta));
-        }
-
         public void Generate(double[] array, int length)
         {
             if (array.Length < length)
@@ -75,29 +57,6 @@ namespace SoundUtils.Filtering.FIR
             int arrayLength = array.Length;
 
             this.GenerateValues(array, Math.Min(arrayLength, length));
-        }
-        #endregion
-
-        #region -- Public Static Methods --
-        public static double GetDelta(double samplingRate, int delayer)
-        {
-            // 奇数で返す
-            if ((delayer & 1) == 0)
-                delayer--;
-
-            return (3.1 / (delayer - 0.5)) * samplingRate;
-        }
-
-        public static int GetFilterSize(double samplingRate, double delta)
-        {
-            delta /= samplingRate;
-            int delayer = (int)(3.1 / delta + 0.5) - 1;
-
-            // 偶数で返す
-            if ((delayer & 1) == 1)
-                delayer++;
-
-            return delayer;
         }
         #endregion
 

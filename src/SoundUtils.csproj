@@ -72,7 +72,7 @@
     <Compile Include="Math\FastFourier.cs" />
     <Compile Include="Filtering\FFTFiltering.cs" />
     <Compile Include="Filtering\FilterBuffer.cs" />
-    <Compile Include="Filtering\FIR\ImpulseResponse.cs" />
+    <Compile Include="Filtering\ImpulseResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Filtering\SoundFilter.cs" />
     <Compile Include="Math\SoundMath.cs" />
