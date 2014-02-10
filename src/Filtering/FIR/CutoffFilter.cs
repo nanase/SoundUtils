@@ -26,7 +26,7 @@ using System;
 
 namespace SoundUtils.Filtering.FIR
 {
-    public abstract class CutoffFilter : ImpulseResponse
+    public abstract class CutoffFilter : FiniteImpulseResponse
     {
         #region -- Public Properties --
         public double CutoffFrequency { get; set; }

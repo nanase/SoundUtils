@@ -26,7 +26,7 @@ using System;
 
 namespace SoundUtils.Filtering.FIR
 {
-    public abstract class BandFilter : ImpulseResponse
+    public abstract class BandFilter : FiniteImpulseResponse
     {
         #region -- Public Properties --
         public double FrequencyLow { get; set; }
