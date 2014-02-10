@@ -24,10 +24,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace SoundUtils
 {
+    /// <summary>
+    /// 配列に対する変換処理メソッド群を提供します。
+    /// </summary>
     public static class ArrayConvert
     {
         #region -- Public Static Methods --
         #region ToDouble
+        /// <summary>
+        /// 配列を System.Double 型に変換します。
+        /// </summary>
+        /// <param name="src">変換元の配列。</param>
+        /// <param name="dst">変換先の配列。</param>
         public static void ToDouble(float[] src, double[] dst)
         {
             for (int i = 0, l = src.Length; i < l; i++)
@@ -36,6 +44,11 @@ namespace SoundUtils
         #endregion
 
         #region ToSingle
+        /// <summary>
+        /// 配列を System.Single 型に変換します。
+        /// </summary>
+        /// <param name="src">変換元の配列。</param>
+        /// <param name="dst">変換先の配列。</param>
         public static void ToSingle(double[] src, float[] dst)
         {
             for (int i = 0, l = src.Length; i < l; i++)
