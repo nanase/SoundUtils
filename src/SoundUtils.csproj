@@ -67,7 +67,7 @@
     <Compile Include="Filtering\FIR\BandEliminationFilter.cs" />
     <Compile Include="Filtering\FIR\BandFilter.cs" />
     <Compile Include="Filtering\FIR\CutoffFilter.cs" />
-    <Compile Include="Filtering\FIR\CombFilter.cs" />
+    <Compile Include="Filtering\IIR\CombFilter.cs" />
     <Compile Include="Filtering\FIR\ImpulseGenerator.cs" />
     <Compile Include="Filtering\OverSampling.cs" />
     <Compile Include="IO\WaveFormatWriter.cs" />

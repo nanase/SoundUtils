@@ -24,9 +24,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 
-namespace SoundUtils.Filtering.FIR
+namespace SoundUtils.Filtering.IIR
 {
-    public class CombFilter : ImpulseResponse
+    public class CombFilter : InfiniteImpulseResponse
     {
         #region -- Public Properties --
         public double Delay { get; set; }
