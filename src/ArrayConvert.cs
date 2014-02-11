@@ -22,6 +22,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+
 namespace SoundUtils
 {
     /// <summary>
@@ -38,6 +40,15 @@ namespace SoundUtils
         /// <param name="dst">変換先の配列。</param>
         public static void ToDouble(float[] src, double[] dst)
         {
+            if (src == null)
+                throw new ArgumentNullException("src");
+
+            if (dst == null)
+                throw new ArgumentNullException("dst");
+
+            if (src.Length != dst.Length)
+                throw new ArgumentOutOfRangeException("dst");
+
             for (int i = 0, l = src.Length; i < l; i++)
                 dst[i] = (double)src[i];
         }
@@ -51,6 +62,15 @@ namespace SoundUtils
         /// <param name="dst">変換先の配列。</param>
         public static void ToSingle(double[] src, float[] dst)
         {
+            if (src == null)
+                throw new ArgumentNullException("src");
+
+            if (dst == null)
+                throw new ArgumentNullException("dst");
+
+            if (src.Length != dst.Length)
+                throw new ArgumentOutOfRangeException("dst");
+
             for (int i = 0, l = src.Length; i < l; i++)
                 dst[i] = (float)src[i];
         }
