@@ -59,6 +59,9 @@ namespace SoundUtils
         #region -- Constructors --
         public FastFourier(int n)
         {
+            if (n < 4)
+                throw new ArgumentOutOfRangeException("n");
+
             this.n = n;
             this.ip = new int[n / 2];
             this.w = new double[n / 2];
@@ -69,6 +72,12 @@ namespace SoundUtils
         #region -- Public Methods --
         public void TransformComplex(bool invert, double[] data)
         {
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            if (data.Length != this.n)
+                throw new ArgumentOutOfRangeException("data");
+
             FastFourier.cdft(this.n, invert, data, this.ip, this.w);
 
             if (invert)
@@ -82,6 +91,18 @@ namespace SoundUtils
 
         public void TransformComplex(bool invert, double[] real, double[] imaginary)
         {
+            if (real == null)
+                throw new ArgumentNullException("real");
+
+            if (imaginary == null)
+                throw new ArgumentNullException("imaginary");
+
+            if (real.Length != this.n / 2)
+                throw new ArgumentOutOfRangeException("real");
+
+            if (imaginary.Length != this.n / 2)
+                throw new ArgumentOutOfRangeException("imaginary");
+
             Channel.Interleave(real, imaginary, this.interleave, this.n / 2);
             this.TransformComplex(invert, this.interleave);
             Channel.Deinterleave(this.interleave, real, imaginary, this.n / 2);
@@ -89,6 +110,12 @@ namespace SoundUtils
 
         public void TransformReal(bool invert, double[] data)
         {
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            if (data.Length != this.n)
+                throw new ArgumentOutOfRangeException("data");
+
             FastFourier.rdft(this.n, invert, data, this.ip, this.w);
 
             if (invert)
