@@ -38,6 +38,12 @@ namespace SoundUtils
 
         public static double Bessel0(double x, int iterate = 100)
         {
+            if (x < 0.0)
+                throw new ArgumentOutOfRangeException("x");
+
+            if (iterate < 0)
+                throw new ArgumentOutOfRangeException("iterate");
+
             double y = 0.0;
             double f;
 
