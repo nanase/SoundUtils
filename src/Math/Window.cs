@@ -31,6 +31,10 @@ namespace SoundUtils
     /// </summary>
     public static class Window
     {
+        /// <summary>
+        /// 配列にハン窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void Hanning(double[] array)
         {
             int length = array.Length;
@@ -41,6 +45,10 @@ namespace SoundUtils
                 array[i] *= 0.5 - 0.5 * Math.Cos(factor * k);
         }
 
+        /// <summary>
+        /// 配列にハミング窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void Hamming(double[] array)
         {
             int length = array.Length;
@@ -51,6 +59,10 @@ namespace SoundUtils
                 array[i] *= 0.54 - 0.46 * Math.Cos(factor * k);
         }
 
+        /// <summary>
+        /// 配列にバートレット窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void Bartlett(double[] array)
         {
             int length = array.Length;
@@ -61,6 +73,10 @@ namespace SoundUtils
                 array[i] *= 1.0 - 2.0 * Math.Abs(k * n - 0.5);
         }
 
+        /// <summary>
+        /// 配列にナットール窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void Nuttall(double[] array)
         {
             int length = array.Length;
@@ -74,6 +90,10 @@ namespace SoundUtils
                             0.012604 * Math.Cos(3.0 * factor * k);
         }
 
+        /// <summary>
+        /// 配列にブラックマン窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void Blackman(double[] array)
         {
             int length = array.Length;
@@ -84,6 +104,10 @@ namespace SoundUtils
                 array[i] *= 0.42 - 0.5 * Math.Cos(factor * k) + 0.08 * Math.Cos(2.0 * factor * k);
         }
 
+        /// <summary>
+        /// 配列にブラックマンハリス窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void BlackmanHarris(double[] array)
         {
             int length = array.Length;
@@ -97,6 +121,10 @@ namespace SoundUtils
                             0.01168 * Math.Cos(3.0 * factor * k);
         }
 
+        /// <summary>
+        /// 配列にブラックマンナットール窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void BlackmanNuttall(double[] array)
         {
             int length = array.Length;
@@ -110,6 +138,10 @@ namespace SoundUtils
                             0.0106411 * Math.Cos(3.0 * factor * k);
         }
 
+        /// <summary>
+        /// 配列にフラットトップ窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void FlatTop(double[] array)
         {
             int length = array.Length;
@@ -124,6 +156,10 @@ namespace SoundUtils
                             0.032 * Math.Cos(4.0 * factor * k);
         }
 
+        /// <summary>
+        /// 配列にウェルチ窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void Welch(double[] array)
         {
             int length = array.Length;
@@ -134,6 +170,10 @@ namespace SoundUtils
                 array[i] *= 4.0 * (factor * k) * (1.0 - factor * k);
         }
 
+        /// <summary>
+        /// 配列にカイザー窓を畳み込みます。
+        /// </summary>
+        /// <param name="array">畳み込まれる配列。</param>
         public static void Kaiser(double[] array, double alpha)
         {
             int length = array.Length;
