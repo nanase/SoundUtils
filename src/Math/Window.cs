@@ -31,6 +31,7 @@ namespace SoundUtils
     /// </summary>
     public static class Window
     {
+        #region -- Public Static Methods --
         /// <summary>
         /// 配列にハン窓を畳み込みます。
         /// </summary>
@@ -191,5 +192,6 @@ namespace SoundUtils
             for (int i = 0; i < length; i++, k++)
                 array[i] *= SoundMath.Bessel0(alpha * Math.Sqrt(1.0 - Math.Pow(k * n - 1.0, 2.0))) * alpha_tmp;
         }
+        #endregion
     }
 }
