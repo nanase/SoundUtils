@@ -24,6 +24,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace SoundUtils.Filtering
 {
+    /// <summary>
+    /// モノラルまたはステレオの音声データにフィルタリングします。
+    /// </summary>
     public class SoundFilter
     {
         #region -- Private Fields --
@@ -33,6 +36,12 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Constructors --
+        /// <summary>
+        /// パラメータを指定して新しい SoundFilter クラスのインスタンスを初期化します。
+        /// </summary>
+        /// <param name="stereo">ステレオの場合は true、モノラルの場合は false。</param>
+        /// <param name="bufferSize">フィルタが適用されるバッファのサイズ。
+        /// stereo が true の場合、各チャネルのバッファサイズは bufferSize の半分となります。</param>
         public SoundFilter(bool stereo, int bufferSize)
         {
             this.stereo = stereo;
@@ -50,6 +59,10 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// 適用するフィルタを設定します。
+        /// </summary>
+        /// <param name="impulseResponses">フィルタのインパルス応答。</param>
         public void SetFilter(double[] impulseResponses)
         {
             this.lfilter.SetFilter(impulseResponses);
@@ -58,6 +71,10 @@ namespace SoundUtils.Filtering
                 this.rfilter.SetFilter(impulseResponses);
         }
 
+        /// <summary>
+        /// フィルタリングを行います。
+        /// </summary>
+        /// <param name="buffer">フィルタリングされるバッファ。</param>
         public void Filtering(double[] buffer)
         {
             if (this.stereo)
@@ -73,6 +90,11 @@ namespace SoundUtils.Filtering
             }
         }
 
+        /// <summary>
+        /// フィルタリングを行います。
+        /// </summary>
+        /// <param name="input">フィルタリングされる入力バッファ。</param>
+        /// <param name="output">フィルタリングの結果が格納される出力バッファ。</param>
         public void Filtering(double[] input, double[] output)
         {
             if (this.stereo)
