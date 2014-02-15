@@ -31,6 +31,7 @@ namespace SoundUtils
     /// </summary>
     public static class SoundMath
     {
+        #region -- Public Static Methods --        
         public static double Sinc(double x)
         {
             return x == 0.0 ? 1.0 : Math.Sin(x) / x;
@@ -69,5 +70,6 @@ namespace SoundUtils
 
             return y;
         }
+        #endregion
     }
 }
