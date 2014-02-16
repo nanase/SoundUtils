@@ -53,7 +53,7 @@ namespace SoundUtils
         private readonly int[] ip;
         private readonly double[] w;
         private readonly int n;
-        private readonly double[] interleave;
+        private double[] interleave;
         #endregion
 
         #region -- Constructors --
@@ -69,7 +69,6 @@ namespace SoundUtils
             this.n = n;
             this.ip = new int[n / 2];
             this.w = new double[n / 2];
-            this.interleave = new double[n];
         }
         #endregion
 
@@ -117,6 +116,9 @@ namespace SoundUtils
 
             if (imaginary.Length != this.n / 2)
                 throw new ArgumentOutOfRangeException("imaginary");
+
+            if (this.interleave == null)
+                this.interleave = new double[n];
 
             Channel.Interleave(real, imaginary, this.interleave, this.n / 2);
             this.TransformComplex(invert, this.interleave);
