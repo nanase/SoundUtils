@@ -75,6 +75,9 @@ namespace SoundUtils.Filtering
         #region -- Public Methods --
         public void SetFilter(double[] impulseResponses)
         {
+            if (impulseResponses == null)
+                throw new ArgumentNullException("impulseResponses");
+
             Array.Clear(this.fr, 0, this.fftSize);
             Array.Clear(this.fi, 0, this.fftSize);
             Array.Clear(this.overlap, 0, this.overlapSize);
@@ -86,6 +89,12 @@ namespace SoundUtils.Filtering
 
         public void Apply(double[] buffer)
         {
+            if (buffer == null)
+                throw new ArgumentNullException("buffer");
+
+            if (buffer.Length < bufferSize)
+                throw new ArgumentOutOfRangeException("buffer");
+
             for (int iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {
                 Array.Clear(this.fft_c, this.segmentSize, fftSize * 2 - this.segmentSize);
