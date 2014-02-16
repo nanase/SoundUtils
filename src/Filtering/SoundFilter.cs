@@ -22,6 +22,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+
 namespace SoundUtils.Filtering
 {
     /// <summary>
@@ -44,6 +46,12 @@ namespace SoundUtils.Filtering
         /// stereo が true の場合、各チャネルのバッファサイズは bufferSize の半分となります。</param>
         public SoundFilter(bool stereo, int bufferSize)
         {
+            if (bufferSize < 0)
+                throw new ArgumentException();
+
+            if (bufferSize % 2 != 0)
+                throw new ArgumentException();
+
             this.stereo = stereo;
 
             if (stereo)
@@ -65,6 +73,9 @@ namespace SoundUtils.Filtering
         /// <param name="impulseResponses">フィルタのインパルス応答。</param>
         public void SetFilter(double[] impulseResponses)
         {
+            if (impulseResponses == null)
+                throw new ArgumentNullException("impulseResponses");
+
             this.lfilter.SetFilter(impulseResponses);
 
             if (this.stereo)
@@ -77,6 +88,9 @@ namespace SoundUtils.Filtering
         /// <param name="buffer">フィルタリングされるバッファ。</param>
         public void Filtering(double[] buffer)
         {
+            if (buffer == null)
+                throw new ArgumentNullException("buffer");
+
             if (this.stereo)
             {
                 Channel.Split(buffer, this.lbuffer, this.rbuffer);
@@ -97,6 +111,15 @@ namespace SoundUtils.Filtering
         /// <param name="output">フィルタリングの結果が格納される出力バッファ。</param>
         public void Filtering(double[] input, double[] output)
         {
+            if (input == null)
+                throw new ArgumentNullException("input");
+
+            if (output == null)
+                throw new ArgumentNullException("output");
+
+            if (input.Length != output.Length)
+                throw new ArgumentOutOfRangeException("input");
+
             if (this.stereo)
             {
                 Channel.Split(input, this.lbuffer, this.rbuffer);
