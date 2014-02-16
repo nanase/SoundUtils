@@ -57,6 +57,10 @@ namespace SoundUtils
         #endregion
 
         #region -- Constructors --
+        /// <summary>
+        /// FFT サイズを指定して新しい FastFourier クラスのインスタンスを初期化します。
+        /// </summary>
+        /// <param name="n">FFT サイズ。</param>
         public FastFourier(int n)
         {
             if (n < 4)
@@ -70,6 +74,11 @@ namespace SoundUtils
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// 複素数がインターリーブされたデータを離散フーリエ変換します。
+        /// </summary>
+        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
+        /// <param name="data">複素数がインターリーブされた配列。</param>
         public void TransformComplex(bool invert, double[] data)
         {
             if (data == null)
@@ -89,6 +98,12 @@ namespace SoundUtils
             }
         }
 
+        /// <summary>
+        /// 実数と虚数のデータを離散フーリエ変換します。
+        /// </summary>
+        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
+        /// <param name="real">実数データの配列。</param>
+        /// <param name="imaginary">虚数データの配列。</param>
         public void TransformComplex(bool invert, double[] real, double[] imaginary)
         {
             if (real == null)
@@ -108,6 +123,12 @@ namespace SoundUtils
             Channel.Deinterleave(this.interleave, real, imaginary, this.n / 2);
         }
 
+        /// <summary>
+        /// 実数データを離散フーリエ変換します。
+        /// </summary>
+        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
+        /// <param name="data">入力は連続した実数データの配列。
+        /// 出力は複素数のインターリーブとなり、かつサンプリング周波数の半分のデータ数です。</param>
         public void TransformReal(bool invert, double[] data)
         {
             if (data == null)
