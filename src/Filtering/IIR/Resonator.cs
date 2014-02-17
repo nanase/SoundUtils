@@ -36,6 +36,15 @@ namespace SoundUtils.Filtering.IIR
         public double Strength { get; set; }
         #endregion
 
+        #region -- Constructors --
+        public Resonator()
+        {
+            this.Amplifier = 1.0;
+            this.Strength = double.PositiveInfinity;
+            this.Frequencies = new double[0];
+        }
+        #endregion
+
         #region -- Protected Methods --
         protected override void GenerateValues(double[] array, int size)
         {
