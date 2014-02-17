@@ -32,6 +32,8 @@ namespace SoundUtils.Filtering.IIR
         public double[] Frequencies { get; set; }
 
         public double Amplifier { get; set; }
+
+        public double Strength { get; set; }
         #endregion
 
         #region -- Protected Methods --
@@ -41,11 +43,13 @@ namespace SoundUtils.Filtering.IIR
 
             Array.Clear(array, 0, size);
 
-            for (int j = 0; j < this.Frequencies.Length; j++)
-                for (int i = 0; i < size; i++)
-                    array[i] += Math.Sin(i * this.Frequencies[j] * 2.0 * Math.PI / this.SamplingRate) * amp;
-
-            
+            if (this.Strength == 0.0)
+                array[0] = amp;
+            else
+                for (int j = 0; j < this.Frequencies.Length; j++)
+                    for (int i = 0; i < size; i++)
+                        array[i] += Math.Sin(i * this.Frequencies[j] * 2.0 * Math.PI / this.SamplingRate) * amp *
+                                    Math.Exp(-Math.Pow(i, 2.0) / Math.Pow(this.Strength, 2.0));
         }
         #endregion
     }
