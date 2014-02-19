@@ -46,6 +46,9 @@ namespace SoundUtils.Filtering
         /// <returns>インパルス応答が格納された配列。</returns>
         public double[] Generate(int length)
         {
+            if (length < 0)
+                throw new ArgumentOutOfRangeException("length");
+
             double[] array = new double[length];
 
             this.GenerateValues(array, length);
@@ -59,6 +62,9 @@ namespace SoundUtils.Filtering
         /// <param name="array">インパルス応答が生成される配列。</param>
         public void Generate(double[] array)
         {
+            if (array == null)
+                throw new ArgumentNullException("array");
+
             int length = array.Length;
 
             this.GenerateValues(array, length);
@@ -71,6 +77,9 @@ namespace SoundUtils.Filtering
         /// <param name="length">生成される長さ。</param>
         public void Generate(double[] array, int length)
         {
+            if (array == null)
+                throw new ArgumentNullException("array");
+
             if (array.Length < length)
                 throw new ArgumentOutOfRangeException("length");
 
