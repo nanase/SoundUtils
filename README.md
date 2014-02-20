@@ -8,22 +8,22 @@ SoundUtils
 
 含まれているものは以下のクラス群です。
 
-- 配列型変換 (ArrayConvert)
+- 配列型変換 ([ArrayConvert](src/ArrayConvert.cs))
   + Single <-> Double 相互変換
-- ビット/バイト操作 (BitOperate)
+- ビット/バイト操作 ([BitOperate](src/BitOperate.cs))
   + エンディアンネスの逆転
-- チャネル・インターリーブ操作 (Channel)
+- チャネル・インターリーブ操作 ([Channel](src/Channel.cs))
   + L, R の分解・統合
   + インターリーブ
   + デインターリーブ
-- 高速フーリエ変換 (Math/FastFourier)
+- 高速フーリエ変換 ([Math/FastFourier](src/Math/FastFourier.cs))
   + 複素数 -> 複素数
   + 実数部 -> 複素数
-- 汎用的数学クラス (Math/SoundMath)
+- 汎用的数学クラス ([Math/SoundMath](src/Math/SoundMath.cs))
   + Sinc 関数
   + 第1種0次変形ベッセル関数
   + 逆数での階乗
-- 窓関数 (Math/Window)
+- 窓関数 ([Math/Window](src/Math/Window.cs))
   + ハン窓 (ハニング窓)
   + ハミング窓
   + バートレット窓
@@ -34,19 +34,19 @@ SoundUtils
   + フラットトップ窓
   + ウェルチ窓
   + カイザー窓 (カイザー-ベッセル窓)
-- WAVE PCM書き込み (IO/WaveFormatWriter)
+- WAVE PCM書き込み ([IO/WaveFormatWriter](src/IO/WaveFormatWriter.cs))
 - フィルタリング (Filtering 名前空間)
-  + FFTフィルタリング (FFTFiltering)
-  + フィルタバッファ (FilterBuffer)
-  + オーバーサンプリング (OverSampling)
-  + 2 チャネル用フィルタクラス (SoundFilter)
-- インパルス応答 (Filtering/ImpulseResponse)
+  + FFTフィルタリング ([FFTFiltering](src/Filtering/FFTFiltering.cs))
+  + フィルタバッファ ([FilterBuffer](src/Filtering/FilterBuffer.cs))
+  + オーバーサンプリング ([OverSampling](src/Filtering/OverSampling.cs))
+  + 2 チャネル用フィルタクラス ([SoundFilter](src/Filtering/SoundFilter.cs))
+- インパルス応答 ([Filtering/ImpulseResponse](src/Filtering/ImpulseResponse.cs))
   + FIR
     - ローパス
     - ハイパス
     - バンドパス
     - バンドイリミネーション
-    - FIR ジェネレータ (Filtering/FIR/ImpulseGenerator)
+    - FIR ジェネレータ ([Filtering/FIR/ImpulseGenerator](src/Filtering/FIR/ImpulseGenerator.cs))
   + IIR
     - コムフィルタ
     - リゾネータ
