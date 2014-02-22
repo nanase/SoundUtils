@@ -31,12 +31,23 @@ namespace SoundUtils
     /// </summary>
     public static class SoundMath
     {
-        #region -- Public Static Methods --        
+        #region -- Public Static Methods --
+        /// <summary>
+        /// Sinc 関数の値を取得します。
+        /// </summary>
+        /// <param name="x">x の値。</param>
+        /// <returns>Sinc(x) の結果。</returns>
         public static double Sinc(double x)
         {
             return x == 0.0 ? 1.0 : Math.Sin(x) / x;
         }
 
+        /// <summary>
+        /// 第1種0次変形ベッセル関数の値を取得します。
+        /// </summary>
+        /// <param name="x">x の値。</param>
+        /// <param name="iterate">近似計算の反復回数。</param>
+        /// <returns>計算結果。</returns>
         public static double Bessel0(double x, int iterate = 100)
         {
             if (x < 0.0)
@@ -58,6 +69,11 @@ namespace SoundUtils
             return y;
         }
 
+        /// <summary>
+        /// n の階乗を逆数で計算します。
+        /// </summary>
+        /// <param name="n">階乗の整数パラメータ。</param>
+        /// <returns>n の階乗の逆数の値。</returns>
         public static double InvertedFactorial(int n)
         {
             double y = 1.0;
