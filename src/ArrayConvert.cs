@@ -32,13 +32,13 @@ namespace SoundUtils
     public static class ArrayConvert
     {
         #region -- Public Static Methods --
-        #region ToDouble
+        #region CastToDouble
         /// <summary>
         /// 配列を System.Double 型に変換します。
         /// </summary>
         /// <param name="src">変換元の配列。</param>
         /// <param name="dst">変換先の配列。</param>
-        public static void ToDouble(float[] src, double[] dst)
+        public static void CastToDouble(float[] src, double[] dst)
         {
             if (src == null)
                 throw new ArgumentNullException("src");
@@ -54,13 +54,13 @@ namespace SoundUtils
         }
         #endregion
 
-        #region ToSingle
+        #region CastToSingle
         /// <summary>
         /// 配列を System.Single 型に変換します。
         /// </summary>
         /// <param name="src">変換元の配列。</param>
         /// <param name="dst">変換先の配列。</param>
-        public static void ToSingle(double[] src, float[] dst)
+        public static void CastToSingle(double[] src, float[] dst)
         {
             if (src == null)
                 throw new ArgumentNullException("src");
