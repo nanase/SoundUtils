@@ -73,6 +73,7 @@
     <Compile Include="Filtering\IIR\Resonator.cs" />
     <Compile Include="Filtering\OverSampling.cs" />
     <Compile Include="IO\WaveFormatWriter.cs" />
+    <Compile Include="IO\PCMWriter.cs" />
     <Compile Include="IO\WaveWriter.cs" />
     <Compile Include="Math\FastFourier.cs" />
     <Compile Include="Filtering\FFTFiltering.cs" />
