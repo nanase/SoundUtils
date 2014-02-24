@@ -62,8 +62,7 @@ namespace SoundUtils.IO
             {
                 buf = new byte[count];
 
-                for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
-                    buf[j] = (byte)Math.Round((buffer[i] / 65536.0 + 0.5) * 255);
+                ArrayConvert.Ragulate(buffer, offset, count, buf);
 
                 this.BaseStream.Write(buf, 0, count);
                 this.WrittenBytes += count;
@@ -71,23 +70,8 @@ namespace SoundUtils.IO
             else
             {
                 buf = new byte[count * 2];
-                short tmp;
-                byte* b0 = (byte*)&tmp, b1 = b0 + 1;
 
-                if (BitConverter.IsLittleEndian)
-                    for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                    {
-                        tmp = buffer[i];
-                        buf[j++] = *b0;
-                        buf[j++] = *b1;
-                    }
-                else
-                    for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                    {
-                        tmp = buffer[i];
-                        buf[j++] = *b1;
-                        buf[j++] = *b0;
-                    }
+                ArrayConvert.ToByte(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
                 this.BaseStream.Write(buf, 0, count * 2);
                 this.WrittenBytes += count * 2;
