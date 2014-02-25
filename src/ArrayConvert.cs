@@ -105,6 +105,40 @@ namespace SoundUtils
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
                 dst[j] = (byte)Math.Round((src[i] / 65536.0 + 0.5) * 255);
         }
+
+        unsafe public static void RagulateAsInt8(float[] src, int offset, int count, byte[] dst)
+        {
+            for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
+            {
+                float dtmp = src[i];
+
+                if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
+                    dst[j] = 127;
+                else if (dtmp > 1.0f)
+                    dst[j] = 255;
+                else if (dtmp < -1.0f)
+                    dst[j] = 0;
+                else
+                    dst[j] = (byte)Math.Round((dtmp + 1.0f) * 127.5f);
+            }
+        }
+
+        unsafe public static void RagulateAsInt8(double[] src, int offset, int count, byte[] dst)
+        {
+            for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
+            {
+                double dtmp = src[i];
+
+                if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
+                    dst[j] = 127;
+                else if (dtmp > 1.0)
+                    dst[j] = 255;
+                else if (dtmp < -1.0)
+                    dst[j] = 0;
+                else
+                    dst[j] = (byte)Math.Round((dtmp + 1.0) * 127.5);
+            }
+        }
         #endregion
         #endregion
     }
