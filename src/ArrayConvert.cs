@@ -99,8 +99,8 @@ namespace SoundUtils
         }
         #endregion
 
-        #region Regulate
-        unsafe public static void Ragulate(short[] src, int offset, int count, byte[] dst)
+        #region RagulateAsInt8
+        unsafe public static void RagulateAsInt8(short[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
                 dst[j] = (byte)Math.Round((src[i] / 65536.0 + 0.5) * 255);
