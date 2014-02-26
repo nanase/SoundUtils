@@ -62,7 +62,7 @@ namespace SoundUtils.IO
             {
                 buf = new byte[count];
 
-                ArrayConvert.RagulateAsInt8(buffer, offset, count, buf);
+                ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
 
                 this.BaseStream.Write(buf, 0, count);
                 this.WrittenBytes += count;

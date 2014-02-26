@@ -99,14 +99,14 @@ namespace SoundUtils
         }
         #endregion
 
-        #region RagulateAsInt8
-        public static void RagulateAsInt8(short[] src, int offset, int count, byte[] dst)
+        #region RegulateAsInt8
+        public static void RegulateAsInt8(short[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
                 dst[j] = (byte)Math.Round((src[i] / 65536.0 + 0.5) * 255);
         }
 
-        public static void RagulateAsInt8(float[] src, int offset, int count, byte[] dst)
+        public static void RegulateAsInt8(float[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
             {
@@ -123,7 +123,7 @@ namespace SoundUtils
             }
         }
 
-        public static void RagulateAsInt8(double[] src, int offset, int count, byte[] dst)
+        public static void RegulateAsInt8(double[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
             {
