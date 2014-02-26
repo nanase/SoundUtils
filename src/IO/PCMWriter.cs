@@ -84,24 +84,12 @@ namespace SoundUtils.IO
                 throw new ObjectDisposedException("BaseStream");
 
             byte[] buf;
-            double dtmp;
 
             if (this.BitPerSample == 8)
             {
                 buf = new byte[count];
 
-                for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
-                {
-                    dtmp = buffer[i];
-                    if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
-                        continue;
-                    else if (dtmp > 1.0)
-                        buf[j] = 255;
-                    else if (dtmp < -1.0)
-                        buf[j] = 0;
-                    else
-                        buf[j] = (byte)Math.Round((dtmp + 1.0) * 127.5);
-                }
+                ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
 
                 this.BaseStream.Write(buf, 0, count);
                 this.WrittenBytes += count;
@@ -109,47 +97,8 @@ namespace SoundUtils.IO
             else
             {
                 buf = new byte[count * 2];
-                short tmp;
-                byte* b0 = (byte*)&tmp, b1 = b0 + 1;
 
-                if (BitConverter.IsLittleEndian)
-                    for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                    {
-                        dtmp = buffer[i];
-                        if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
-                        {
-                            j += 2;
-                            continue;
-                        }
-                        else if (dtmp > 1.0)
-                            tmp = short.MaxValue;
-                        else if (dtmp < -1.0)
-                            tmp = short.MinValue;
-                        else
-                            tmp = (short)(buffer[i] * 32767.5);
-
-                        buf[j++] = *b0;
-                        buf[j++] = *b1;
-                    }
-                else
-                    for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                    {
-                        dtmp = buffer[i];
-                        if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
-                        {
-                            j += 2;
-                            continue;
-                        }
-                        else if (dtmp > 1.0)
-                            tmp = short.MaxValue;
-                        else if (dtmp < -1.0)
-                            tmp = short.MinValue;
-                        else
-                            tmp = (short)(buffer[i] * 32767.5);
-
-                        buf[j++] = *b1;
-                        buf[j++] = *b0;
-                    }
+                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf);
 
                 this.BaseStream.Write(buf, 0, count * 2);
                 this.WrittenBytes += count * 2;
@@ -162,24 +111,12 @@ namespace SoundUtils.IO
                 throw new ObjectDisposedException("BaseStream");
 
             byte[] buf;
-            float dtmp;
 
             if (this.BitPerSample == 8)
             {
                 buf = new byte[count];
 
-                for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
-                {
-                    dtmp = buffer[i];
-                    if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
-                        continue;
-                    else if (dtmp > 1.0f)
-                        buf[j] = 255;
-                    else if (dtmp < -1.0f)
-                        buf[j] = 0;
-                    else
-                        buf[j] = (byte)Math.Round((dtmp + 1.0f) * 127.5f);
-                }
+                ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
 
                 this.BaseStream.Write(buf, 0, count);
                 this.WrittenBytes += count;
@@ -187,47 +124,8 @@ namespace SoundUtils.IO
             else
             {
                 buf = new byte[count * 2];
-                short tmp;
-                byte* b0 = (byte*)&tmp, b1 = b0 + 1;
 
-                if (BitConverter.IsLittleEndian)
-                    for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                    {
-                        dtmp = buffer[i];
-                        if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
-                        {
-                            j += 2;
-                            continue;
-                        }
-                        else if (dtmp > 1.0f)
-                            tmp = short.MaxValue;
-                        else if (dtmp < -1.0f)
-                            tmp = short.MinValue;
-                        else
-                            tmp = (short)(buffer[i] * 32767.5f);
-
-                        buf[j++] = *b0;
-                        buf[j++] = *b1;
-                    }
-                else
-                    for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                    {
-                        dtmp = buffer[i];
-                        if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
-                        {
-                            j += 2;
-                            continue;
-                        }
-                        else if (dtmp > 1.0)
-                            tmp = short.MaxValue;
-                        else if (dtmp < -1.0)
-                            tmp = short.MinValue;
-                        else
-                            tmp = (short)(buffer[i] * 32767.5f);
-
-                        buf[j++] = *b1;
-                        buf[j++] = *b0;
-                    }
+                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf);
 
                 this.BaseStream.Write(buf, 0, count * 2);
                 this.WrittenBytes += count * 2;
