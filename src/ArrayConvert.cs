@@ -148,44 +148,34 @@ namespace SoundUtils
             float dtmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
 
-            if (reverse)
-                for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                {
-                    dtmp = src[i];
-                    if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
-                    {
-                        j += 2;
-                        continue;
-                    }
-                    else if (dtmp > 1.0f)
-                        tmp = short.MaxValue;
-                    else if (dtmp < -1.0f)
-                        tmp = short.MinValue;
-                    else
-                        tmp = (short)(src[i] * 32767.5f);
 
+            for (int i = offset, j = 0, length = offset + count; i < length; i++)
+            {
+                dtmp = src[i];
+
+                if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
+                {
+                    j += 2;
+                    continue;
+                }
+                else if (dtmp > 1.0f)
+                    tmp = short.MaxValue;
+                else if (dtmp < -1.0f)
+                    tmp = short.MinValue;
+                else
+                    tmp = (short)(src[i] * 32767.5f);
+
+                if (reverse)
+                {
                     dst[j++] = *b0;
                     dst[j++] = *b1;
                 }
-            else
-                for (int i = offset, j = 0, length = offset + count; i < length; i++)
+                else
                 {
-                    dtmp = src[i];
-                    if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
-                    {
-                        j += 2;
-                        continue;
-                    }
-                    else if (dtmp > 1.0f)
-                        tmp = short.MaxValue;
-                    else if (dtmp < -1.0f)
-                        tmp = short.MinValue;
-                    else
-                        tmp = (short)(src[i] * 32767.5f);
-
                     dst[j++] = *b1;
                     dst[j++] = *b0;
                 }
+            }
         }
 
         unsafe public static void RegulateAsInt16(double[] src, int offset, int count, byte[] dst, bool reverse = false)
@@ -194,44 +184,33 @@ namespace SoundUtils
             double dtmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
 
-            if (reverse)
-                for (int i = offset, j = 0, length = offset + count; i < length; i++)
-                {
-                    dtmp = src[i];
-                    if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
-                    {
-                        j += 2;
-                        continue;
-                    }
-                    else if (dtmp > 1.0)
-                        tmp = short.MaxValue;
-                    else if (dtmp < -1.0)
-                        tmp = short.MinValue;
-                    else
-                        tmp = (short)(src[i] * 32767.5);
+            for (int i = offset, j = 0, length = offset + count; i < length; i++)
+            {
+                dtmp = src[i];
 
+                if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
+                {
+                    j += 2;
+                    continue;
+                }
+                else if (dtmp > 1.0)
+                    tmp = short.MaxValue;
+                else if (dtmp < -1.0)
+                    tmp = short.MinValue;
+                else
+                    tmp = (short)(src[i] * 32767.5);
+
+                if (reverse)
+                {
                     dst[j++] = *b0;
                     dst[j++] = *b1;
                 }
-            else
-                for (int i = offset, j = 0, length = offset + count; i < length; i++)
+                else
                 {
-                    dtmp = src[i];
-                    if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
-                    {
-                        j += 2;
-                        continue;
-                    }
-                    else if (dtmp > 1.0)
-                        tmp = short.MaxValue;
-                    else if (dtmp < -1.0)
-                        tmp = short.MinValue;
-                    else
-                        tmp = (short)(src[i] * 32767.5);
-
                     dst[j++] = *b1;
                     dst[j++] = *b0;
                 }
+            }
         }
         #endregion
         #endregion
