@@ -82,20 +82,21 @@ namespace SoundUtils
             short tmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
 
-            if (reverse)
-                for (int i = offset, j = 0, length = offset + count; i < length; i++)
+            for (int i = offset, j = 0, length = offset + count; i < length; i++)
+            {
+                tmp = src[i];
+
+                if (reverse)
                 {
-                    tmp = src[i];
                     dst[j++] = *b0;
                     dst[j++] = *b1;
                 }
-            else
-                for (int i = offset, j = 0, length = offset + count; i < length; i++)
+                else
                 {
-                    tmp = src[i];
                     dst[j++] = *b1;
                     dst[j++] = *b0;
                 }
+            }
         }
         #endregion
 
