@@ -146,13 +146,11 @@ namespace SoundUtils
         unsafe public static void RegulateAsInt16(float[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
-            float dtmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
-
 
             for (int i = offset, j = 0, length = offset + count; i < length; i++)
             {
-                dtmp = src[i];
+                float dtmp = src[i];
 
                 if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
                 {
@@ -164,7 +162,7 @@ namespace SoundUtils
                 else if (dtmp < -1.0f)
                     tmp = short.MinValue;
                 else
-                    tmp = (short)(src[i] * 32767.5f);
+                    tmp = (short)(dtmp * 32767.5f);
 
                 if (reverse)
                 {
@@ -182,12 +180,11 @@ namespace SoundUtils
         unsafe public static void RegulateAsInt16(double[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
-            double dtmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
 
             for (int i = offset, j = 0, length = offset + count; i < length; i++)
             {
-                dtmp = src[i];
+                double dtmp = src[i];
 
                 if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
                 {
@@ -199,7 +196,7 @@ namespace SoundUtils
                 else if (dtmp < -1.0)
                     tmp = short.MinValue;
                 else
-                    tmp = (short)(src[i] * 32767.5);
+                    tmp = (short)(dtmp * 32767.5);
 
                 if (reverse)
                 {
