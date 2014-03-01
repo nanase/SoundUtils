@@ -64,7 +64,7 @@ namespace SoundUtils.IO
 
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
 
-                this.BaseStream.Write(buf, 0, count);
+                this.BaseStream.Write(buf, offset, count);
                 this.WrittenBytes += count;
             }
             else
@@ -73,7 +73,7 @@ namespace SoundUtils.IO
 
                 ArrayConvert.ToByte(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
-                this.BaseStream.Write(buf, 0, count * 2);
+                this.BaseStream.Write(buf, offset, count * 2);
                 this.WrittenBytes += count * 2;
             }
         }
@@ -91,7 +91,7 @@ namespace SoundUtils.IO
 
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
 
-                this.BaseStream.Write(buf, 0, count);
+                this.BaseStream.Write(buf, offset, count);
                 this.WrittenBytes += count;
             }
             else
@@ -100,7 +100,7 @@ namespace SoundUtils.IO
 
                 ArrayConvert.RegulateAsInt16(buffer, offset, count, buf);
 
-                this.BaseStream.Write(buf, 0, count * 2);
+                this.BaseStream.Write(buf, offset, count * 2);
                 this.WrittenBytes += count * 2;
             }
         }
@@ -118,7 +118,7 @@ namespace SoundUtils.IO
 
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
 
-                this.BaseStream.Write(buf, 0, count);
+                this.BaseStream.Write(buf, offset, count);
                 this.WrittenBytes += count;
             }
             else
@@ -127,7 +127,7 @@ namespace SoundUtils.IO
 
                 ArrayConvert.RegulateAsInt16(buffer, offset, count, buf);
 
-                this.BaseStream.Write(buf, 0, count * 2);
+                this.BaseStream.Write(buf, offset, count * 2);
                 this.WrittenBytes += count * 2;
             }
         }
