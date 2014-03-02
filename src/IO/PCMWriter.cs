@@ -56,26 +56,18 @@ namespace SoundUtils.IO
             if (this.Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            byte[] buf;
+            if (this.BitPerSample == 16)
+                count *= 2;
+
+            byte[] buf = new byte[count];
 
             if (this.BitPerSample == 8)
-            {
-                buf = new byte[count];
-
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
-
-                this.BaseStream.Write(buf, offset, count);
-                this.WrittenBytes += count;
-            }
             else
-            {
-                buf = new byte[count * 2];
-
                 ArrayConvert.ToByte(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
-                this.BaseStream.Write(buf, offset, count * 2);
-                this.WrittenBytes += count * 2;
-            }
+            this.BaseStream.Write(buf, offset, count);
+            this.WrittenBytes += count;
         }
 
         unsafe public override void Write(double[] buffer, int offset, int count)
@@ -83,26 +75,18 @@ namespace SoundUtils.IO
             if (this.Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            byte[] buf;
+            if (this.BitPerSample == 16)
+                count *= 2;
+
+            byte[] buf = new byte[count];
 
             if (this.BitPerSample == 8)
-            {
-                buf = new byte[count];
-
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
-
-                this.BaseStream.Write(buf, offset, count);
-                this.WrittenBytes += count;
-            }
             else
-            {
-                buf = new byte[count * 2];
-
                 ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
-                this.BaseStream.Write(buf, offset, count * 2);
-                this.WrittenBytes += count * 2;
-            }
+            this.BaseStream.Write(buf, offset, count);
+            this.WrittenBytes += count;
         }
 
         unsafe public override void Write(float[] buffer, int offset, int count)
@@ -110,26 +94,18 @@ namespace SoundUtils.IO
             if (this.Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            byte[] buf;
+            if (this.BitPerSample == 16)
+                count *= 2;
+
+            byte[] buf = new byte[count];
 
             if (this.BitPerSample == 8)
-            {
-                buf = new byte[count];
-
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
-
-                this.BaseStream.Write(buf, offset, count);
-                this.WrittenBytes += count;
-            }
             else
-            {
-                buf = new byte[count * 2];
-
                 ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
-                this.BaseStream.Write(buf, offset, count * 2);
-                this.WrittenBytes += count * 2;
-            }
+            this.BaseStream.Write(buf, offset, count);
+            this.WrittenBytes += count;
         }
 
         public override void Flush()
