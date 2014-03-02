@@ -98,7 +98,7 @@ namespace SoundUtils.IO
             {
                 buf = new byte[count * 2];
 
-                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf);
+                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
                 this.BaseStream.Write(buf, offset, count * 2);
                 this.WrittenBytes += count * 2;
@@ -125,7 +125,7 @@ namespace SoundUtils.IO
             {
                 buf = new byte[count * 2];
 
-                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf);
+                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
                 this.BaseStream.Write(buf, offset, count * 2);
                 this.WrittenBytes += count * 2;
