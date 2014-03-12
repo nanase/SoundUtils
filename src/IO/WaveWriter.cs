@@ -34,22 +34,51 @@ namespace SoundUtils.IO
         #endregion
 
         #region -- Public Properties --
+        /// <summary>
+        /// 継承されたクラスで書き込まれるストリームを取得します。
+        /// </summary>
         public Stream BaseStream { get; private set; }
 
+        /// <summary>
+        /// サンプリング周波数を取得します。単位は ヘルツ (Hz) です。
+        /// </summary>
         public int SamplingRate { get; private set; }
 
+        /// <summary>
+        /// 1 サンプルあたりのビット数を取得します。
+        /// </summary>
         public int BitPerSample { get; private set; }
 
+        /// <summary>
+        /// チャネルの数を取得します。
+        /// </summary>
         public int ChannelCount { get; private set; }
 
+        /// <summary>
+        /// ストリームに書き込まれた累計バイト数を取得します。
+        /// </summary>
         public long WrittenBytes { get; protected set; }
 
+        /// <summary>
+        /// ストリームに書き込まれた累計サンプル数を取得します。
+        /// </summary>
         public long WrittenSamples { get; protected set; }
 
+        /// <summary>
+        /// このインスタンスが Dispose メソッドで破棄されたかの真偽値を取得します。
+        /// </summary>
         public bool Disposed { get { return this.disposed; } }
         #endregion
 
         #region -- Constructor --
+        /// <summary>
+        /// ストリームとパラメータを指定して新しい WaveWriter クラスのインスタンスを初期化します。
+        /// </summary>
+        /// <param name="stream">書き込まれるストリーム。</param>
+        /// <param name="samplingRate">サンプリング周波数。</param>
+        /// <param name="bitPerSample">サンプルあたりのビット数。</param>
+        /// <param name="channelCount">チャネルの数。</param>
+        /// <param name="entryOffset">書き込みを開始するバイトオフセット。</param>
         public WaveWriter(Stream stream, int samplingRate, int bitPerSample, int channelCount, long entryOffset = 0L)
         {
             if (stream == null)
@@ -77,14 +106,41 @@ namespace SoundUtils.IO
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された byte 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         public abstract void Write(byte[] buffer, int offset, int count);
 
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された short 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         public abstract void Write(short[] buffer, int offset, int count);
 
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された float 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         public abstract void Write(float[] buffer, int offset, int count);
 
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された double 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         public abstract void Write(double[] buffer, int offset, int count);
 
+        /// <summary>
+        /// ストリームに対応するすべてのバッファーをクリアし、バッファー内のデータを基になるデバイスに書き込みます。
+        /// </summary>
         public abstract void Flush();
 
         /// <summary>
