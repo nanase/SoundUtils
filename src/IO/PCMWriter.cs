@@ -159,7 +159,7 @@ namespace SoundUtils.IO
             }
 
             this.BaseStream.Seek(position, SeekOrigin.Begin);
-
+            this.BaseStream.Flush();
         }
         #endregion
     }
