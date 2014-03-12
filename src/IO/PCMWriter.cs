@@ -115,8 +115,10 @@ namespace SoundUtils.IO
 
             bool little = BitConverter.IsLittleEndian;
             bool big = !little;
+            long position = this.BaseStream.Position;
 
             this.BaseStream.Seek(0L, SeekOrigin.Begin);
+
             using (BinaryWriter bw = new BinaryWriter(this.BaseStream))
             {
                 // 4 bytes, offset 4
@@ -155,6 +157,9 @@ namespace SoundUtils.IO
                 // 4 bytes, offset 44
                 bw.Write(BitOperate.ReverseBytes((int)this.WrittenBytes, big));
             }
+
+            this.BaseStream.Seek(position, SeekOrigin.Begin);
+
         }
         #endregion
     }
