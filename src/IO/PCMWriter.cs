@@ -27,9 +27,19 @@ using System.IO;
 
 namespace SoundUtils.IO
 {
+    /// <summary>
+    /// PCM 形式でストリームに書き込むための機能を提供します。
+    /// </summary>
     public class PCMWriter : WaveWriter
     {
         #region -- Constructor --
+        /// <summary>
+        /// ストリームとパラメータを指定して新しい PCMWriter クラスのインスタンスを初期化します。
+        /// </summary>
+        /// <param name="stream">書き込まれるストリーム。</param>
+        /// <param name="samplingRate">サンプリング周波数。</param>
+        /// <param name="bitPerSample">サンプルあたりのビット数。</param>
+        /// <param name="channelCount">チャネルの数。</param>
         public PCMWriter(Stream stream, int samplingRate, int bitPerSample, int channelCount)
             : base(stream, samplingRate, bitPerSample, channelCount, 44L)
         {
@@ -42,6 +52,12 @@ namespace SoundUtils.IO
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された byte 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         public override void Write(byte[] buffer, int offset, int count)
         {
             if (this.Disposed)
@@ -51,6 +67,12 @@ namespace SoundUtils.IO
             this.WrittenBytes += count;
         }
 
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された short 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         unsafe public override void Write(short[] buffer, int offset, int count)
         {
             if (this.Disposed)
@@ -70,6 +92,12 @@ namespace SoundUtils.IO
             this.WrittenBytes += count;
         }
 
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された double 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         unsafe public override void Write(double[] buffer, int offset, int count)
         {
             if (this.Disposed)
@@ -89,6 +117,12 @@ namespace SoundUtils.IO
             this.WrittenBytes += count;
         }
 
+        /// <summary>
+        /// 指定されたバッファをストリームに書き込みます。
+        /// </summary>
+        /// <param name="buffer">書き込まれるデータが格納された float 型配列。</param>
+        /// <param name="offset">書き込みを開始する配列のオフセット。</param>
+        /// <param name="count">書き込まれるデータ数。</param>
         unsafe public override void Write(float[] buffer, int offset, int count)
         {
             if (this.Disposed)
@@ -108,6 +142,9 @@ namespace SoundUtils.IO
             this.WrittenBytes += count;
         }
 
+        /// <summary>
+        /// ストリームに対応するすべてのバッファーをクリアし、バッファー内のデータを基になるデバイスに書き込みます。
+        /// </summary>
         public override void Flush()
         {
             if (this.Disposed)
