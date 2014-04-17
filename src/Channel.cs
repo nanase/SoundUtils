@@ -32,22 +32,52 @@ namespace SoundUtils
     public static class Channel
     {
         #region -- Public Static Methods --
+        /// <summary>
+        /// 配列を 2 つのチャネルに分割します。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="source">分割される T 型の配列。</param>
+        /// <param name="lch">L チャネルに分割される T 型配列。</param>
+        /// <param name="rch">R チャネルに分割される T 型配列。</param>
         public static void Split<T>(T[] source, T[] lch, T[] rch)
         {
             Deinterleave(source, lch, rch, source.Length / 2);
         }
 
+        /// <summary>
+        /// 2 つのチャネルを 1 つの配列に合成します。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="lch">合成元の L チャネルの T 型配列。</param>
+        /// <param name="rch">合成元の R チャネルの T 型配列。</param>
+        /// <param name="dest">合成先の T 型配列。</param>
         public static void Join<T>(T[] lch, T[] rch, T[] dest)
         {
             Interleave(lch, rch, dest, dest.Length / 2);
         }
 
         #region Interleave
+        /// <summary>
+        /// 単一の配列と既定の値をインターリーブします。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="src">インターリーブされる T 型配列。</param>
+        /// <param name="dest">インターリーブされた結果が格納されるの T 型配列</param>
+        /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
         public static void Interleave<T>(T[] src, T[] dest, int count)
         {
             Interleave(src, 0, dest, 0, count);
         }
 
+        /// <summary>
+        /// 単一の配列と既定の値をインターリーブします。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="src">インターリーブされる T 型配列。</param>
+        /// <param name="srcOffset">読み取りが開始されるインデックスのオフセット。</param>
+        /// <param name="dest">インターリーブされた結果が格納される T 型配列</param>
+        /// <param name="dest_offset">書き込みが開始されるインデックスのオフセット。</param>
+        /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
         public static void Interleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
         {
             if (src == null)
@@ -76,11 +106,30 @@ namespace SoundUtils
             }
         }
 
+        /// <summary>
+        /// 2つの配列をインターリーブします。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="srcR">1つ目の T 型配列。</param>
+        /// <param name="srcI">2つ目の T 型配列。</param>
+        /// <param name="dest">インタリーブされた結果が格納される T 型配列。</param>
+        /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
         public static void Interleave<T>(T[] srcR, T[] srcI, T[] dest, int count)
         {
             Interleave(srcR, 0, srcI, 0, dest, 0, count);
         }
 
+        /// <summary>
+        /// 2つの配列をインターリーブします。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="srcR">1つ目の T 型配列。</param>
+        /// <param name="srcROffset">1つ目の T 型配列の読み取りが開始されるインデックスのオフセット。</param>
+        /// <param name="srcI">2つ目の T 型配列。</param>
+        /// <param name="srcIOffset">2つ目の T 型配列の読み取りが開始されるインデックスのオフセット。</param>
+        /// <param name="dest">インタリーブされた結果が格納される T 型配列。</param>
+        /// <param name="dest_offset">結果の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
         public static void Interleave<T>(T[] srcR, int srcROffset, T[] srcI, int srcIOffset, T[] dest, int dest_offset, int count)
         {
             if (srcR == null)
@@ -118,11 +167,27 @@ namespace SoundUtils
         #endregion
 
         #region Deinterleave
+        /// <summary>
+        /// 配列のインターリーブを解除し、単一の配列に格納します。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="src">インターリーブされた入力となる T 型配列。</param>
+        /// <param name="dest">インターリーブ解除の結果が格納される T 型配列。</param>
+        /// <param name="count">読み取り元配列のデータ数。</param>
         public static void Deinterleave<T>(T[] src, T[] dest, int count)
         {
             Deinterleave(src, 0, dest, 0, count);
         }
 
+        /// <summary>
+        /// 配列のインターリーブを解除し、単一の配列に格納します。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="src">インターリーブされた入力となる T 型配列。</param>
+        /// <param name="srcOffset">T 型配列の読み取りが開始されるインデックスのオフセット。</param>
+        /// <param name="dest">インターリーブ解除の結果が格納される T 型配列。</param>
+        /// <param name="dest_offset">結果の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="count">読み取り元配列のデータ数。</param>
         public static void Deinterleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
         {
             if (src == null)
@@ -148,11 +213,30 @@ namespace SoundUtils
                 dest[k] = src[j];
         }
 
+        /// <summary>
+        /// 配列のインターリーブを解除し、2つの配列に格納します。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="src">インターリーブされた入力となる T 型配列。</param>
+        /// <param name="destR">インターリーブ解除の結果が格納される 1つ目の T 型配列。</param>
+        /// <param name="destI">インターリーブ解除の結果が格納される 2つ目の T 型配列。</param>
+        /// <param name="count">読み取り元配列のデータ数。</param>
         public static void Deinterleave<T>(T[] src, T[] destR, T[] destI, int count)
         {
             Deinterleave(src, 0, destR, 0, destI, 0, count);
         }
 
+        /// <summary>
+        /// 配列のインターリーブを解除し、2つの配列に格納します。
+        /// </summary>
+        /// <typeparam name="T">配列のデータ型。</typeparam>
+        /// <param name="src">インターリーブされた入力となる T 型配列。</param>
+        /// <param name="srcOffset"></param>
+        /// <param name="destR">インターリーブ解除の結果が格納される 1つ目の T 型配列。</param>
+        /// <param name="destR_offset">1つ目の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="destI">インターリーブ解除の結果が格納される 2つ目の T 型配列。</param>
+        /// <param name="destI_offset">2つ目の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="count">読み取り元配列のデータ数。</param>
         public static void Deinterleave<T>(T[] src, int srcOffset, T[] destR, int destR_offset, T[] destI, int destI_offset, int count)
         {
             if (src == null)
