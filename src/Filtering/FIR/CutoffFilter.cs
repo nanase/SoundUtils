@@ -26,9 +26,15 @@ using System;
 
 namespace SoundUtils.Filtering.FIR
 {
+    /// <summary>
+    /// 指定された周波数を閾値として遮断するカットオフフィルタを抽象化します。
+    /// </summary>
     public abstract class CutoffFilter : FiniteImpulseResponse
     {
         #region -- Public Properties --
+        /// <summary>
+        /// カットオフ周波数を取得または設定します。
+        /// </summary>
         public double CutoffFrequency { get; set; }
         #endregion
     }
