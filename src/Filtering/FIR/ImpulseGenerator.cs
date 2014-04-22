@@ -26,8 +26,16 @@ using System;
 
 namespace SoundUtils.Filtering.FIR
 {
+    /// <summary>
+    /// 任意のインパルス応答を生成するための機能を提供します。
+    /// </summary>
     public class ImpulseGenerator
     {
+        /// <summary>
+        /// 周波数特性から有限インパルス応答を生成します。
+        /// </summary>
+        /// <param name="input">周波数応答。</param>
+        /// <param name="output">生成された有限インパルス応答。</param>
         public static void Generate(double[] input, double[] output)
         {
             if (input == null)
