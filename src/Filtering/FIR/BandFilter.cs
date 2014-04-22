@@ -26,15 +26,29 @@ using System;
 
 namespace SoundUtils.Filtering.FIR
 {
+    /// <summary>
+    /// 指定された周波数帯域に作用するインパルス応答を抽象化します。
+    /// </summary>
     public abstract class BandFilter : FiniteImpulseResponse
     {
         #region -- Public Properties --
+        /// <summary>
+        /// 周波数帯域の低い値を取得または設定します。
+        /// </summary>
         public double FrequencyLow { get; set; }
 
+        /// <summary>
+        /// 周波数帯域の高い値を取得または設定します。
+        /// </summary>
         public double FrequencyHigh { get; set; }
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// 中心周波数と帯域幅を指定して周波数帯域を設定します。
+        /// </summary>
+        /// <param name="centerFrequecy">中心周波数。</param>
+        /// <param name="bandwidth">帯域幅。</param>
         public void SetFrequency(double centerFrequecy, double bandwidth)
         {
             this.FrequencyLow = centerFrequecy - bandwidth / 2.0;
