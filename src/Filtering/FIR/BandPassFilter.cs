@@ -26,9 +26,17 @@ using System;
 
 namespace SoundUtils.Filtering.FIR
 {
+    /// <summary>
+    /// 周波数帯域を通過させるバンドパスフィルタです。
+    /// </summary>
     public class BandPassFilter : BandFilter
     {
         #region -- Protected Methods --
+        /// <summary>
+        /// 指定された配列に size だけの長さでインパルス応答を生成します。
+        /// </summary>
+        /// <param name="array">インパルス応答が生成される配列。</param>
+        /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
             int offset = size / 2;
