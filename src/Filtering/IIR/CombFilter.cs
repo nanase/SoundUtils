@@ -26,15 +26,29 @@ using System;
 
 namespace SoundUtils.Filtering.IIR
 {
+    /// <summary>
+    /// コムフィルタを生成するクラスです。
+    /// </summary>
     public class CombFilter : InfiniteImpulseResponse
     {
         #region -- Public Properties --
+        /// <summary>
+        /// 遅延器の数を取得または設定します。
+        /// </summary>
         public double Delay { get; set; }
 
+        /// <summary>
+        /// 増幅度を取得または設定します。
+        /// </summary>
         public double Amplifier { get; set; }
         #endregion
 
         #region -- Protected Methods --
+        /// <summary>
+        /// 指定された配列に size だけの長さでインパルス応答を生成します。
+        /// </summary>
+        /// <param name="array">インパルス応答が生成される配列。</param>
+        /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
             double progress = this.Delay;
