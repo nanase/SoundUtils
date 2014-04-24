@@ -26,6 +26,9 @@ using System;
 
 namespace SoundUtils.Filtering.IIR
 {
+    /// <summary>
+    /// 無限インパルス応答を生成するクラスを抽象化します。
+    /// </summary>
     public abstract class InfiniteImpulseResponse : ImpulseResponse
     {
     }
