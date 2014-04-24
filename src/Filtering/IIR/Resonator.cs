@@ -26,17 +26,32 @@ using System;
 
 namespace SoundUtils.Filtering.IIR
 {
+    /// <summary>
+    /// 特定の周波数を強調させるリゾネーターを生成します。
+    /// </summary>
     public class Resonator : InfiniteImpulseResponse
     {
         #region -- Public Properties --
+        /// <summary>
+        /// 強調させる周波数を格納した配列を取得または設定します。
+        /// </summary>
         public double[] Frequencies { get; set; }
 
+        /// <summary>
+        /// 増幅度を取得または設定します。
+        /// </summary>
         public double Amplifier { get; set; }
 
+        /// <summary>
+        /// 強調の尖鋭度を取得または設定します。
+        /// </summary>
         public double Strength { get; set; }
         #endregion
 
         #region -- Constructors --
+        /// <summary>
+        /// パラメータを指定せずに新しい Resonator クラスのインスタンスを初期化します。
+        /// </summary>
         public Resonator()
         {
             this.Amplifier = 1.0;
@@ -46,6 +61,11 @@ namespace SoundUtils.Filtering.IIR
         #endregion
 
         #region -- Protected Methods --
+        /// <summary>
+        /// 指定された配列に size だけの長さでインパルス応答を生成します。
+        /// </summary>
+        /// <param name="array">インパルス応答が生成される配列。</param>
+        /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
             double amp = this.Amplifier / (size / 2);
