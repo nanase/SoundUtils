@@ -27,6 +27,9 @@ using SoundUtils.Filtering.FIR;
 
 namespace SoundUtils.Filtering
 {
+    /// <summary>
+    /// 波形をローパスフィルタを用いてオーバーサンプリングするための機能を提供します。
+    /// </summary>
     public class OverSampling
     {
         #region -- Private Fields --
@@ -38,6 +41,13 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Constructors --
+        /// <summary>
+        /// パラメータを指定して新しい OverSampling クラスのインスタンスを初期化します。
+        /// </summary>
+        /// <param name="samplingRate">サンプリング周波数。これはオーバーサンプリング後の周波数となります。</param>
+        /// <param name="magnification">サンプリング倍率。</param>
+        /// <param name="stereo">ステレオである場合は true、モノラルである場合は false。</param>
+        /// <param name="filterSize">フィルタサイズ。</param>
         public OverSampling(double samplingRate, int magnification, bool stereo, int filterSize)
         {
             if (samplingRate <= 0.0)
@@ -73,6 +83,11 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// 指定された波形にオーバーサンプリングを実行します。
+        /// </summary>
+        /// <param name="buffer">オーバーサンプリングが適用される配列。</param>
+        /// <returns>オーバーサンプリングされたデータ数。</returns>
         public int Apply(double[] buffer)
         {
             if (buffer == null)
