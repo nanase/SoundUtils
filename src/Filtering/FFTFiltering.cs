@@ -34,6 +34,9 @@ using System;
 
 namespace SoundUtils.Filtering
 {
+    /// <summary>
+    /// 畳み込みの代わりに FFT による周波数空間の乗算によってフィルタリングを適用します。
+    /// </summary>
     public class FFTFiltering
     {
         #region -- Private Fields --
@@ -44,6 +47,13 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Constructors --
+        /// <summary>
+        /// パラメータを指定して新しい FFTFiltering クラスのインスタンスを初期化します。
+        /// </summary>
+        /// <param name="filterSize">フィルタサイズ。</param>
+        /// <param name="segmentSize">セグメントサイズ。segmentSize は filterSize 未満 かつ fftSize 未満でなくてはなりません。</param>
+        /// <param name="fftSize">FFT サイズ。fftSize は bufferSize 未満でなくてはなりません。</param>
+        /// <param name="bufferSize">バッファサイズ。</param>
         public FFTFiltering(int filterSize, int segmentSize, int fftSize, int bufferSize)
         {
             if (segmentSize < filterSize)
@@ -73,6 +83,10 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Public Methods --
+        /// <summary>
+        /// 指定されたインパルス応答をフィルタリングに用いるよう設定します。
+        /// </summary>
+        /// <param name="impulseResponses">インパルス応答。</param>
         public void SetFilter(double[] impulseResponses)
         {
             if (impulseResponses == null)
@@ -87,6 +101,10 @@ namespace SoundUtils.Filtering
             this.fft.TransformComplex(false, this.fr, this.fi);
         }
 
+        /// <summary>
+        /// バッファにフィルタリングを適用します。
+        /// </summary>
+        /// <param name="buffer">フィルタリングされるバッファ。</param>
         public void Apply(double[] buffer)
         {
             if (buffer == null)
