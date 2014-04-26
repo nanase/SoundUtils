@@ -27,6 +27,9 @@ using System.IO;
 
 namespace SoundUtils.IO
 {
+    /// <summary>
+    /// Wave 形式の書き込みを抽象化したクラスです。
+    /// </summary>
     public abstract class WaveWriter : IDisposable
     {
         #region -- Private Fields --
