@@ -2,8 +2,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SoundUtils;
-using SoundUtils.Filtering;
-using SoundUtils.Filtering.FIR;
 
 namespace UnitTest
 {
@@ -42,6 +40,39 @@ namespace UnitTest
             Channel.Join(lch, rch, dst0);
 
             CollectionAssert.AreEqual(new[] { 0, 4, 1, 5, 2, 6, 3, 7 }, dst0);
+        }
+
+        [TestMethod]
+        public void InterleaveTest1()
+        {
+            var src = Enumerable.Range(0, 4).ToArray();
+            var dst = new int[8];
+
+            Channel.Interleave(src, dst, 4);
+
+            CollectionAssert.AreEqual(new[] { 0, 0, 1, 0, 2, 0, 3, 0 }, dst);
+
+            Array.Clear(dst, 0, 8);
+            Channel.Interleave(src, 2, dst, 0, 2);
+
+            CollectionAssert.AreEqual(new[] { 2, 0, 3, 0, 0, 0, 0, 0 }, dst);
+        }
+
+        [TestMethod]
+        public void InterleaveTest2()
+        {
+            var srcR = Enumerable.Range(0, 4).ToArray();
+            var srcI = Enumerable.Range(0, 4).ToArray();
+            var dst = new int[8];
+
+            Channel.Interleave(srcR, srcI, dst, 4);
+
+            CollectionAssert.AreEqual(new[] { 0, 0, 1, 1, 2, 2, 3, 3 }, dst);
+
+            Array.Clear(dst, 0, 8);
+            Channel.Interleave(srcR, 1, srcI, 2, dst, 0, 2);
+
+            CollectionAssert.AreEqual(new[] { 1, 2, 2, 3, 0, 0, 0, 0 }, dst);
         }
     }
 }
