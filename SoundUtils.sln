@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundUtils", "SoundUtils.csproj", "{E9E4BCDA-1DCB-49F0-97DA-0FAC24081115}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundUtils", "src\SoundUtils.csproj", "{E9E4BCDA-1DCB-49F0-97DA-0FAC24081115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,14 @@ Global
 		{E9E4BCDA-1DCB-49F0-97DA-0FAC24081115}.Release|x64.Build.0 = Release|x64
 		{E9E4BCDA-1DCB-49F0-97DA-0FAC24081115}.Release|x86.ActiveCfg = Release|x86
 		{E9E4BCDA-1DCB-49F0-97DA-0FAC24081115}.Release|x86.Build.0 = Release|x86
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Debug|x64.ActiveCfg = Debug|x64
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Debug|x64.Build.0 = Debug|x64
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Debug|x86.ActiveCfg = Debug|x86
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Debug|x86.Build.0 = Debug|x86
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Release|x64.ActiveCfg = Release|x64
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Release|x64.Build.0 = Release|x64
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Release|x86.ActiveCfg = Release|x86
+		{998C9A2A-CE56-4299-BC07-741EAA0FAEAA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
