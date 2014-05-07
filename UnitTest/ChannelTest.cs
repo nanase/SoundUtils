@@ -74,5 +74,41 @@ namespace UnitTest
 
             CollectionAssert.AreEqual(new[] { 1, 2, 2, 3, 0, 0, 0, 0 }, dst);
         }
+
+        [TestMethod]
+        public void DeinterleaveTest1()
+        {
+            var src = Enumerable.Range(0, 8).ToArray();
+            var dst = new int[4];
+
+            Channel.Deinterleave(src, dst, 4);
+
+            CollectionAssert.AreEqual(new[] { 0, 2, 4, 6 }, dst);
+
+            Array.Clear(dst, 0, 4);
+            Channel.Deinterleave(src, 1, dst, 0, 3);
+
+            CollectionAssert.AreEqual(new[] { 1, 3, 5, 0 }, dst);
+        }
+
+        [TestMethod]
+        public void DeinterleaveTest2()
+        {
+            var src = Enumerable.Range(0, 8).ToArray();
+            var dstR = new int[4];
+            var dstI = new int[4];
+
+            Channel.Deinterleave(src, dstR, dstI, 4);
+
+            CollectionAssert.AreEqual(new[] { 0, 2, 4, 6 }, dstR);
+            CollectionAssert.AreEqual(new[] { 1, 3, 5, 7 }, dstI);
+
+            Array.Clear(dstR, 0, 4);
+            Array.Clear(dstI, 0, 4);
+            Channel.Deinterleave(src, 1, dstR, 0, dstI, 0, 3);
+
+            CollectionAssert.AreEqual(new[] { 1, 3, 5, 0 }, dstR);
+            CollectionAssert.AreEqual(new[] { 2, 4, 6, 0 }, dstI);
+        }
     }
 }
