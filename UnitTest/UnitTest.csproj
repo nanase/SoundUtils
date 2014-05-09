@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChannelTest.cs" />
+    <Compile Include="BitOperateTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\SoundUtils.csproj">
