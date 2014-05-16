@@ -163,6 +163,11 @@ namespace SoundUtils
         #endregion
 
         #region RegulateAsInt16
+        public static void RegulateAsInt16(float[] src, byte[] dst, bool reverse = false)
+        {
+            ArrayConvert.RegulateAsInt16(src, 0, src.Length, dst, reverse);
+        }
+
         unsafe public static void RegulateAsInt16(float[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
@@ -195,6 +200,11 @@ namespace SoundUtils
                     dst[j++] = *b0;
                 }
             }
+        }
+
+        public static void RegulateAsInt16(double[] src, byte[] dst, bool reverse = false)
+        {
+            ArrayConvert.RegulateAsInt16(src, 0, src.Length, dst, reverse);
         }
 
         unsafe public static void RegulateAsInt16(double[] src, int offset, int count, byte[] dst, bool reverse = false)
