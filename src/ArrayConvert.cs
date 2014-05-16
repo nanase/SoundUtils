@@ -106,10 +106,20 @@ namespace SoundUtils
         #endregion
 
         #region RegulateAsInt8
+        public static void RegulateAsInt8(short[] src, byte[] dst)
+        {
+            ArrayConvert.RegulateAsInt8(src, 0, src.Length, dst);
+        }
+
         public static void RegulateAsInt8(short[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
                 dst[j] = (byte)Math.Round((src[i] / 65536.0 + 0.5) * 255);
+        }
+
+        public static void RegulateAsInt8(float[] src, byte[] dst)
+        {
+            ArrayConvert.RegulateAsInt8(src, 0, src.Length, dst);
         }
 
         public static void RegulateAsInt8(float[] src, int offset, int count, byte[] dst)
@@ -127,6 +137,11 @@ namespace SoundUtils
                 else
                     dst[j] = (byte)Math.Round((dtmp + 1.0f) * 127.5f);
             }
+        }
+
+        public static void RegulateAsInt8(double[] src, byte[] dst)
+        {
+            ArrayConvert.RegulateAsInt8(src, 0, src.Length, dst);
         }
 
         public static void RegulateAsInt8(double[] src, int offset, int count, byte[] dst)
