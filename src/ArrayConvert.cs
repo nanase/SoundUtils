@@ -77,6 +77,11 @@ namespace SoundUtils
         #endregion
 
         #region ToByte
+        public static void ToByte(short[] src, byte[] dst, bool reverse = false)
+        {
+            ArrayConvert.ToByte(src, 0, src.Length, dst, reverse);
+        }
+
         unsafe public static void ToByte(short[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
