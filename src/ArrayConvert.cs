@@ -77,11 +77,25 @@ namespace SoundUtils
         #endregion
 
         #region ToByte
+        /// <summary>
+        /// System.Int16 型の配列の値を System.Byte 型に変換します。
+        /// </summary>
+        /// <param name="src">変換される System.Int16 型配列。</param>
+        /// <param name="dst">変換された値が格納される System.Byte 型配列。</param>
+        /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
         public static void ToByte(short[] src, byte[] dst, bool reverse = false)
         {
             ArrayConvert.ToByte(src, 0, src.Length, dst, reverse);
         }
 
+        /// <summary>
+        /// System.Int16 型の配列の値を System.Byte 型に変換します。
+        /// </summary>
+        /// <param name="src">変換される System.Int16 型配列。</param>
+        /// <param name="offset">読み取りが開始されるインデックスのオフセット。</param>
+        /// <param name="count">読み取られる要素数。</param>
+        /// <param name="dst">変換された値が格納される System.Byte 型配列。</param>
+        /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
         unsafe public static void ToByte(short[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
