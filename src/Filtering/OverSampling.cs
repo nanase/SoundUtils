@@ -51,13 +51,13 @@ namespace SoundUtils.Filtering
         public OverSampling(double samplingRate, int magnification, bool stereo, int filterSize)
         {
             if (samplingRate <= 0.0)
-                throw new ArgumentOutOfRangeException("samplingRate");
+                throw new ArgumentOutOfRangeException(nameof(samplingRate));
 
             if (magnification <= 0)
-                throw new ArgumentOutOfRangeException("magnification");
+                throw new ArgumentOutOfRangeException(nameof(magnification));
 
             if (filterSize <= 0)
-                throw new ArgumentOutOfRangeException("filterSize");
+                throw new ArgumentOutOfRangeException(nameof(filterSize));
 
             if (filterSize % 2 != 0)
                 throw new ArgumentException();
@@ -91,7 +91,7 @@ namespace SoundUtils.Filtering
         public int Apply(double[] buffer)
         {
             if (buffer == null)
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
 
             if (this.magnification == 1)
                 return this.filterSize;

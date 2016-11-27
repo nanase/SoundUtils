@@ -85,19 +85,19 @@ namespace SoundUtils.IO
         public WaveWriter(Stream stream, int samplingRate, int bitPerSample, int channelCount, long entryOffset = 0L)
         {
             if (stream == null)
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
 
             if (!stream.CanSeek || !stream.CanWrite)
                 throw new InvalidOperationException();
 
             if (samplingRate <= 0)
-                throw new ArgumentOutOfRangeException("samplingRate");
+                throw new ArgumentOutOfRangeException(nameof(samplingRate));
 
             if (bitPerSample < 8)
-                throw new ArgumentOutOfRangeException("bitPerSample");
+                throw new ArgumentOutOfRangeException(nameof(bitPerSample));
 
             if (channelCount < 1)
-                throw new ArgumentOutOfRangeException("channelCount");
+                throw new ArgumentOutOfRangeException(nameof(channelCount));
 
             this.BaseStream = stream;
             this.SamplingRate = samplingRate;

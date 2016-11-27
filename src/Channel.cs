@@ -81,23 +81,23 @@ namespace SoundUtils
         public static void Interleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
         {
             if (src == null)
-                throw new ArgumentNullException("src");
+                throw new ArgumentNullException(nameof(src));
 
             if (dest == null)
-                throw new ArgumentNullException("dest");
+                throw new ArgumentNullException(nameof(dest));
 
             if (srcOffset < 0 || srcOffset >= src.Length)
-                throw new ArgumentOutOfRangeException("srcOffset");
+                throw new ArgumentOutOfRangeException(nameof(srcOffset));
 
             if (dest_offset < 0 || dest_offset >= dest.Length)
-                throw new ArgumentOutOfRangeException("dest_offset");
+                throw new ArgumentOutOfRangeException(nameof(dest_offset));
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((src.Length - srcOffset) < count / 2 ||
                 (dest.Length - dest_offset) < count)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             for (int i = 0, j = srcOffset, k = dest_offset; i < count; i++, j++, k++)
             {
@@ -133,30 +133,30 @@ namespace SoundUtils
         public static void Interleave<T>(T[] srcR, int srcROffset, T[] srcI, int srcIOffset, T[] dest, int dest_offset, int count)
         {
             if (srcR == null)
-                throw new ArgumentNullException("srcR");
+                throw new ArgumentNullException(nameof(srcR));
 
             if (srcI == null)
-                throw new ArgumentNullException("srcI");
+                throw new ArgumentNullException(nameof(srcI));
 
             if (dest == null)
-                throw new ArgumentNullException("dest");
+                throw new ArgumentNullException(nameof(dest));
 
             if (srcROffset < 0 || srcROffset >= srcR.Length)
-                throw new ArgumentOutOfRangeException("srcROffset");
+                throw new ArgumentOutOfRangeException(nameof(srcROffset));
 
             if (srcIOffset < 0 || srcIOffset >= srcI.Length)
-                throw new ArgumentOutOfRangeException("srcIOffset");
+                throw new ArgumentOutOfRangeException(nameof(srcIOffset));
 
             if (dest_offset < 0 || dest_offset >= dest.Length)
-                throw new ArgumentOutOfRangeException("dest_offset");
+                throw new ArgumentOutOfRangeException(nameof(dest_offset));
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((srcR.Length - srcROffset) < count / 2 ||
                 (srcI.Length - srcIOffset) < count / 2 ||
                 (dest.Length - dest_offset) < count)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             for (int i = 0, j = srcROffset, k = srcIOffset, l = dest_offset; i < count; i++, j++, k++)
             {
@@ -191,23 +191,23 @@ namespace SoundUtils
         public static void Deinterleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
         {
             if (src == null)
-                throw new ArgumentNullException("src");
+                throw new ArgumentNullException(nameof(src));
 
             if (dest == null)
-                throw new ArgumentNullException("dest");
+                throw new ArgumentNullException(nameof(dest));
 
             if (srcOffset < 0 || srcOffset >= src.Length)
-                throw new ArgumentOutOfRangeException("srcOffset");
+                throw new ArgumentOutOfRangeException(nameof(srcOffset));
 
             if (dest_offset < 0 || dest_offset >= dest.Length)
-                throw new ArgumentOutOfRangeException("dest_offset");
+                throw new ArgumentOutOfRangeException(nameof(dest_offset));
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((src.Length - srcOffset) < count ||
                 (dest.Length - dest_offset) * 2 < count)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             for (int i = 0, j = srcOffset, k = dest_offset; i < count; i++, j += 2, k++)
                 dest[k] = src[j];
@@ -240,30 +240,30 @@ namespace SoundUtils
         public static void Deinterleave<T>(T[] src, int srcOffset, T[] destR, int destR_offset, T[] destI, int destI_offset, int count)
         {
             if (src == null)
-                throw new ArgumentNullException("src");
+                throw new ArgumentNullException(nameof(src));
 
             if (destR == null)
-                throw new ArgumentNullException("destR");
+                throw new ArgumentNullException(nameof(destR));
 
             if (destI == null)
-                throw new ArgumentNullException("destI");
+                throw new ArgumentNullException(nameof(destI));
 
             if (srcOffset < 0 || srcOffset >= src.Length)
-                throw new ArgumentOutOfRangeException("srcOffset");
+                throw new ArgumentOutOfRangeException(nameof(srcOffset));
 
             if (destR_offset < 0 || destR_offset >= destR.Length)
-                throw new ArgumentOutOfRangeException("destR_offset");
+                throw new ArgumentOutOfRangeException(nameof(destR_offset));
 
             if (destI_offset < 0 || destI_offset >= destI.Length)
-                throw new ArgumentOutOfRangeException("destI_offset");
+                throw new ArgumentOutOfRangeException(nameof(destI_offset));
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((src.Length - srcOffset) < count * 2 ||
                 (destR.Length - destR_offset) < count ||
                 (destI.Length - destI_offset) < count)
-                throw new ArgumentOutOfRangeException("count");
+                throw new ArgumentOutOfRangeException(nameof(count));
 
             for (int i = 0, j = srcOffset, k = destR_offset, l = destI_offset; i < count; i++, k++, l++)
             {

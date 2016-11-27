@@ -64,7 +64,7 @@ namespace SoundUtils
         public FastFourier(int n)
         {
             if (n < 4)
-                throw new ArgumentOutOfRangeException("n");
+                throw new ArgumentOutOfRangeException(nameof(n));
 
             this.n = n;
             this.ip = new int[n / 2];
@@ -81,10 +81,10 @@ namespace SoundUtils
         public void TransformComplex(bool invert, double[] data)
         {
             if (data == null)
-                throw new ArgumentNullException("data");
+                throw new ArgumentNullException(nameof(data));
 
             if (data.Length != this.n)
-                throw new ArgumentOutOfRangeException("data");
+                throw new ArgumentOutOfRangeException(nameof(data));
 
             FastFourier.cdft(this.n, invert, data, this.ip, this.w);
 
@@ -106,16 +106,16 @@ namespace SoundUtils
         public void TransformComplex(bool invert, double[] real, double[] imaginary)
         {
             if (real == null)
-                throw new ArgumentNullException("real");
+                throw new ArgumentNullException(nameof(real));
 
             if (imaginary == null)
-                throw new ArgumentNullException("imaginary");
+                throw new ArgumentNullException(nameof(imaginary));
 
             if (real.Length != this.n / 2)
-                throw new ArgumentOutOfRangeException("real");
+                throw new ArgumentOutOfRangeException(nameof(real));
 
             if (imaginary.Length != this.n / 2)
-                throw new ArgumentOutOfRangeException("imaginary");
+                throw new ArgumentOutOfRangeException(nameof(imaginary));
 
             if (this.interleave == null)
                 this.interleave = new double[n];
@@ -134,10 +134,10 @@ namespace SoundUtils
         public void TransformReal(bool invert, double[] data)
         {
             if (data == null)
-                throw new ArgumentNullException("data");
+                throw new ArgumentNullException(nameof(data));
 
             if (data.Length != this.n)
-                throw new ArgumentOutOfRangeException("data");
+                throw new ArgumentOutOfRangeException(nameof(data));
 
             FastFourier.rdft(this.n, invert, data, this.ip, this.w);
 

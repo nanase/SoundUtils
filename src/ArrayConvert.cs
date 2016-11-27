@@ -41,13 +41,13 @@ namespace SoundUtils
         public static void CastToDouble(float[] src, double[] dst)
         {
             if (src == null)
-                throw new ArgumentNullException("src");
+                throw new ArgumentNullException(nameof(src));
 
             if (dst == null)
-                throw new ArgumentNullException("dst");
+                throw new ArgumentNullException(nameof(dst));
 
             if (src.Length != dst.Length)
-                throw new ArgumentOutOfRangeException("dst");
+                throw new ArgumentOutOfRangeException(nameof(dst));
 
             for (int i = 0, l = src.Length; i < l; i++)
                 dst[i] = (double)src[i];
@@ -63,13 +63,13 @@ namespace SoundUtils
         public static void CastToSingle(double[] src, float[] dst)
         {
             if (src == null)
-                throw new ArgumentNullException("src");
+                throw new ArgumentNullException(nameof(src));
 
             if (dst == null)
-                throw new ArgumentNullException("dst");
+                throw new ArgumentNullException(nameof(dst));
 
             if (src.Length != dst.Length)
-                throw new ArgumentOutOfRangeException("dst");
+                throw new ArgumentOutOfRangeException(nameof(dst));
 
             for (int i = 0, l = src.Length; i < l; i++)
                 dst[i] = (float)src[i];

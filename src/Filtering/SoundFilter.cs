@@ -74,7 +74,7 @@ namespace SoundUtils.Filtering
         public void SetFilter(double[] impulseResponses)
         {
             if (impulseResponses == null)
-                throw new ArgumentNullException("impulseResponses");
+                throw new ArgumentNullException(nameof(impulseResponses));
 
             this.lfilter.SetFilter(impulseResponses);
 
@@ -89,7 +89,7 @@ namespace SoundUtils.Filtering
         public void Filtering(double[] buffer)
         {
             if (buffer == null)
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
 
             if (this.stereo)
             {
@@ -112,13 +112,13 @@ namespace SoundUtils.Filtering
         public void Filtering(double[] input, double[] output)
         {
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             if (output == null)
-                throw new ArgumentNullException("output");
+                throw new ArgumentNullException(nameof(output));
 
             if (input.Length != output.Length)
-                throw new ArgumentOutOfRangeException("input");
+                throw new ArgumentOutOfRangeException(nameof(input));
 
             if (this.stereo)
             {

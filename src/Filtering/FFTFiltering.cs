@@ -90,7 +90,7 @@ namespace SoundUtils.Filtering
         public void SetFilter(double[] impulseResponses)
         {
             if (impulseResponses == null)
-                throw new ArgumentNullException("impulseResponses");
+                throw new ArgumentNullException(nameof(impulseResponses));
 
             Array.Clear(this.fr, 0, this.fftSize);
             Array.Clear(this.fi, 0, this.fftSize);
@@ -108,10 +108,10 @@ namespace SoundUtils.Filtering
         public void Apply(double[] buffer)
         {
             if (buffer == null)
-                throw new ArgumentNullException("buffer");
+                throw new ArgumentNullException(nameof(buffer));
 
             if (buffer.Length < bufferSize)
-                throw new ArgumentOutOfRangeException("buffer");
+                throw new ArgumentOutOfRangeException(nameof(buffer));
 
             for (int iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {

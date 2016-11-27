@@ -39,10 +39,10 @@ namespace SoundUtils.Filtering.FIR
         public static void Generate(double[] input, double[] output)
         {
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             if (output == null)
-                throw new ArgumentNullException("output");
+                throw new ArgumentNullException(nameof(output));
 
             if (input.Length * 2 != output.Length)
                 throw new ArgumentException();

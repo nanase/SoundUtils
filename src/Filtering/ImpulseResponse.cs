@@ -47,7 +47,7 @@ namespace SoundUtils.Filtering
         public double[] Generate(int length)
         {
             if (length < 0)
-                throw new ArgumentOutOfRangeException("length");
+                throw new ArgumentOutOfRangeException(nameof(length));
 
             double[] array = new double[length];
 
@@ -63,7 +63,7 @@ namespace SoundUtils.Filtering
         public void Generate(double[] array)
         {
             if (array == null)
-                throw new ArgumentNullException("array");
+                throw new ArgumentNullException(nameof(array));
 
             int length = array.Length;
 
@@ -78,10 +78,10 @@ namespace SoundUtils.Filtering
         public void Generate(double[] array, int length)
         {
             if (array == null)
-                throw new ArgumentNullException("array");
+                throw new ArgumentNullException(nameof(array));
 
             if (array.Length < length)
-                throw new ArgumentOutOfRangeException("length");
+                throw new ArgumentOutOfRangeException(nameof(length));
 
             int arrayLength = array.Length;
 

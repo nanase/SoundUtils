@@ -73,7 +73,7 @@ namespace SoundUtils.Filtering
         public void Push(T[] input)
         {
             if (input == null)
-                throw new ArgumentNullException("input");
+                throw new ArgumentNullException(nameof(input));
 
             int input_index = 0;
 
