@@ -67,8 +67,8 @@ namespace SoundUtils
                 throw new ArgumentOutOfRangeException(nameof(n));
 
             this.n = n;
-            this.ip = new int[n / 2];
-            this.w = new double[n / 2];
+            ip = new int[n / 2];
+            w = new double[n / 2];
         }
         #endregion
 
@@ -83,16 +83,16 @@ namespace SoundUtils
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            if (data.Length != this.n)
+            if (data.Length != n)
                 throw new ArgumentOutOfRangeException(nameof(data));
 
-            FastFourier.cdft(this.n, invert, data, this.ip, this.w);
+            cdft(n, invert, data, ip, w);
 
             if (invert)
             {
-                double f = 2.0 / this.n;
+                var f = 2.0 / n;
 
-                for (int j = 0; j < this.n; j++)
+                for (var j = 0; j < n; j++)
                     data[j] *= f;
             }
         }
@@ -111,18 +111,18 @@ namespace SoundUtils
             if (imaginary == null)
                 throw new ArgumentNullException(nameof(imaginary));
 
-            if (real.Length != this.n / 2)
+            if (real.Length != n / 2)
                 throw new ArgumentOutOfRangeException(nameof(real));
 
-            if (imaginary.Length != this.n / 2)
+            if (imaginary.Length != n / 2)
                 throw new ArgumentOutOfRangeException(nameof(imaginary));
 
-            if (this.interleave == null)
-                this.interleave = new double[n];
+            if (interleave == null)
+                interleave = new double[n];
 
-            Channel.Interleave(real, imaginary, this.interleave, this.n / 2);
-            this.TransformComplex(invert, this.interleave);
-            Channel.Deinterleave(this.interleave, real, imaginary, this.n / 2);
+            Channel.Interleave(real, imaginary, interleave, n / 2);
+            TransformComplex(invert, interleave);
+            Channel.Deinterleave(interleave, real, imaginary, n / 2);
         }
 
         /// <summary>
@@ -136,16 +136,16 @@ namespace SoundUtils
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
 
-            if (data.Length != this.n)
+            if (data.Length != n)
                 throw new ArgumentOutOfRangeException(nameof(data));
 
-            FastFourier.rdft(this.n, invert, data, this.ip, this.w);
+            rdft(n, invert, data, ip, w);
 
             if (invert)
             {
-                double f = 2.0 / this.n;
+                var f = 2.0 / n;
 
-                for (int j = 0; j < this.n; j++)
+                for (var j = 0; j < n; j++)
                     data[j] *= f;
             }
         }

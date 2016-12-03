@@ -41,7 +41,7 @@ namespace SoundUtils
             if (reverse)
             {
                 byte* x = stackalloc byte[8];
-                byte* bp = (byte*)&value;
+                var bp = (byte*)&value;
                 x[0] = bp[7];
                 x[1] = bp[6];
                 x[2] = bp[5];
@@ -53,8 +53,8 @@ namespace SoundUtils
 
                 return *(long*)x;
             }
-            else
-                return value;
+
+            return value;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace SoundUtils
             if (reverse)
             {
                 byte* x = stackalloc byte[4];
-                byte* bp = (byte*)&value;
+                var bp = (byte*)&value;
                 x[0] = bp[3];
                 x[1] = bp[2];
                 x[2] = bp[1];
@@ -76,8 +76,8 @@ namespace SoundUtils
 
                 return *(int*)x;
             }
-            else
-                return value;
+
+            return value;
         }
 
         /// <summary>
@@ -93,8 +93,8 @@ namespace SoundUtils
                 byte* b0 = (byte*)&value, b1 = b0 + 1;
                 return (short)(*b0 * 256 + *b1);
             }
-            else
-                return value;
+
+            return value;
         }
         #endregion
     }

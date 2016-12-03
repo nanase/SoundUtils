@@ -70,7 +70,7 @@ namespace SoundUtils.IO
         /// <summary>
         /// このインスタンスが Dispose メソッドで破棄されたかの真偽値を取得します。
         /// </summary>
-        public bool Disposed { get { return this.disposed; } }
+        public bool Disposed { get { return disposed; } }
         #endregion
 
         #region -- Constructor --
@@ -99,12 +99,12 @@ namespace SoundUtils.IO
             if (channelCount < 1)
                 throw new ArgumentOutOfRangeException(nameof(channelCount));
 
-            this.BaseStream = stream;
-            this.SamplingRate = samplingRate;
-            this.BitPerSample = bitPerSample;
-            this.ChannelCount = channelCount;
+            BaseStream = stream;
+            SamplingRate = samplingRate;
+            BitPerSample = bitPerSample;
+            ChannelCount = channelCount;
 
-            this.BaseStream.Seek(entryOffset, SeekOrigin.Begin);
+            BaseStream.Seek(entryOffset, SeekOrigin.Begin);
         }
         #endregion
 
@@ -151,7 +151,7 @@ namespace SoundUtils.IO
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
         #endregion
@@ -163,12 +163,12 @@ namespace SoundUtils.IO
         /// <param name="disposing">マネージリソースとアンマネージリソースの両方を解放する場合は true。アンマネージリソースだけを解放する場合は false。</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
-                this.Flush();
-                this.BaseStream.Dispose();
+                Flush();
+                BaseStream.Dispose();
 
-                this.disposed = true;
+                disposed = true;
             }
         }
         #endregion

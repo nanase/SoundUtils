@@ -56,12 +56,11 @@ namespace SoundUtils
             if (iterate < 0)
                 throw new ArgumentOutOfRangeException(nameof(iterate));
 
-            double y = 0.0;
-            double f;
+            var y = 0.0;
 
-            for (int i = 0; i < iterate; i++)
+            for (var i = 0; i < iterate; i++)
             {
-                f = InvertedFactorial(i);
+                var f = InvertedFactorial(i);
 
                 y += (f * f) * Math.Pow(x / 2.0, 2.0 * i);
             }
@@ -76,11 +75,11 @@ namespace SoundUtils
         /// <returns>n の階乗の逆数の値。</returns>
         public static double InvertedFactorial(int n)
         {
-            double y = 1.0;
+            var y = 1.0;
 
             while (n > 1)
             {
-                y *= 1.0 / (double)n;
+                y *= 1.0 / n;
                 n--;
             }
 

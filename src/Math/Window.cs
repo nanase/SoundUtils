@@ -38,11 +38,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Hanning(double[] array)
         {
-            int length = array.Length;
-            double factor = 2.0 * Math.PI / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 2.0 * Math.PI / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 0.5 - 0.5 * Math.Cos(factor * k);
         }
 
@@ -52,11 +52,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Hamming(double[] array)
         {
-            int length = array.Length;
-            double factor = 2.0 * Math.PI / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 2.0 * Math.PI / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 0.54 - 0.46 * Math.Cos(factor * k);
         }
 
@@ -66,11 +66,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Bartlett(double[] array)
         {
-            int length = array.Length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
-            double n = 1.0 / length;
+            var length = array.Length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
+            var n = 1.0 / length;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 1.0 - 2.0 * Math.Abs(k * n - 0.5);
         }
 
@@ -80,11 +80,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Nuttall(double[] array)
         {
-            int length = array.Length;
-            double factor = 2.0 * Math.PI / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 2.0 * Math.PI / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 0.355768 -
                             0.487396 * Math.Cos(factor * k) +
                             0.144232 * Math.Cos(2.0 * factor * k) -
@@ -97,11 +97,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Blackman(double[] array)
         {
-            int length = array.Length;
-            double factor = 2.0 * Math.PI / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 2.0 * Math.PI / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 0.42 - 0.5 * Math.Cos(factor * k) + 0.08 * Math.Cos(2.0 * factor * k);
         }
 
@@ -111,11 +111,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void BlackmanHarris(double[] array)
         {
-            int length = array.Length;
-            double factor = 2.0 * Math.PI / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 2.0 * Math.PI / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 0.35875 -
                             0.48829 * Math.Cos(factor * k) +
                             0.14128 * Math.Cos(2.0 * factor * k) -
@@ -128,11 +128,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void BlackmanNuttall(double[] array)
         {
-            int length = array.Length;
-            double factor = 2.0 * Math.PI / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 2.0 * Math.PI / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 0.3635819 -
                             0.4891775 * Math.Cos(factor * k) +
                             0.1365995 * Math.Cos(2.0 * factor * k) -
@@ -145,11 +145,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void FlatTop(double[] array)
         {
-            int length = array.Length;
-            double factor = 2.0 * Math.PI / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 2.0 * Math.PI / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 1 -
                             1.93 * Math.Cos(factor * k) +
                             1.29 * Math.Cos(2.0 * factor * k) -
@@ -163,11 +163,11 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Welch(double[] array)
         {
-            int length = array.Length;
-            double factor = 1.0 / (double)length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
+            var length = array.Length;
+            var factor = 1.0 / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            for (int i = 0; i < length; i++, k++)
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= 4.0 * (factor * k) * (1.0 - factor * k);
         }
 
@@ -177,19 +177,18 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Kaiser(double[] array, double alpha)
         {
-            int length = array.Length;
-            double alpha_tmp;
-            double n = 2.0 / length;
-            double k = (length & 1) == 0 ? 0.0 : 0.5;
-
-            alpha *= Math.PI;
+            var length = array.Length;
+            var n = 2.0 / length;
+            var k = (length & 1) == 0 ? 0.0 : 0.5;
 
             if (alpha == 0.0)
                 return;
 
-            alpha_tmp = 1.0 / SoundMath.Bessel0(alpha);
+            alpha *= Math.PI;
 
-            for (int i = 0; i < length; i++, k++)
+            var alpha_tmp = 1.0 / SoundMath.Bessel0(alpha);
+
+            for (var i = 0; i < length; i++, k++)
                 array[i] *= SoundMath.Bessel0(alpha * Math.Sqrt(1.0 - Math.Pow(k * n - 1.0, 2.0))) * alpha_tmp;
         }
         #endregion

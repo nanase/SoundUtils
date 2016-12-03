@@ -50,7 +50,7 @@ namespace SoundUtils
                 throw new ArgumentOutOfRangeException(nameof(dst));
 
             for (int i = 0, l = src.Length; i < l; i++)
-                dst[i] = (double)src[i];
+                dst[i] = src[i];
         }
         #endregion
 
@@ -85,7 +85,7 @@ namespace SoundUtils
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
         public static void ToByte(short[] src, byte[] dst, bool reverse = false)
         {
-            ArrayConvert.ToByte(src, 0, src.Length, dst, reverse);
+            ToByte(src, 0, src.Length, dst, reverse);
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace SoundUtils
         #region RegulateAsInt8
         public static void RegulateAsInt8(short[] src, byte[] dst)
         {
-            ArrayConvert.RegulateAsInt8(src, 0, src.Length, dst);
+            RegulateAsInt8(src, 0, src.Length, dst);
         }
 
         public static void RegulateAsInt8(short[] src, int offset, int count, byte[] dst)
@@ -133,14 +133,14 @@ namespace SoundUtils
 
         public static void RegulateAsInt8(float[] src, byte[] dst)
         {
-            ArrayConvert.RegulateAsInt8(src, 0, src.Length, dst);
+            RegulateAsInt8(src, 0, src.Length, dst);
         }
 
         public static void RegulateAsInt8(float[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
             {
-                float dtmp = src[i];
+                var dtmp = src[i];
 
                 if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
                     dst[j] = 127;
@@ -155,14 +155,14 @@ namespace SoundUtils
 
         public static void RegulateAsInt8(double[] src, byte[] dst)
         {
-            ArrayConvert.RegulateAsInt8(src, 0, src.Length, dst);
+            RegulateAsInt8(src, 0, src.Length, dst);
         }
 
         public static void RegulateAsInt8(double[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
             {
-                double dtmp = src[i];
+                var dtmp = src[i];
 
                 if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
                     dst[j] = 127;
@@ -179,7 +179,7 @@ namespace SoundUtils
         #region RegulateAsInt16
         public static void RegulateAsInt16(float[] src, byte[] dst, bool reverse = false)
         {
-            ArrayConvert.RegulateAsInt16(src, 0, src.Length, dst, reverse);
+            RegulateAsInt16(src, 0, src.Length, dst, reverse);
         }
 
         unsafe public static void RegulateAsInt16(float[] src, int offset, int count, byte[] dst, bool reverse = false)
@@ -189,14 +189,15 @@ namespace SoundUtils
 
             for (int i = offset, j = 0, length = offset + count; i < length; i++)
             {
-                float dtmp = src[i];
+                var dtmp = src[i];
 
                 if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
                 {
                     j += 2;
                     continue;
                 }
-                else if (dtmp > 1.0f)
+
+                if (dtmp > 1.0f)
                     tmp = short.MaxValue;
                 else if (dtmp < -1.0f)
                     tmp = short.MinValue;
@@ -218,7 +219,7 @@ namespace SoundUtils
 
         public static void RegulateAsInt16(double[] src, byte[] dst, bool reverse = false)
         {
-            ArrayConvert.RegulateAsInt16(src, 0, src.Length, dst, reverse);
+            RegulateAsInt16(src, 0, src.Length, dst, reverse);
         }
 
         unsafe public static void RegulateAsInt16(double[] src, int offset, int count, byte[] dst, bool reverse = false)
@@ -228,14 +229,15 @@ namespace SoundUtils
 
             for (int i = offset, j = 0, length = offset + count; i < length; i++)
             {
-                double dtmp = src[i];
+                var dtmp = src[i];
 
                 if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
                 {
                     j += 2;
                     continue;
                 }
-                else if (dtmp > 1.0)
+
+                if (dtmp > 1.0)
                     tmp = short.MaxValue;
                 else if (dtmp < -1.0)
                     tmp = short.MinValue;
