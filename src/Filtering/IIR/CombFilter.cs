@@ -51,14 +51,14 @@ namespace SoundUtils.Filtering.IIR
         /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
-            double progress = Delay;
+            var progress = Delay;
 
             for (int i = 0, j = 0; i < size; j++)
             {
-                double value = Math.Ceiling(progress);
-                double alpha = 1.0 + progress - value;
-                double beta = 1.0 - alpha;
-                double amp = Math.Pow(Amplifier, j);
+                var value = Math.Ceiling(progress);
+                var alpha = 1.0 + progress - value;
+                var beta = 1.0 - alpha;
+                var amp = Math.Pow(Amplifier, j);
 
                 i = (int)value - 1;
                 progress += Delay;

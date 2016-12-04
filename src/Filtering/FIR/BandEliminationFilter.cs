@@ -39,11 +39,11 @@ namespace SoundUtils.Filtering.FIR
         /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
-            int offset = size / 2;
-            double feL_2 = 2.0 * (FrequencyLow / SamplingRate);
-            double feH_2 = 2.0 * (FrequencyHigh / SamplingRate);
-            double feL_PI2 = Math.PI * feL_2;
-            double feH_PI2 = Math.PI * feH_2;
+            var offset = size / 2;
+            var feL_2 = 2.0 * (FrequencyLow / SamplingRate);
+            var feH_2 = 2.0 * (FrequencyHigh / SamplingRate);
+            var feL_PI2 = Math.PI * feL_2;
+            var feH_PI2 = Math.PI * feH_2;
 
             for (int i = 0, j = -offset; i < size && j <= offset; i++, j++)
                 array[i] = SoundMath.Sinc(Math.PI * j) -

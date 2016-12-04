@@ -78,7 +78,7 @@ namespace SoundUtils.Filtering.FIR
         public static int GetFilterSize(double samplingRate, double delta)
         {
             delta /= samplingRate;
-            int delayer = (int)(3.1 / delta + 0.5) - 1;
+            var delayer = (int)(3.1 / delta + 0.5) - 1;
 
             // 偶数で返す
             if ((delayer & 1) == 1)

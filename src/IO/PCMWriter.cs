@@ -81,7 +81,7 @@ namespace SoundUtils.IO
             if (BitPerSample == 16)
                 count *= 2;
 
-            byte[] buf = new byte[count];
+            var buf = new byte[count];
 
             if (BitPerSample == 8)
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
@@ -106,7 +106,7 @@ namespace SoundUtils.IO
             if (BitPerSample == 16)
                 count *= 2;
 
-            byte[] buf = new byte[count];
+            var buf = new byte[count];
 
             if (BitPerSample == 8)
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
@@ -131,7 +131,7 @@ namespace SoundUtils.IO
             if (BitPerSample == 16)
                 count *= 2;
 
-            byte[] buf = new byte[count];
+            var buf = new byte[count];
 
             if (BitPerSample == 8)
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
@@ -150,13 +150,13 @@ namespace SoundUtils.IO
             if (Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            bool little = BitConverter.IsLittleEndian;
-            bool big = !little;
-            long position = BaseStream.Position;
+            var little = BitConverter.IsLittleEndian;
+            var big = !little;
+            var position = BaseStream.Position;
 
             BaseStream.Seek(0L, SeekOrigin.Begin);
 
-            using (BinaryWriter bw = new BinaryWriter(BaseStream))
+            using (var bw = new BinaryWriter(BaseStream))
             {
                 // 4 bytes, offset 4
                 bw.Write(BitOperate.ReverseBytes(0x52494646, little));

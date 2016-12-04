@@ -47,13 +47,13 @@ namespace SoundUtils.Filtering.FIR
             if (input.Length * 2 != output.Length)
                 throw new ArgumentException();
 
-            int filterLength = output.Length;
-            int blockSize = filterLength / 2;
+            var filterLength = output.Length;
+            var blockSize = filterLength / 2;
 
-            FastFourier fft = new FastFourier(filterLength * 2);
+            var fft = new FastFourier(filterLength * 2);
 
             Array.Clear(output, 0, filterLength);
-            double[] imDummy = new double[filterLength];
+            var imDummy = new double[filterLength];
 
             Array.Copy(input, 0, output, blockSize, blockSize);
             Array.Reverse(output, blockSize, blockSize);

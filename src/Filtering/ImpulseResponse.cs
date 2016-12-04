@@ -49,7 +49,7 @@ namespace SoundUtils.Filtering
             if (length < 0)
                 throw new ArgumentOutOfRangeException(nameof(length));
 
-            double[] array = new double[length];
+            var array = new double[length];
 
             GenerateValues(array, length);
 
@@ -65,7 +65,7 @@ namespace SoundUtils.Filtering
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
 
-            int length = array.Length;
+            var length = array.Length;
 
             GenerateValues(array, length);
         }
@@ -83,7 +83,7 @@ namespace SoundUtils.Filtering
             if (array.Length < length)
                 throw new ArgumentOutOfRangeException(nameof(length));
 
-            int arrayLength = array.Length;
+            var arrayLength = array.Length;
 
             GenerateValues(array, Math.Min(arrayLength, length));
         }

@@ -113,7 +113,7 @@ namespace SoundUtils.Filtering
             if (buffer.Length < bufferSize)
                 throw new ArgumentOutOfRangeException(nameof(buffer));
 
-            for (int iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
+            for (var iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {
                 Array.Clear(fftC, segmentSize, fftSize * 2 - segmentSize);
                 Channel.Interleave(buffer, iOffset, fftC, 0, segmentSize);
@@ -122,8 +122,8 @@ namespace SoundUtils.Filtering
 
                 for (int i = 0, j = 1, k = 0, l = fftSize * 2; i < l; i += 2, j += 2, k++)
                 {
-                    double dblR = fr[k] * fftC[i] - fi[k] * fftC[j];
-                    double dblI = fr[k] * fftC[j] + fi[k] * fftC[i];
+                    var dblR = fr[k] * fftC[i] - fi[k] * fftC[j];
+                    var dblI = fr[k] * fftC[j] + fi[k] * fftC[i];
                     fftC[i] = dblR;
                     fftC[j] = dblI;
                 }
@@ -131,10 +131,10 @@ namespace SoundUtils.Filtering
                 fft.TransformComplex(true, fftC);
                 Channel.Deinterleave(fftC, xr, fftSize);
 
-                for (int i = 0; i < overlapSize; i++)
+                for (var i = 0; i < overlapSize; i++)
                     xr[i] += overlap[i];
 
-                for (int i = segmentSize; i < fftSize; i++)
+                for (var i = segmentSize; i < fftSize; i++)
                     overlap[i - segmentSize] = xr[i];
 
                 Array.Copy(xr, 0, buffer, iOffset, segmentSize);
