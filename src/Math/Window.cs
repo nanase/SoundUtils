@@ -186,10 +186,10 @@ namespace SoundUtils
 
             alpha *= Math.PI;
 
-            var alpha_tmp = 1.0 / SoundMath.Bessel0(alpha);
+            var alphaTmp = 1.0 / SoundMath.Bessel0(alpha);
 
             for (var i = 0; i < length; i++, k++)
-                array[i] *= SoundMath.Bessel0(alpha * Math.Sqrt(1.0 - Math.Pow(k * n - 1.0, 2.0))) * alpha_tmp;
+                array[i] *= SoundMath.Bessel0(alpha * Math.Sqrt(1.0 - Math.Pow(k * n - 1.0, 2.0))) * alphaTmp;
         }
         #endregion
     }

@@ -53,13 +53,13 @@ namespace SoundUtils.Filtering.FIR
             FastFourier fft = new FastFourier(filterLength * 2);
 
             Array.Clear(output, 0, filterLength);
-            double[] im_dummy = new double[filterLength];
+            double[] imDummy = new double[filterLength];
 
             Array.Copy(input, 0, output, blockSize, blockSize);
             Array.Reverse(output, blockSize, blockSize);
             Array.Copy(input, 0, output, 0, blockSize);
 
-            fft.TransformComplex(true, output, im_dummy);
+            fft.TransformComplex(true, output, imDummy);
 
             Array.Reverse(output, 0, blockSize);
             Array.Reverse(output, blockSize, blockSize);

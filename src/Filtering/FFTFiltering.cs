@@ -37,11 +37,11 @@ namespace SoundUtils.Filtering
     /// <summary>
     /// 畳み込みの代わりに FFT による周波数空間の乗算によってフィルタリングを適用します。
     /// </summary>
-    public class FFTFiltering
+    public class FftFiltering
     {
         #region -- Private Fields --
         private readonly int filterSize, segmentSize, fftSize, overlapSize, bufferSize;
-        private readonly double[] fr, fi, xr, fft_c, overlap, output;
+        private readonly double[] fr, fi, xr, fftC, overlap, output;
 
         private readonly FastFourier fft;
         #endregion
@@ -54,7 +54,7 @@ namespace SoundUtils.Filtering
         /// <param name="segmentSize">セグメントサイズ。segmentSize は filterSize 未満 かつ fftSize 未満でなくてはなりません。</param>
         /// <param name="fftSize">FFT サイズ。fftSize は bufferSize 未満でなくてはなりません。</param>
         /// <param name="bufferSize">バッファサイズ。</param>
-        public FFTFiltering(int filterSize, int segmentSize, int fftSize, int bufferSize)
+        public FftFiltering(int filterSize, int segmentSize, int fftSize, int bufferSize)
         {
             if (segmentSize < filterSize)
                 throw new ArgumentException("segmentSize は filterSize 未満でなくてはなりません。");
@@ -74,7 +74,7 @@ namespace SoundUtils.Filtering
             this.fr = new double[fftSize];
             this.fi = new double[fftSize];
             this.xr = new double[fftSize];
-            this.fft_c = new double[fftSize * 2];
+            this.fftC = new double[fftSize * 2];
             this.overlap = new double[overlapSize];
             this.output = new double[bufferSize];
 
@@ -115,21 +115,21 @@ namespace SoundUtils.Filtering
 
             for (int iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {
-                Array.Clear(this.fft_c, this.segmentSize, fftSize * 2 - this.segmentSize);
-                Channel.Interleave(buffer, iOffset, this.fft_c, 0, this.segmentSize);
+                Array.Clear(this.fftC, this.segmentSize, fftSize * 2 - this.segmentSize);
+                Channel.Interleave(buffer, iOffset, this.fftC, 0, this.segmentSize);
 
-                this.fft.TransformComplex(false, this.fft_c);
+                this.fft.TransformComplex(false, this.fftC);
 
                 for (int i = 0, j = 1, k = 0, l = fftSize * 2; i < l; i += 2, j += 2, k++)
                 {
-                    double dbl_R = fr[k] * fft_c[i] - fi[k] * fft_c[j];
-                    double dbl_I = fr[k] * fft_c[j] + fi[k] * fft_c[i];
-                    fft_c[i] = dbl_R;
-                    fft_c[j] = dbl_I;
+                    double dblR = fr[k] * fftC[i] - fi[k] * fftC[j];
+                    double dblI = fr[k] * fftC[j] + fi[k] * fftC[i];
+                    fftC[i] = dblR;
+                    fftC[j] = dblI;
                 }
 
-                this.fft.TransformComplex(true, this.fft_c);
-                Channel.Deinterleave(this.fft_c, this.xr, this.fftSize);
+                this.fft.TransformComplex(true, this.fftC);
+                Channel.Deinterleave(this.fftC, this.xr, this.fftSize);
 
                 for (int i = 0; i < overlapSize; i++)
                     xr[i] += overlap[i];

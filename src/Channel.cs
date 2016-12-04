@@ -76,9 +76,9 @@ namespace SoundUtils
         /// <param name="src">インターリーブされる T 型配列。</param>
         /// <param name="srcOffset">読み取りが開始されるインデックスのオフセット。</param>
         /// <param name="dest">インターリーブされた結果が格納される T 型配列</param>
-        /// <param name="dest_offset">書き込みが開始されるインデックスのオフセット。</param>
+        /// <param name="destOffset">書き込みが開始されるインデックスのオフセット。</param>
         /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
-        public static void Interleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
+        public static void Interleave<T>(T[] src, int srcOffset, T[] dest, int destOffset, int count)
         {
             if (src == null)
                 throw new ArgumentNullException(nameof(src));
@@ -89,17 +89,17 @@ namespace SoundUtils
             if (srcOffset < 0 || srcOffset >= src.Length)
                 throw new ArgumentOutOfRangeException(nameof(srcOffset));
 
-            if (dest_offset < 0 || dest_offset >= dest.Length)
-                throw new ArgumentOutOfRangeException(nameof(dest_offset));
+            if (destOffset < 0 || destOffset >= dest.Length)
+                throw new ArgumentOutOfRangeException(nameof(destOffset));
 
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((src.Length - srcOffset) < count / 2 ||
-                (dest.Length - dest_offset) < count)
+                (dest.Length - destOffset) < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            for (int i = 0, j = srcOffset, k = dest_offset; i < count; i++, j++, k++)
+            for (int i = 0, j = srcOffset, k = destOffset; i < count; i++, j++, k++)
             {
                 dest[k] = src[j];
                 dest[++k] = default(T);
@@ -128,9 +128,9 @@ namespace SoundUtils
         /// <param name="srcI">2つ目の T 型配列。</param>
         /// <param name="srcIOffset">2つ目の T 型配列の読み取りが開始されるインデックスのオフセット。</param>
         /// <param name="dest">インタリーブされた結果が格納される T 型配列。</param>
-        /// <param name="dest_offset">結果の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="destOffset">結果の T 型配列の格納が開始されるインデックスのオフセット。</param>
         /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
-        public static void Interleave<T>(T[] srcR, int srcROffset, T[] srcI, int srcIOffset, T[] dest, int dest_offset, int count)
+        public static void Interleave<T>(T[] srcR, int srcROffset, T[] srcI, int srcIOffset, T[] dest, int destOffset, int count)
         {
             if (srcR == null)
                 throw new ArgumentNullException(nameof(srcR));
@@ -147,18 +147,18 @@ namespace SoundUtils
             if (srcIOffset < 0 || srcIOffset >= srcI.Length)
                 throw new ArgumentOutOfRangeException(nameof(srcIOffset));
 
-            if (dest_offset < 0 || dest_offset >= dest.Length)
-                throw new ArgumentOutOfRangeException(nameof(dest_offset));
+            if (destOffset < 0 || destOffset >= dest.Length)
+                throw new ArgumentOutOfRangeException(nameof(destOffset));
 
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((srcR.Length - srcROffset) < count / 2 ||
                 (srcI.Length - srcIOffset) < count / 2 ||
-                (dest.Length - dest_offset) < count)
+                (dest.Length - destOffset) < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            for (int i = 0, j = srcROffset, k = srcIOffset, l = dest_offset; i < count; i++, j++, k++)
+            for (int i = 0, j = srcROffset, k = srcIOffset, l = destOffset; i < count; i++, j++, k++)
             {
                 dest[l++] = srcR[j];
                 dest[l++] = srcI[k];
@@ -186,9 +186,9 @@ namespace SoundUtils
         /// <param name="src">インターリーブされた入力となる T 型配列。</param>
         /// <param name="srcOffset">T 型配列の読み取りが開始されるインデックスのオフセット。</param>
         /// <param name="dest">インターリーブ解除の結果が格納される T 型配列。</param>
-        /// <param name="dest_offset">結果の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="destOffset">結果の T 型配列の格納が開始されるインデックスのオフセット。</param>
         /// <param name="count">読み取り元配列のデータ数。</param>
-        public static void Deinterleave<T>(T[] src, int srcOffset, T[] dest, int dest_offset, int count)
+        public static void Deinterleave<T>(T[] src, int srcOffset, T[] dest, int destOffset, int count)
         {
             if (src == null)
                 throw new ArgumentNullException(nameof(src));
@@ -199,17 +199,17 @@ namespace SoundUtils
             if (srcOffset < 0 || srcOffset >= src.Length)
                 throw new ArgumentOutOfRangeException(nameof(srcOffset));
 
-            if (dest_offset < 0 || dest_offset >= dest.Length)
-                throw new ArgumentOutOfRangeException(nameof(dest_offset));
+            if (destOffset < 0 || destOffset >= dest.Length)
+                throw new ArgumentOutOfRangeException(nameof(destOffset));
 
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((src.Length - srcOffset) < count ||
-                (dest.Length - dest_offset) * 2 < count)
+                (dest.Length - destOffset) * 2 < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            for (int i = 0, j = srcOffset, k = dest_offset; i < count; i++, j += 2, k++)
+            for (int i = 0, j = srcOffset, k = destOffset; i < count; i++, j += 2, k++)
                 dest[k] = src[j];
         }
 
@@ -233,11 +233,11 @@ namespace SoundUtils
         /// <param name="src">インターリーブされた入力となる T 型配列。</param>
         /// <param name="srcOffset"></param>
         /// <param name="destR">インターリーブ解除の結果が格納される 1つ目の T 型配列。</param>
-        /// <param name="destR_offset">1つ目の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="destROffset">1つ目の T 型配列の格納が開始されるインデックスのオフセット。</param>
         /// <param name="destI">インターリーブ解除の結果が格納される 2つ目の T 型配列。</param>
-        /// <param name="destI_offset">2つ目の T 型配列の格納が開始されるインデックスのオフセット。</param>
+        /// <param name="destIOffset">2つ目の T 型配列の格納が開始されるインデックスのオフセット。</param>
         /// <param name="count">読み取り元配列のデータ数。</param>
-        public static void Deinterleave<T>(T[] src, int srcOffset, T[] destR, int destR_offset, T[] destI, int destI_offset, int count)
+        public static void Deinterleave<T>(T[] src, int srcOffset, T[] destR, int destROffset, T[] destI, int destIOffset, int count)
         {
             if (src == null)
                 throw new ArgumentNullException(nameof(src));
@@ -251,21 +251,21 @@ namespace SoundUtils
             if (srcOffset < 0 || srcOffset >= src.Length)
                 throw new ArgumentOutOfRangeException(nameof(srcOffset));
 
-            if (destR_offset < 0 || destR_offset >= destR.Length)
-                throw new ArgumentOutOfRangeException(nameof(destR_offset));
+            if (destROffset < 0 || destROffset >= destR.Length)
+                throw new ArgumentOutOfRangeException(nameof(destROffset));
 
-            if (destI_offset < 0 || destI_offset >= destI.Length)
-                throw new ArgumentOutOfRangeException(nameof(destI_offset));
+            if (destIOffset < 0 || destIOffset >= destI.Length)
+                throw new ArgumentOutOfRangeException(nameof(destIOffset));
 
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             if ((src.Length - srcOffset) < count * 2 ||
-                (destR.Length - destR_offset) < count ||
-                (destI.Length - destI_offset) < count)
+                (destR.Length - destROffset) < count ||
+                (destI.Length - destIOffset) < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            for (int i = 0, j = srcOffset, k = destR_offset, l = destI_offset; i < count; i++, k++, l++)
+            for (int i = 0, j = srcOffset, k = destROffset, l = destIOffset; i < count; i++, k++, l++)
             {
                 destR[k] = src[j++];
                 destI[l] = src[j++];

@@ -86,7 +86,7 @@ namespace SoundUtils
             if (data.Length != n)
                 throw new ArgumentOutOfRangeException(nameof(data));
 
-            cdft(n, invert, data, ip, w);
+            Cdft(n, invert, data, ip, w);
 
             if (invert)
             {
@@ -139,7 +139,7 @@ namespace SoundUtils
             if (data.Length != n)
                 throw new ArgumentOutOfRangeException(nameof(data));
 
-            rdft(n, invert, data, ip, w);
+            Rdft(n, invert, data, ip, w);
 
             if (invert)
             {
@@ -152,30 +152,30 @@ namespace SoundUtils
         #endregion
 
         #region -- Private Static Methods --
-        private static void cdft(int n, bool invert, double[] a, int[] ip, double[] w)
+        private static void Cdft(int n, bool invert, double[] a, int[] ip, double[] w)
         {
             if (n > (ip[0] << 2))
-                makewt(n >> 2, ip, w);
+                Makewt(n >> 2, ip, w);
 
             if (n > 4)
             {
                 if (invert)
                 {
 
-                    bitrv2conj(n, ip, 2, a);
-                    cftbsub(n, a, w);
+                    Bitrv2Conj(n, ip, 2, a);
+                    Cftbsub(n, a, w);
                 }
                 else
                 {
-                    bitrv2(n, ip, 2, a);
-                    cftfsub(n, a, w);
+                    Bitrv2(n, ip, 2, a);
+                    Cftfsub(n, a, w);
                 }
             }
             else if (n == 4)
-                cftfsub(n, a, w);
+                Cftfsub(n, a, w);
         }
 
-        private static void rdft(int n, bool invert, double[] a, int[] ip, double[] w)
+        private static void Rdft(int n, bool invert, double[] a, int[] ip, double[] w)
         {
             int nw, nc;
             double xi;
@@ -185,7 +185,7 @@ namespace SoundUtils
             if (n > (nw << 2))
             {
                 nw = n >> 2;
-                makewt(nw, ip, w);
+                Makewt(nw, ip, w);
             }
 
             nc = ip[1];
@@ -193,7 +193,7 @@ namespace SoundUtils
             if (n > (nc << 2))
             {
                 nc = n >> 2;
-                makect(nc, ip, w, nw);
+                Makect(nc, ip, w, nw);
             }
 
             if (invert)
@@ -202,23 +202,23 @@ namespace SoundUtils
                 a[0] -= a[1];
                 if (n > 4)
                 {
-                    rftbsub(n, a, nc, w, nw);
-                    bitrv2(n, ip, 2, a);
-                    cftbsub(n, a, w);
+                    Rftbsub(n, a, nc, w, nw);
+                    Bitrv2(n, ip, 2, a);
+                    Cftbsub(n, a, w);
                 }
                 else if (n == 4)
-                    cftfsub(n, a, w);
+                    Cftfsub(n, a, w);
             }
             else
             {
                 if (n > 4)
                 {
-                    bitrv2(n, ip, 2, a);
-                    cftfsub(n, a, w);
-                    rftfsub(n, a, nc, w, nw);
+                    Bitrv2(n, ip, 2, a);
+                    Cftfsub(n, a, w);
+                    Rftfsub(n, a, nc, w, nw);
                 }
                 else if (n == 4)
-                    cftfsub(n, a, w);
+                    Cftfsub(n, a, w);
 
                 xi = a[0] - a[1];
                 a[0] += a[1];
@@ -227,7 +227,7 @@ namespace SoundUtils
         }
 
         /* -------- initializing routines -------- */
-        private static void makewt(int nw, int[] ip, double[] w)
+        private static void Makewt(int nw, int[] ip, double[] w)
         {
             int j, nwh;
             double delta, x, y;
@@ -256,12 +256,12 @@ namespace SoundUtils
                         w[nw - j + 1] = x;
                     }
 
-                    bitrv2(nw, ip, 2, w);
+                    Bitrv2(nw, ip, 2, w);
                 }
             }
         }
 
-        private static void makect(int nc, int[] ip, double[] c, int offset)
+        private static void Makect(int nc, int[] ip, double[] c, int offset)
         {
             int j, nch;
             double delta;
@@ -284,7 +284,7 @@ namespace SoundUtils
         }
 
         /* -------- child routines -------- */
-        private static void bitrv2(int n, int[] ip, int offset, double[] a)
+        private static void Bitrv2(int n, int[] ip, int offset, double[] a)
         {
             int j, j1, k, k1, l, m, m2;
             double xr, xi, yr, yi;
@@ -398,7 +398,7 @@ namespace SoundUtils
             }
         }
 
-        private static void bitrv2conj(int n, int[] ip, int offset, double[] a)
+        private static void Bitrv2Conj(int n, int[] ip, int offset, double[] a)
         {
             int j, j1, k, k1, l, m, m2;
             double xr, xi, yr, yi;
@@ -523,20 +523,20 @@ namespace SoundUtils
             }
         }
 
-        private static void cftfsub(int n, double[] a, double[] w)
+        private static void Cftfsub(int n, double[] a, double[] w)
         {
             int j, j1, j2, j3, l;
-            double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
+            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
 
             l = 2;
 
             if (n > 8)
             {
-                cft1st(n, a, w);
+                Cft1St(n, a, w);
                 l = 8;
                 while ((l << 2) < n)
                 {
-                    cftmdl(n, l, a, w);
+                    Cftmdl(n, l, a, w);
                     l <<= 2;
                 }
             }
@@ -548,22 +548,22 @@ namespace SoundUtils
                     j1 = j + l;
                     j2 = j1 + l;
                     j3 = j2 + l;
-                    x0r = a[j] + a[j1];
-                    x0i = a[j + 1] + a[j1 + 1];
-                    x1r = a[j] - a[j1];
-                    x1i = a[j + 1] - a[j1 + 1];
-                    x2r = a[j2] + a[j3];
-                    x2i = a[j2 + 1] + a[j3 + 1];
-                    x3r = a[j2] - a[j3];
-                    x3i = a[j2 + 1] - a[j3 + 1];
-                    a[j] = x0r + x2r;
-                    a[j + 1] = x0i + x2i;
-                    a[j2] = x0r - x2r;
-                    a[j2 + 1] = x0i - x2i;
-                    a[j1] = x1r - x3i;
-                    a[j1 + 1] = x1i + x3r;
-                    a[j3] = x1r + x3i;
-                    a[j3 + 1] = x1i - x3r;
+                    x0R = a[j] + a[j1];
+                    x0I = a[j + 1] + a[j1 + 1];
+                    x1R = a[j] - a[j1];
+                    x1I = a[j + 1] - a[j1 + 1];
+                    x2R = a[j2] + a[j3];
+                    x2I = a[j2 + 1] + a[j3 + 1];
+                    x3R = a[j2] - a[j3];
+                    x3I = a[j2 + 1] - a[j3 + 1];
+                    a[j] = x0R + x2R;
+                    a[j + 1] = x0I + x2I;
+                    a[j2] = x0R - x2R;
+                    a[j2 + 1] = x0I - x2I;
+                    a[j1] = x1R - x3I;
+                    a[j1 + 1] = x1I + x3R;
+                    a[j3] = x1R + x3I;
+                    a[j3 + 1] = x1I - x3R;
                 }
             }
             else
@@ -571,33 +571,33 @@ namespace SoundUtils
                 for (j = 0; j < l; j += 2)
                 {
                     j1 = j + l;
-                    x0r = a[j] - a[j1];
-                    x0i = a[j + 1] - a[j1 + 1];
+                    x0R = a[j] - a[j1];
+                    x0I = a[j + 1] - a[j1 + 1];
                     a[j] += a[j1];
                     a[j + 1] += a[j1 + 1];
-                    a[j1] = x0r;
-                    a[j1 + 1] = x0i;
+                    a[j1] = x0R;
+                    a[j1 + 1] = x0I;
                 }
             }
         }
 
-        private static void cftbsub(int n, double[] a, double[] w)
+        private static void Cftbsub(int n, double[] a, double[] w)
         {
             //void cft1st(int n, double *a, double *w);
             //void cftmdl(int n, int l, double *a, double *w);
             int j, j1, j2, j3, l;
-            double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
+            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
 
             l = 2;
 
             if (n > 8)
             {
-                cft1st(n, a, w);
+                Cft1St(n, a, w);
                 l = 8;
 
                 while ((l << 2) < n)
                 {
-                    cftmdl(n, l, a, w);
+                    Cftmdl(n, l, a, w);
                     l <<= 2;
                 }
             }
@@ -609,22 +609,22 @@ namespace SoundUtils
                     j1 = j + l;
                     j2 = j1 + l;
                     j3 = j2 + l;
-                    x0r = a[j] + a[j1];
-                    x0i = -a[j + 1] - a[j1 + 1];
-                    x1r = a[j] - a[j1];
-                    x1i = -a[j + 1] + a[j1 + 1];
-                    x2r = a[j2] + a[j3];
-                    x2i = a[j2 + 1] + a[j3 + 1];
-                    x3r = a[j2] - a[j3];
-                    x3i = a[j2 + 1] - a[j3 + 1];
-                    a[j] = x0r + x2r;
-                    a[j + 1] = x0i - x2i;
-                    a[j2] = x0r - x2r;
-                    a[j2 + 1] = x0i + x2i;
-                    a[j1] = x1r - x3i;
-                    a[j1 + 1] = x1i - x3r;
-                    a[j3] = x1r + x3i;
-                    a[j3 + 1] = x1i + x3r;
+                    x0R = a[j] + a[j1];
+                    x0I = -a[j + 1] - a[j1 + 1];
+                    x1R = a[j] - a[j1];
+                    x1I = -a[j + 1] + a[j1 + 1];
+                    x2R = a[j2] + a[j3];
+                    x2I = a[j2 + 1] + a[j3 + 1];
+                    x3R = a[j2] - a[j3];
+                    x3I = a[j2 + 1] - a[j3 + 1];
+                    a[j] = x0R + x2R;
+                    a[j + 1] = x0I - x2I;
+                    a[j2] = x0R - x2R;
+                    a[j2 + 1] = x0I + x2I;
+                    a[j1] = x1R - x3I;
+                    a[j1 + 1] = x1I - x3R;
+                    a[j3] = x1R + x3I;
+                    a[j3 + 1] = x1I + x3R;
                 }
             }
             else
@@ -632,127 +632,127 @@ namespace SoundUtils
                 for (j = 0; j < l; j += 2)
                 {
                     j1 = j + l;
-                    x0r = a[j] - a[j1];
-                    x0i = -a[j + 1] + a[j1 + 1];
+                    x0R = a[j] - a[j1];
+                    x0I = -a[j + 1] + a[j1 + 1];
                     a[j] += a[j1];
                     a[j + 1] = -a[j + 1] - a[j1 + 1];
-                    a[j1] = x0r;
-                    a[j1 + 1] = x0i;
+                    a[j1] = x0R;
+                    a[j1 + 1] = x0I;
                 }
             }
         }
 
-        private static void cft1st(int n, double[] a, double[] w)
+        private static void Cft1St(int n, double[] a, double[] w)
         {
             int j, k1, k2;
-            double wk1r, wk1i, wk2r, wk2i, wk3r, wk3i;
-            double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
+            double wk1R, wk1I, wk2R, wk2I, wk3R, wk3I;
+            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
 
-            x0r = a[0] + a[2];
-            x0i = a[1] + a[3];
-            x1r = a[0] - a[2];
-            x1i = a[1] - a[3];
-            x2r = a[4] + a[6];
-            x2i = a[5] + a[7];
-            x3r = a[4] - a[6];
-            x3i = a[5] - a[7];
-            a[0] = x0r + x2r;
-            a[1] = x0i + x2i;
-            a[4] = x0r - x2r;
-            a[5] = x0i - x2i;
-            a[2] = x1r - x3i;
-            a[3] = x1i + x3r;
-            a[6] = x1r + x3i;
-            a[7] = x1i - x3r;
-            wk1r = w[2];
-            x0r = a[8] + a[10];
-            x0i = a[9] + a[11];
-            x1r = a[8] - a[10];
-            x1i = a[9] - a[11];
-            x2r = a[12] + a[14];
-            x2i = a[13] + a[15];
-            x3r = a[12] - a[14];
-            x3i = a[13] - a[15];
-            a[8] = x0r + x2r;
-            a[9] = x0i + x2i;
-            a[12] = x2i - x0i;
-            a[13] = x0r - x2r;
-            x0r = x1r - x3i;
-            x0i = x1i + x3r;
-            a[10] = wk1r * (x0r - x0i);
-            a[11] = wk1r * (x0r + x0i);
-            x0r = x3i + x1r;
-            x0i = x3r - x1i;
-            a[14] = wk1r * (x0i - x0r);
-            a[15] = wk1r * (x0i + x0r);
+            x0R = a[0] + a[2];
+            x0I = a[1] + a[3];
+            x1R = a[0] - a[2];
+            x1I = a[1] - a[3];
+            x2R = a[4] + a[6];
+            x2I = a[5] + a[7];
+            x3R = a[4] - a[6];
+            x3I = a[5] - a[7];
+            a[0] = x0R + x2R;
+            a[1] = x0I + x2I;
+            a[4] = x0R - x2R;
+            a[5] = x0I - x2I;
+            a[2] = x1R - x3I;
+            a[3] = x1I + x3R;
+            a[6] = x1R + x3I;
+            a[7] = x1I - x3R;
+            wk1R = w[2];
+            x0R = a[8] + a[10];
+            x0I = a[9] + a[11];
+            x1R = a[8] - a[10];
+            x1I = a[9] - a[11];
+            x2R = a[12] + a[14];
+            x2I = a[13] + a[15];
+            x3R = a[12] - a[14];
+            x3I = a[13] - a[15];
+            a[8] = x0R + x2R;
+            a[9] = x0I + x2I;
+            a[12] = x2I - x0I;
+            a[13] = x0R - x2R;
+            x0R = x1R - x3I;
+            x0I = x1I + x3R;
+            a[10] = wk1R * (x0R - x0I);
+            a[11] = wk1R * (x0R + x0I);
+            x0R = x3I + x1R;
+            x0I = x3R - x1I;
+            a[14] = wk1R * (x0I - x0R);
+            a[15] = wk1R * (x0I + x0R);
             k1 = 0;
 
             for (j = 16; j < n; j += 16)
             {
                 k1 += 2;
                 k2 = 2 * k1;
-                wk2r = w[k1];
-                wk2i = w[k1 + 1];
-                wk1r = w[k2];
-                wk1i = w[k2 + 1];
-                wk3r = wk1r - 2 * wk2i * wk1i;
-                wk3i = 2 * wk2i * wk1r - wk1i;
-                x0r = a[j] + a[j + 2];
-                x0i = a[j + 1] + a[j + 3];
-                x1r = a[j] - a[j + 2];
-                x1i = a[j + 1] - a[j + 3];
-                x2r = a[j + 4] + a[j + 6];
-                x2i = a[j + 5] + a[j + 7];
-                x3r = a[j + 4] - a[j + 6];
-                x3i = a[j + 5] - a[j + 7];
-                a[j] = x0r + x2r;
-                a[j + 1] = x0i + x2i;
-                x0r -= x2r;
-                x0i -= x2i;
-                a[j + 4] = wk2r * x0r - wk2i * x0i;
-                a[j + 5] = wk2r * x0i + wk2i * x0r;
-                x0r = x1r - x3i;
-                x0i = x1i + x3r;
-                a[j + 2] = wk1r * x0r - wk1i * x0i;
-                a[j + 3] = wk1r * x0i + wk1i * x0r;
-                x0r = x1r + x3i;
-                x0i = x1i - x3r;
-                a[j + 6] = wk3r * x0r - wk3i * x0i;
-                a[j + 7] = wk3r * x0i + wk3i * x0r;
-                wk1r = w[k2 + 2];
-                wk1i = w[k2 + 3];
-                wk3r = wk1r - 2 * wk2r * wk1i;
-                wk3i = 2 * wk2r * wk1r - wk1i;
-                x0r = a[j + 8] + a[j + 10];
-                x0i = a[j + 9] + a[j + 11];
-                x1r = a[j + 8] - a[j + 10];
-                x1i = a[j + 9] - a[j + 11];
-                x2r = a[j + 12] + a[j + 14];
-                x2i = a[j + 13] + a[j + 15];
-                x3r = a[j + 12] - a[j + 14];
-                x3i = a[j + 13] - a[j + 15];
-                a[j + 8] = x0r + x2r;
-                a[j + 9] = x0i + x2i;
-                x0r -= x2r;
-                x0i -= x2i;
-                a[j + 12] = -wk2i * x0r - wk2r * x0i;
-                a[j + 13] = -wk2i * x0i + wk2r * x0r;
-                x0r = x1r - x3i;
-                x0i = x1i + x3r;
-                a[j + 10] = wk1r * x0r - wk1i * x0i;
-                a[j + 11] = wk1r * x0i + wk1i * x0r;
-                x0r = x1r + x3i;
-                x0i = x1i - x3r;
-                a[j + 14] = wk3r * x0r - wk3i * x0i;
-                a[j + 15] = wk3r * x0i + wk3i * x0r;
+                wk2R = w[k1];
+                wk2I = w[k1 + 1];
+                wk1R = w[k2];
+                wk1I = w[k2 + 1];
+                wk3R = wk1R - 2 * wk2I * wk1I;
+                wk3I = 2 * wk2I * wk1R - wk1I;
+                x0R = a[j] + a[j + 2];
+                x0I = a[j + 1] + a[j + 3];
+                x1R = a[j] - a[j + 2];
+                x1I = a[j + 1] - a[j + 3];
+                x2R = a[j + 4] + a[j + 6];
+                x2I = a[j + 5] + a[j + 7];
+                x3R = a[j + 4] - a[j + 6];
+                x3I = a[j + 5] - a[j + 7];
+                a[j] = x0R + x2R;
+                a[j + 1] = x0I + x2I;
+                x0R -= x2R;
+                x0I -= x2I;
+                a[j + 4] = wk2R * x0R - wk2I * x0I;
+                a[j + 5] = wk2R * x0I + wk2I * x0R;
+                x0R = x1R - x3I;
+                x0I = x1I + x3R;
+                a[j + 2] = wk1R * x0R - wk1I * x0I;
+                a[j + 3] = wk1R * x0I + wk1I * x0R;
+                x0R = x1R + x3I;
+                x0I = x1I - x3R;
+                a[j + 6] = wk3R * x0R - wk3I * x0I;
+                a[j + 7] = wk3R * x0I + wk3I * x0R;
+                wk1R = w[k2 + 2];
+                wk1I = w[k2 + 3];
+                wk3R = wk1R - 2 * wk2R * wk1I;
+                wk3I = 2 * wk2R * wk1R - wk1I;
+                x0R = a[j + 8] + a[j + 10];
+                x0I = a[j + 9] + a[j + 11];
+                x1R = a[j + 8] - a[j + 10];
+                x1I = a[j + 9] - a[j + 11];
+                x2R = a[j + 12] + a[j + 14];
+                x2I = a[j + 13] + a[j + 15];
+                x3R = a[j + 12] - a[j + 14];
+                x3I = a[j + 13] - a[j + 15];
+                a[j + 8] = x0R + x2R;
+                a[j + 9] = x0I + x2I;
+                x0R -= x2R;
+                x0I -= x2I;
+                a[j + 12] = -wk2I * x0R - wk2R * x0I;
+                a[j + 13] = -wk2I * x0I + wk2R * x0R;
+                x0R = x1R - x3I;
+                x0I = x1I + x3R;
+                a[j + 10] = wk1R * x0R - wk1I * x0I;
+                a[j + 11] = wk1R * x0I + wk1I * x0R;
+                x0R = x1R + x3I;
+                x0I = x1I - x3R;
+                a[j + 14] = wk3R * x0R - wk3I * x0I;
+                a[j + 15] = wk3R * x0I + wk3I * x0R;
             }
         }
 
-        private static void cftmdl(int n, int l, double[] a, double[] w)
+        private static void Cftmdl(int n, int l, double[] a, double[] w)
         {
             int j, j1, j2, j3, k, k1, k2, m, m2;
-            double wk1r, wk1i, wk2r, wk2i, wk3r, wk3i;
-            double x0r, x0i, x1r, x1i, x2r, x2i, x3r, x3i;
+            double wk1R, wk1I, wk2R, wk2I, wk3R, wk3I;
+            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
 
             m = l << 2;
 
@@ -761,51 +761,51 @@ namespace SoundUtils
                 j1 = j + l;
                 j2 = j1 + l;
                 j3 = j2 + l;
-                x0r = a[j] + a[j1];
-                x0i = a[j + 1] + a[j1 + 1];
-                x1r = a[j] - a[j1];
-                x1i = a[j + 1] - a[j1 + 1];
-                x2r = a[j2] + a[j3];
-                x2i = a[j2 + 1] + a[j3 + 1];
-                x3r = a[j2] - a[j3];
-                x3i = a[j2 + 1] - a[j3 + 1];
-                a[j] = x0r + x2r;
-                a[j + 1] = x0i + x2i;
-                a[j2] = x0r - x2r;
-                a[j2 + 1] = x0i - x2i;
-                a[j1] = x1r - x3i;
-                a[j1 + 1] = x1i + x3r;
-                a[j3] = x1r + x3i;
-                a[j3 + 1] = x1i - x3r;
+                x0R = a[j] + a[j1];
+                x0I = a[j + 1] + a[j1 + 1];
+                x1R = a[j] - a[j1];
+                x1I = a[j + 1] - a[j1 + 1];
+                x2R = a[j2] + a[j3];
+                x2I = a[j2 + 1] + a[j3 + 1];
+                x3R = a[j2] - a[j3];
+                x3I = a[j2 + 1] - a[j3 + 1];
+                a[j] = x0R + x2R;
+                a[j + 1] = x0I + x2I;
+                a[j2] = x0R - x2R;
+                a[j2 + 1] = x0I - x2I;
+                a[j1] = x1R - x3I;
+                a[j1 + 1] = x1I + x3R;
+                a[j3] = x1R + x3I;
+                a[j3 + 1] = x1I - x3R;
             }
 
-            wk1r = w[2];
+            wk1R = w[2];
 
             for (j = m; j < l + m; j += 2)
             {
                 j1 = j + l;
                 j2 = j1 + l;
                 j3 = j2 + l;
-                x0r = a[j] + a[j1];
-                x0i = a[j + 1] + a[j1 + 1];
-                x1r = a[j] - a[j1];
-                x1i = a[j + 1] - a[j1 + 1];
-                x2r = a[j2] + a[j3];
-                x2i = a[j2 + 1] + a[j3 + 1];
-                x3r = a[j2] - a[j3];
-                x3i = a[j2 + 1] - a[j3 + 1];
-                a[j] = x0r + x2r;
-                a[j + 1] = x0i + x2i;
-                a[j2] = x2i - x0i;
-                a[j2 + 1] = x0r - x2r;
-                x0r = x1r - x3i;
-                x0i = x1i + x3r;
-                a[j1] = wk1r * (x0r - x0i);
-                a[j1 + 1] = wk1r * (x0r + x0i);
-                x0r = x3i + x1r;
-                x0i = x3r - x1i;
-                a[j3] = wk1r * (x0i - x0r);
-                a[j3 + 1] = wk1r * (x0i + x0r);
+                x0R = a[j] + a[j1];
+                x0I = a[j + 1] + a[j1 + 1];
+                x1R = a[j] - a[j1];
+                x1I = a[j + 1] - a[j1 + 1];
+                x2R = a[j2] + a[j3];
+                x2I = a[j2 + 1] + a[j3 + 1];
+                x3R = a[j2] - a[j3];
+                x3I = a[j2 + 1] - a[j3 + 1];
+                a[j] = x0R + x2R;
+                a[j + 1] = x0I + x2I;
+                a[j2] = x2I - x0I;
+                a[j2 + 1] = x0R - x2R;
+                x0R = x1R - x3I;
+                x0I = x1I + x3R;
+                a[j1] = wk1R * (x0R - x0I);
+                a[j1 + 1] = wk1R * (x0R + x0I);
+                x0R = x3I + x1R;
+                x0I = x3R - x1I;
+                a[j3] = wk1R * (x0I - x0R);
+                a[j3 + 1] = wk1R * (x0I + x0R);
             }
 
             k1 = 0;
@@ -815,79 +815,79 @@ namespace SoundUtils
             {
                 k1 += 2;
                 k2 = 2 * k1;
-                wk2r = w[k1];
-                wk2i = w[k1 + 1];
-                wk1r = w[k2];
-                wk1i = w[k2 + 1];
-                wk3r = wk1r - 2 * wk2i * wk1i;
-                wk3i = 2 * wk2i * wk1r - wk1i;
+                wk2R = w[k1];
+                wk2I = w[k1 + 1];
+                wk1R = w[k2];
+                wk1I = w[k2 + 1];
+                wk3R = wk1R - 2 * wk2I * wk1I;
+                wk3I = 2 * wk2I * wk1R - wk1I;
 
                 for (j = k; j < l + k; j += 2)
                 {
                     j1 = j + l;
                     j2 = j1 + l;
                     j3 = j2 + l;
-                    x0r = a[j] + a[j1];
-                    x0i = a[j + 1] + a[j1 + 1];
-                    x1r = a[j] - a[j1];
-                    x1i = a[j + 1] - a[j1 + 1];
-                    x2r = a[j2] + a[j3];
-                    x2i = a[j2 + 1] + a[j3 + 1];
-                    x3r = a[j2] - a[j3];
-                    x3i = a[j2 + 1] - a[j3 + 1];
-                    a[j] = x0r + x2r;
-                    a[j + 1] = x0i + x2i;
-                    x0r -= x2r;
-                    x0i -= x2i;
-                    a[j2] = wk2r * x0r - wk2i * x0i;
-                    a[j2 + 1] = wk2r * x0i + wk2i * x0r;
-                    x0r = x1r - x3i;
-                    x0i = x1i + x3r;
-                    a[j1] = wk1r * x0r - wk1i * x0i;
-                    a[j1 + 1] = wk1r * x0i + wk1i * x0r;
-                    x0r = x1r + x3i;
-                    x0i = x1i - x3r;
-                    a[j3] = wk3r * x0r - wk3i * x0i;
-                    a[j3 + 1] = wk3r * x0i + wk3i * x0r;
+                    x0R = a[j] + a[j1];
+                    x0I = a[j + 1] + a[j1 + 1];
+                    x1R = a[j] - a[j1];
+                    x1I = a[j + 1] - a[j1 + 1];
+                    x2R = a[j2] + a[j3];
+                    x2I = a[j2 + 1] + a[j3 + 1];
+                    x3R = a[j2] - a[j3];
+                    x3I = a[j2 + 1] - a[j3 + 1];
+                    a[j] = x0R + x2R;
+                    a[j + 1] = x0I + x2I;
+                    x0R -= x2R;
+                    x0I -= x2I;
+                    a[j2] = wk2R * x0R - wk2I * x0I;
+                    a[j2 + 1] = wk2R * x0I + wk2I * x0R;
+                    x0R = x1R - x3I;
+                    x0I = x1I + x3R;
+                    a[j1] = wk1R * x0R - wk1I * x0I;
+                    a[j1 + 1] = wk1R * x0I + wk1I * x0R;
+                    x0R = x1R + x3I;
+                    x0I = x1I - x3R;
+                    a[j3] = wk3R * x0R - wk3I * x0I;
+                    a[j3 + 1] = wk3R * x0I + wk3I * x0R;
                 }
 
-                wk1r = w[k2 + 2];
-                wk1i = w[k2 + 3];
-                wk3r = wk1r - 2 * wk2r * wk1i;
-                wk3i = 2 * wk2r * wk1r - wk1i;
+                wk1R = w[k2 + 2];
+                wk1I = w[k2 + 3];
+                wk3R = wk1R - 2 * wk2R * wk1I;
+                wk3I = 2 * wk2R * wk1R - wk1I;
 
                 for (j = k + m; j < l + (k + m); j += 2)
                 {
                     j1 = j + l;
                     j2 = j1 + l;
                     j3 = j2 + l;
-                    x0r = a[j] + a[j1];
-                    x0i = a[j + 1] + a[j1 + 1];
-                    x1r = a[j] - a[j1];
-                    x1i = a[j + 1] - a[j1 + 1];
-                    x2r = a[j2] + a[j3];
-                    x2i = a[j2 + 1] + a[j3 + 1];
-                    x3r = a[j2] - a[j3];
-                    x3i = a[j2 + 1] - a[j3 + 1];
-                    a[j] = x0r + x2r;
-                    a[j + 1] = x0i + x2i;
-                    x0r -= x2r;
-                    x0i -= x2i;
-                    a[j2] = -wk2i * x0r - wk2r * x0i;
-                    a[j2 + 1] = -wk2i * x0i + wk2r * x0r;
-                    x0r = x1r - x3i;
-                    x0i = x1i + x3r;
-                    a[j1] = wk1r * x0r - wk1i * x0i;
-                    a[j1 + 1] = wk1r * x0i + wk1i * x0r;
-                    x0r = x1r + x3i;
-                    x0i = x1i - x3r;
-                    a[j3] = wk3r * x0r - wk3i * x0i;
-                    a[j3 + 1] = wk3r * x0i + wk3i * x0r;
+                    x0R = a[j] + a[j1];
+                    x0I = a[j + 1] + a[j1 + 1];
+                    x1R = a[j] - a[j1];
+                    x1I = a[j + 1] - a[j1 + 1];
+                    x2R = a[j2] + a[j3];
+                    x2I = a[j2 + 1] + a[j3 + 1];
+                    x3R = a[j2] - a[j3];
+                    x3I = a[j2 + 1] - a[j3 + 1];
+                    a[j] = x0R + x2R;
+                    a[j + 1] = x0I + x2I;
+                    x0R -= x2R;
+                    x0I -= x2I;
+                    a[j2] = -wk2I * x0R - wk2R * x0I;
+                    a[j2 + 1] = -wk2I * x0I + wk2R * x0R;
+                    x0R = x1R - x3I;
+                    x0I = x1I + x3R;
+                    a[j1] = wk1R * x0R - wk1I * x0I;
+                    a[j1 + 1] = wk1R * x0I + wk1I * x0R;
+                    x0R = x1R + x3I;
+                    x0I = x1I - x3R;
+                    a[j3] = wk3R * x0R - wk3I * x0I;
+                    a[j3 + 1] = wk3R * x0I + wk3I * x0R;
                 }
             }
         }
 
-        private static void rftfsub(int n, double[] a, int nc, double[] c, int offset)
+        private static void Rftfsub(int n, double[] a, int nc, double[] c, int offset)
         {
             int j, k, kk, ks, m;
             double wkr, wki, xr, xi, yr, yi;
@@ -913,7 +913,7 @@ namespace SoundUtils
             }
         }
 
-        private static void rftbsub(int n, double[] a, int nc, double[] c, int offset)
+        private static void Rftbsub(int n, double[] a, int nc, double[] c, int offset)
         {
             int j, k, kk, ks, m;
             double wkr, wki, xr, xi, yr, yi;

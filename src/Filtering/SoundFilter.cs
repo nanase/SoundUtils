@@ -32,7 +32,7 @@ namespace SoundUtils.Filtering
     public class SoundFilter
     {
         #region -- Private Fields --
-        private readonly FFTFiltering lfilter, rfilter;
+        private readonly FftFiltering lfilter, rfilter;
         private readonly bool stereo;
         private readonly double[] lbuffer, rbuffer;
         #endregion
@@ -57,11 +57,11 @@ namespace SoundUtils.Filtering
             if (stereo)
             {
                 bufferSize /= 2;
-                this.rfilter = new FFTFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+                this.rfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
                 this.rbuffer = new double[bufferSize];
             }
 
-            this.lfilter = new FFTFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+            this.lfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
             this.lbuffer = new double[bufferSize];
         }
         #endregion

@@ -75,16 +75,16 @@ namespace SoundUtils.Filtering
             if (input == null)
                 throw new ArgumentNullException(nameof(input));
 
-            int input_index = 0;
+            int inputIndex = 0;
 
-            while (input_index < input.Length)
+            while (inputIndex < input.Length)
             {
-                int copy_length = Math.Min(this.length - this.index, input.Length - input_index);
+                int copyLength = Math.Min(this.length - this.index, input.Length - inputIndex);
 
-                Array.Copy(input, input_index, this.data, this.index, copy_length);
+                Array.Copy(input, inputIndex, this.data, this.index, copyLength);
 
-                this.index += copy_length;
-                input_index += copy_length;
+                this.index += copyLength;
+                inputIndex += copyLength;
 
                 if (this.index + 1 >= this.length)
                 {

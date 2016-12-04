@@ -11,12 +11,12 @@ namespace UnitTest
         {
             unchecked
             {
-                const long val_long = (long)0x0123456789ABCDEF;
-                const long val_long_reverse = (long)0xEFCDAB8967452301;
+                const long valLong = (long)0x0123456789ABCDEF;
+                const long valLongReverse = (long)0xEFCDAB8967452301;
 
-                Assert.AreEqual(val_long_reverse, BitOperate.ReverseBytes(val_long, true));
-                Assert.AreEqual(val_long, BitOperate.ReverseBytes(val_long, false));
-                Assert.AreEqual(val_long, BitOperate.ReverseBytes(BitOperate.ReverseBytes(val_long, true), true));
+                Assert.AreEqual(valLongReverse, BitOperate.ReverseBytes(valLong, true));
+                Assert.AreEqual(valLong, BitOperate.ReverseBytes(valLong, false));
+                Assert.AreEqual(valLong, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valLong, true), true));
             }
         }
 
@@ -25,12 +25,12 @@ namespace UnitTest
         {
             unchecked
             {
-                const int val_int = (int)0x01234567;
-                const int val_int_reverse = (int)0x67452301;
+                const int valInt = (int)0x01234567;
+                const int valIntReverse = (int)0x67452301;
 
-                Assert.AreEqual(val_int_reverse, BitOperate.ReverseBytes(val_int, true));
-                Assert.AreEqual(val_int, BitOperate.ReverseBytes(val_int, false));
-                Assert.AreEqual(val_int, BitOperate.ReverseBytes(BitOperate.ReverseBytes(val_int, true), true));
+                Assert.AreEqual(valIntReverse, BitOperate.ReverseBytes(valInt, true));
+                Assert.AreEqual(valInt, BitOperate.ReverseBytes(valInt, false));
+                Assert.AreEqual(valInt, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valInt, true), true));
             }
         }
 
@@ -39,12 +39,12 @@ namespace UnitTest
         {
             unchecked
             {
-                const short val_short = (short)0x0123;
-                const short val_short_reverse = (short)0x2301;
+                const short valShort = (short)0x0123;
+                const short valShortReverse = (short)0x2301;
 
-                Assert.AreEqual(val_short_reverse, BitOperate.ReverseBytes(val_short, true));
-                Assert.AreEqual(val_short, BitOperate.ReverseBytes(val_short, false));
-                Assert.AreEqual(val_short, BitOperate.ReverseBytes(BitOperate.ReverseBytes(val_short, true), true));
+                Assert.AreEqual(valShortReverse, BitOperate.ReverseBytes(valShort, true));
+                Assert.AreEqual(valShort, BitOperate.ReverseBytes(valShort, false));
+                Assert.AreEqual(valShort, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valShort, true), true));
             }
         }
     }

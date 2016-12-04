@@ -30,7 +30,7 @@ namespace SoundUtils.IO
     /// <summary>
     /// PCM 形式でストリームに書き込むための機能を提供します。
     /// </summary>
-    public class PCMWriter : WaveWriter
+    public class PcmWriter : WaveWriter
     {
         #region -- Constructor --
         /// <summary>
@@ -40,7 +40,7 @@ namespace SoundUtils.IO
         /// <param name="samplingRate">サンプリング周波数。</param>
         /// <param name="bitPerSample">サンプルあたりのビット数。</param>
         /// <param name="channelCount">チャネルの数。</param>
-        public PCMWriter(Stream stream, int samplingRate, int bitPerSample, int channelCount)
+        public PcmWriter(Stream stream, int samplingRate, int bitPerSample, int channelCount)
             : base(stream, samplingRate, bitPerSample, channelCount, 44L)
         {
             if (bitPerSample != 8 && bitPerSample != 16)
