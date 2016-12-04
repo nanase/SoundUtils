@@ -27,7 +27,7 @@ namespace SoundUtils
     /// <summary>
     /// 値型に対してビットまたはバイト単位での操作を提供します。
     /// </summary>
-    public unsafe static class BitOperate
+    public static unsafe class BitOperate
     {
         #region -- Public Static Methods --
         /// <summary>
