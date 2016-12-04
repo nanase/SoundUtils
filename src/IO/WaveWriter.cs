@@ -82,7 +82,7 @@ namespace SoundUtils.IO
         /// <param name="bitPerSample">サンプルあたりのビット数。</param>
         /// <param name="channelCount">チャネルの数。</param>
         /// <param name="entryOffset">書き込みを開始するバイトオフセット。</param>
-        public WaveWriter(Stream stream, int samplingRate, int bitPerSample, int channelCount, long entryOffset = 0L)
+        protected WaveWriter(Stream stream, int samplingRate, int bitPerSample, int channelCount, long entryOffset = 0L)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
