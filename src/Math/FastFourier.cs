@@ -177,10 +177,7 @@ namespace SoundUtils
 
         private static void Rdft(int n, bool invert, double[] a, int[] ip, double[] w)
         {
-            int nw, nc;
-            double xi;
-
-            nw = ip[0];
+            var nw = ip[0];
 
             if (n > (nw << 2))
             {
@@ -188,7 +185,7 @@ namespace SoundUtils
                 Makewt(nw, ip, w);
             }
 
-            nc = ip[1];
+            var nc = ip[1];
 
             if (n > (nc << 2))
             {
@@ -220,7 +217,7 @@ namespace SoundUtils
                 else if (n == 4)
                     Cftfsub(n, a, w);
 
-                xi = a[0] - a[1];
+                var xi = a[0] - a[1];
                 a[0] += a[1];
                 a[1] = xi;
             }
@@ -229,16 +226,13 @@ namespace SoundUtils
         /* -------- initializing routines -------- */
         private static void Makewt(int nw, int[] ip, double[] w)
         {
-            int j, nwh;
-            double delta, x, y;
-
             ip[0] = nw;
             ip[1] = 1;
 
             if (nw > 2)
             {
-                nwh = nw >> 1;
-                delta = Math.Atan(1.0) / nwh;
+                var nwh = nw >> 1;
+                var delta = Math.Atan(1.0) / nwh;
                 w[0] = 1;
                 w[1] = 0;
                 w[nwh] = Math.Cos(delta * nwh);
@@ -246,10 +240,10 @@ namespace SoundUtils
 
                 if (nwh > 2)
                 {
-                    for (j = 2; j < nwh; j += 2)
+                    for (var j = 2; j < nwh; j += 2)
                     {
-                        x = Math.Cos(delta * j);
-                        y = Math.Sin(delta * j);
+                        var x = Math.Cos(delta * j);
+                        var y = Math.Sin(delta * j);
                         w[j] = x;
                         w[j + 1] = y;
                         w[nw - j] = y;
@@ -263,19 +257,16 @@ namespace SoundUtils
 
         private static void Makect(int nc, int[] ip, double[] c, int offset)
         {
-            int j, nch;
-            double delta;
-
             ip[1] = nc;
 
             if (nc > 1)
             {
-                nch = nc >> 1;
-                delta = Math.Atan(1.0) / nch;
+                var nch = nc >> 1;
+                var delta = Math.Atan(1.0) / nch;
                 c[offset] = Math.Cos(delta * nch);
                 c[offset + nch] = 0.5 * c[offset];
-
-                for (j = 1; j < nch; j++)
+                
+                for (var j = 1; j < nch; j++)
                 {
                     c[offset + j] = 0.5 * Math.Cos(delta * j);
                     c[offset + nc - j] = 0.5 * Math.Sin(delta * j);
@@ -286,18 +277,18 @@ namespace SoundUtils
         /* -------- child routines -------- */
         private static void Bitrv2(int n, int[] ip, int offset, double[] a)
         {
-            int j, j1, k, k1, l, m, m2;
+            int j1, k1;
             double xr, xi, yr, yi;
 
             ip[offset] = 0;
-            l = n;
-            m = 1;
+            var l = n;
+            var m = 1;
 
             while ((m << 3) < l)
             {
                 l >>= 1;
 
-                for (j = 0; j < m; j++)
+                for (var j = 0; j < m; j++)
                 {
                     ip[offset + m + j] = ip[offset + j] + l;
                 }
@@ -305,13 +296,13 @@ namespace SoundUtils
                 m <<= 1;
             }
 
-            m2 = 2 * m;
+            var m2 = 2 * m;
 
             if ((m << 3) == l)
             {
-                for (k = 0; k < m; k++)
+                for (var k = 0; k < m; k++)
                 {
-                    for (j = 0; j < k; j++)
+                    for (var j = 0; j < k; j++)
                     {
                         j1 = 2 * j + ip[offset + k];
                         k1 = 2 * k + ip[offset + j];
@@ -369,9 +360,9 @@ namespace SoundUtils
             }
             else
             {
-                for (k = 1; k < m; k++)
+                for (var k = 1; k < m; k++)
                 {
-                    for (j = 0; j < k; j++)
+                    for (var j = 0; j < k; j++)
                     {
                         j1 = 2 * j + ip[offset + k];
                         k1 = 2 * k + ip[offset + j];
@@ -400,18 +391,18 @@ namespace SoundUtils
 
         private static void Bitrv2Conj(int n, int[] ip, int offset, double[] a)
         {
-            int j, j1, k, k1, l, m, m2;
+            int j1, k1;
             double xr, xi, yr, yi;
 
             ip[offset] = 0;
-            l = n;
-            m = 1;
+            var l = n;
+            var m = 1;
 
             while ((m << 3) < l)
             {
                 l >>= 1;
 
-                for (j = 0; j < m; j++)
+                for (var j = 0; j < m; j++)
                 {
                     ip[offset + m + j] = ip[offset + j] + l;
                 }
@@ -419,13 +410,13 @@ namespace SoundUtils
                 m <<= 1;
             }
 
-            m2 = 2 * m;
+            var m2 = 2 * m;
 
             if ((m << 3) == l)
             {
-                for (k = 0; k < m; k++)
+                for (var k = 0; k < m; k++)
                 {
-                    for (j = 0; j < k; j++)
+                    for (var j = 0; j < k; j++)
                     {
                         j1 = 2 * j + ip[offset + k];
                         k1 = 2 * k + ip[offset + j];
@@ -490,9 +481,9 @@ namespace SoundUtils
                 a[1] = -a[1];
                 a[m2 + 1] = -a[m2 + 1];
 
-                for (k = 1; k < m; k++)
+                for (var k = 1; k < m; k++)
                 {
-                    for (j = 0; j < k; j++)
+                    for (var j = 0; j < k; j++)
                     {
                         j1 = 2 * j + ip[offset + k];
                         k1 = 2 * k + ip[offset + j];
@@ -525,10 +516,7 @@ namespace SoundUtils
 
         private static void Cftfsub(int n, double[] a, double[] w)
         {
-            int j, j1, j2, j3, l;
-            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
-
-            l = 2;
+            var l = 2;
 
             if (n > 8)
             {
@@ -543,19 +531,19 @@ namespace SoundUtils
 
             if ((l << 2) == n)
             {
-                for (j = 0; j < l; j += 2)
+                for (var j = 0; j < l; j += 2)
                 {
-                    j1 = j + l;
-                    j2 = j1 + l;
-                    j3 = j2 + l;
-                    x0R = a[j] + a[j1];
-                    x0I = a[j + 1] + a[j1 + 1];
-                    x1R = a[j] - a[j1];
-                    x1I = a[j + 1] - a[j1 + 1];
-                    x2R = a[j2] + a[j3];
-                    x2I = a[j2 + 1] + a[j3 + 1];
-                    x3R = a[j2] - a[j3];
-                    x3I = a[j2 + 1] - a[j3 + 1];
+                    var j1 = j + l;
+                    var j2 = j1 + l;
+                    var j3 = j2 + l;
+                    var x0R = a[j] + a[j1];
+                    var x0I = a[j + 1] + a[j1 + 1];
+                    var x1R = a[j] - a[j1];
+                    var x1I = a[j + 1] - a[j1 + 1];
+                    var x2R = a[j2] + a[j3];
+                    var x2I = a[j2 + 1] + a[j3 + 1];
+                    var x3R = a[j2] - a[j3];
+                    var x3I = a[j2 + 1] - a[j3 + 1];
                     a[j] = x0R + x2R;
                     a[j + 1] = x0I + x2I;
                     a[j2] = x0R - x2R;
@@ -568,11 +556,11 @@ namespace SoundUtils
             }
             else
             {
-                for (j = 0; j < l; j += 2)
+                for (var j = 0; j < l; j += 2)
                 {
-                    j1 = j + l;
-                    x0R = a[j] - a[j1];
-                    x0I = a[j + 1] - a[j1 + 1];
+                    var j1 = j + l;
+                    var x0R = a[j] - a[j1];
+                    var x0I = a[j + 1] - a[j1 + 1];
                     a[j] += a[j1];
                     a[j + 1] += a[j1 + 1];
                     a[j1] = x0R;
@@ -585,10 +573,8 @@ namespace SoundUtils
         {
             //void cft1st(int n, double *a, double *w);
             //void cftmdl(int n, int l, double *a, double *w);
-            int j, j1, j2, j3, l;
-            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
 
-            l = 2;
+            var l = 2;
 
             if (n > 8)
             {
@@ -604,19 +590,19 @@ namespace SoundUtils
 
             if ((l << 2) == n)
             {
-                for (j = 0; j < l; j += 2)
+                for (var j = 0; j < l; j += 2)
                 {
-                    j1 = j + l;
-                    j2 = j1 + l;
-                    j3 = j2 + l;
-                    x0R = a[j] + a[j1];
-                    x0I = -a[j + 1] - a[j1 + 1];
-                    x1R = a[j] - a[j1];
-                    x1I = -a[j + 1] + a[j1 + 1];
-                    x2R = a[j2] + a[j3];
-                    x2I = a[j2 + 1] + a[j3 + 1];
-                    x3R = a[j2] - a[j3];
-                    x3I = a[j2 + 1] - a[j3 + 1];
+                    var j1 = j + l;
+                    var j2 = j1 + l;
+                    var j3 = j2 + l;
+                    var x0R = a[j] + a[j1];
+                    var x0I = -a[j + 1] - a[j1 + 1];
+                    var x1R = a[j] - a[j1];
+                    var x1I = -a[j + 1] + a[j1 + 1];
+                    var x2R = a[j2] + a[j3];
+                    var x2I = a[j2 + 1] + a[j3 + 1];
+                    var x3R = a[j2] - a[j3];
+                    var x3I = a[j2 + 1] - a[j3 + 1];
                     a[j] = x0R + x2R;
                     a[j + 1] = x0I - x2I;
                     a[j2] = x0R - x2R;
@@ -629,11 +615,11 @@ namespace SoundUtils
             }
             else
             {
-                for (j = 0; j < l; j += 2)
+                for (var j = 0; j < l; j += 2)
                 {
-                    j1 = j + l;
-                    x0R = a[j] - a[j1];
-                    x0I = -a[j + 1] + a[j1 + 1];
+                    var j1 = j + l;
+                    var x0R = a[j] - a[j1];
+                    var x0I = -a[j + 1] + a[j1 + 1];
                     a[j] += a[j1];
                     a[j + 1] = -a[j + 1] - a[j1 + 1];
                     a[j1] = x0R;
@@ -644,18 +630,14 @@ namespace SoundUtils
 
         private static void Cft1St(int n, double[] a, double[] w)
         {
-            int j, k1, k2;
-            double wk1R, wk1I, wk2R, wk2I, wk3R, wk3I;
-            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
-
-            x0R = a[0] + a[2];
-            x0I = a[1] + a[3];
-            x1R = a[0] - a[2];
-            x1I = a[1] - a[3];
-            x2R = a[4] + a[6];
-            x2I = a[5] + a[7];
-            x3R = a[4] - a[6];
-            x3I = a[5] - a[7];
+            var x0R = a[0] + a[2];
+            var x0I = a[1] + a[3];
+            var x1R = a[0] - a[2];
+            var x1I = a[1] - a[3];
+            var x2R = a[4] + a[6];
+            var x2I = a[5] + a[7];
+            var x3R = a[4] - a[6];
+            var x3I = a[5] - a[7];
             a[0] = x0R + x2R;
             a[1] = x0I + x2I;
             a[4] = x0R - x2R;
@@ -664,7 +646,7 @@ namespace SoundUtils
             a[3] = x1I + x3R;
             a[6] = x1R + x3I;
             a[7] = x1I - x3R;
-            wk1R = w[2];
+            var wk1R = w[2];
             x0R = a[8] + a[10];
             x0I = a[9] + a[11];
             x1R = a[8] - a[10];
@@ -685,18 +667,18 @@ namespace SoundUtils
             x0I = x3R - x1I;
             a[14] = wk1R * (x0I - x0R);
             a[15] = wk1R * (x0I + x0R);
-            k1 = 0;
+            var k1 = 0;
 
-            for (j = 16; j < n; j += 16)
+            for (var j = 16; j < n; j += 16)
             {
                 k1 += 2;
-                k2 = 2 * k1;
-                wk2R = w[k1];
-                wk2I = w[k1 + 1];
+                var k2 = 2 * k1;
+                var wk2R = w[k1];
+                var wk2I = w[k1 + 1];
                 wk1R = w[k2];
-                wk1I = w[k2 + 1];
-                wk3R = wk1R - 2 * wk2I * wk1I;
-                wk3I = 2 * wk2I * wk1R - wk1I;
+                var wk1I = w[k2 + 1];
+                var wk3R = wk1R - 2 * wk2I * wk1I;
+                var wk3I = 2 * wk2I * wk1R - wk1I;
                 x0R = a[j] + a[j + 2];
                 x0I = a[j + 1] + a[j + 3];
                 x1R = a[j] - a[j + 2];
@@ -750,25 +732,21 @@ namespace SoundUtils
 
         private static void Cftmdl(int n, int l, double[] a, double[] w)
         {
-            int j, j1, j2, j3, k, k1, k2, m, m2;
-            double wk1R, wk1I, wk2R, wk2I, wk3R, wk3I;
-            double x0R, x0I, x1R, x1I, x2R, x2I, x3R, x3I;
+            var m = l << 2;
 
-            m = l << 2;
-
-            for (j = 0; j < l; j += 2)
+            for (var j = 0; j < l; j += 2)
             {
-                j1 = j + l;
-                j2 = j1 + l;
-                j3 = j2 + l;
-                x0R = a[j] + a[j1];
-                x0I = a[j + 1] + a[j1 + 1];
-                x1R = a[j] - a[j1];
-                x1I = a[j + 1] - a[j1 + 1];
-                x2R = a[j2] + a[j3];
-                x2I = a[j2 + 1] + a[j3 + 1];
-                x3R = a[j2] - a[j3];
-                x3I = a[j2 + 1] - a[j3 + 1];
+                var j1 = j + l;
+                var j2 = j1 + l;
+                var j3 = j2 + l;
+                var x0R = a[j] + a[j1];
+                var x0I = a[j + 1] + a[j1 + 1];
+                var x1R = a[j] - a[j1];
+                var x1I = a[j + 1] - a[j1 + 1];
+                var x2R = a[j2] + a[j3];
+                var x2I = a[j2 + 1] + a[j3 + 1];
+                var x3R = a[j2] - a[j3];
+                var x3I = a[j2 + 1] - a[j3 + 1];
                 a[j] = x0R + x2R;
                 a[j + 1] = x0I + x2I;
                 a[j2] = x0R - x2R;
@@ -779,21 +757,21 @@ namespace SoundUtils
                 a[j3 + 1] = x1I - x3R;
             }
 
-            wk1R = w[2];
+            var wk1R = w[2];
 
-            for (j = m; j < l + m; j += 2)
+            for (var j = m; j < l + m; j += 2)
             {
-                j1 = j + l;
-                j2 = j1 + l;
-                j3 = j2 + l;
-                x0R = a[j] + a[j1];
-                x0I = a[j + 1] + a[j1 + 1];
-                x1R = a[j] - a[j1];
-                x1I = a[j + 1] - a[j1 + 1];
-                x2R = a[j2] + a[j3];
-                x2I = a[j2 + 1] + a[j3 + 1];
-                x3R = a[j2] - a[j3];
-                x3I = a[j2 + 1] - a[j3 + 1];
+                var j1 = j + l;
+                var j2 = j1 + l;
+                var j3 = j2 + l;
+                var x0R = a[j] + a[j1];
+                var x0I = a[j + 1] + a[j1 + 1];
+                var x1R = a[j] - a[j1];
+                var x1I = a[j + 1] - a[j1 + 1];
+                var x2R = a[j2] + a[j3];
+                var x2I = a[j2 + 1] + a[j3 + 1];
+                var x3R = a[j2] - a[j3];
+                var x3I = a[j2 + 1] - a[j3 + 1];
                 a[j] = x0R + x2R;
                 a[j + 1] = x0I + x2I;
                 a[j2] = x2I - x0I;
@@ -808,33 +786,33 @@ namespace SoundUtils
                 a[j3 + 1] = wk1R * (x0I + x0R);
             }
 
-            k1 = 0;
-            m2 = 2 * m;
+            var k1 = 0;
+            var m2 = 2 * m;
 
-            for (k = m2; k < n; k += m2)
+            for (var k = m2; k < n; k += m2)
             {
                 k1 += 2;
-                k2 = 2 * k1;
-                wk2R = w[k1];
-                wk2I = w[k1 + 1];
+                var k2 = 2 * k1;
+                var wk2R = w[k1];
+                var wk2I = w[k1 + 1];
                 wk1R = w[k2];
-                wk1I = w[k2 + 1];
-                wk3R = wk1R - 2 * wk2I * wk1I;
-                wk3I = 2 * wk2I * wk1R - wk1I;
+                var wk1I = w[k2 + 1];
+                var wk3R = wk1R - 2 * wk2I * wk1I;
+                var wk3I = 2 * wk2I * wk1R - wk1I;
 
-                for (j = k; j < l + k; j += 2)
+                for (var j = k; j < l + k; j += 2)
                 {
-                    j1 = j + l;
-                    j2 = j1 + l;
-                    j3 = j2 + l;
-                    x0R = a[j] + a[j1];
-                    x0I = a[j + 1] + a[j1 + 1];
-                    x1R = a[j] - a[j1];
-                    x1I = a[j + 1] - a[j1 + 1];
-                    x2R = a[j2] + a[j3];
-                    x2I = a[j2 + 1] + a[j3 + 1];
-                    x3R = a[j2] - a[j3];
-                    x3I = a[j2 + 1] - a[j3 + 1];
+                    var j1 = j + l;
+                    var j2 = j1 + l;
+                    var j3 = j2 + l;
+                    var x0R = a[j] + a[j1];
+                    var x0I = a[j + 1] + a[j1 + 1];
+                    var x1R = a[j] - a[j1];
+                    var x1I = a[j + 1] - a[j1 + 1];
+                    var x2R = a[j2] + a[j3];
+                    var x2I = a[j2 + 1] + a[j3 + 1];
+                    var x3R = a[j2] - a[j3];
+                    var x3I = a[j2 + 1] - a[j3 + 1];
                     a[j] = x0R + x2R;
                     a[j + 1] = x0I + x2I;
                     x0R -= x2R;
@@ -856,19 +834,19 @@ namespace SoundUtils
                 wk3R = wk1R - 2 * wk2R * wk1I;
                 wk3I = 2 * wk2R * wk1R - wk1I;
 
-                for (j = k + m; j < l + (k + m); j += 2)
+                for (var j = k + m; j < l + (k + m); j += 2)
                 {
-                    j1 = j + l;
-                    j2 = j1 + l;
-                    j3 = j2 + l;
-                    x0R = a[j] + a[j1];
-                    x0I = a[j + 1] + a[j1 + 1];
-                    x1R = a[j] - a[j1];
-                    x1I = a[j + 1] - a[j1 + 1];
-                    x2R = a[j2] + a[j3];
-                    x2I = a[j2 + 1] + a[j3 + 1];
-                    x3R = a[j2] - a[j3];
-                    x3I = a[j2 + 1] - a[j3 + 1];
+                    var j1 = j + l;
+                    var j2 = j1 + l;
+                    var j3 = j2 + l;
+                    var x0R = a[j] + a[j1];
+                    var x0I = a[j + 1] + a[j1 + 1];
+                    var x1R = a[j] - a[j1];
+                    var x1I = a[j + 1] - a[j1 + 1];
+                    var x2R = a[j2] + a[j3];
+                    var x2I = a[j2 + 1] + a[j3 + 1];
+                    var x3R = a[j2] - a[j3];
+                    var x3I = a[j2 + 1] - a[j3 + 1];
                     a[j] = x0R + x2R;
                     a[j + 1] = x0I + x2I;
                     x0R -= x2R;
@@ -889,23 +867,20 @@ namespace SoundUtils
 
         private static void Rftfsub(int n, double[] a, int nc, double[] c, int offset)
         {
-            int j, k, kk, ks, m;
-            double wkr, wki, xr, xi, yr, yi;
+            var m = n >> 1;
+            var ks = 2 * nc / m;
+            var kk = 0;
 
-            m = n >> 1;
-            ks = 2 * nc / m;
-            kk = 0;
-
-            for (j = 2; j < m; j += 2)
+            for (var j = 2; j < m; j += 2)
             {
-                k = n - j;
+                var k = n - j;
                 kk += ks;
-                wkr = 0.5 - c[offset + nc - kk];
-                wki = c[offset + kk];
-                xr = a[j] - a[k];
-                xi = a[j + 1] + a[k + 1];
-                yr = wkr * xr - wki * xi;
-                yi = wkr * xi + wki * xr;
+                var wkr = 0.5 - c[offset + nc - kk];
+                var wki = c[offset + kk];
+                var xr = a[j] - a[k];
+                var xi = a[j + 1] + a[k + 1];
+                var yr = wkr * xr - wki * xi;
+                var yi = wkr * xi + wki * xr;
                 a[j] -= yr;
                 a[j + 1] -= yi;
                 a[k] += yr;
@@ -915,24 +890,21 @@ namespace SoundUtils
 
         private static void Rftbsub(int n, double[] a, int nc, double[] c, int offset)
         {
-            int j, k, kk, ks, m;
-            double wkr, wki, xr, xi, yr, yi;
-
             a[1] = -a[1];
-            m = n >> 1;
-            ks = 2 * nc / m;
-            kk = 0;
+            var m = n >> 1;
+            var ks = 2 * nc / m;
+            var kk = 0;
 
-            for (j = 2; j < m; j += 2)
+            for (var j = 2; j < m; j += 2)
             {
-                k = n - j;
+                var k = n - j;
                 kk += ks;
-                wkr = 0.5 - c[offset + nc - kk];
-                wki = c[offset + kk];
-                xr = a[j] - a[k];
-                xi = a[j + 1] + a[k + 1];
-                yr = wkr * xr + wki * xi;
-                yi = wkr * xi - wki * xr;
+                var wkr = 0.5 - c[offset + nc - kk];
+                var wki = c[offset + kk];
+                var xr = a[j] - a[k];
+                var xi = a[j + 1] + a[k + 1];
+                var yr = wkr * xr + wki * xi;
+                var yi = wkr * xi - wki * xr;
                 a[j] -= yr;
                 a[j + 1] = yi - a[j + 1];
                 a[k] += yr;
