@@ -40,8 +40,8 @@ namespace SoundUtils.Filtering.FIR
         protected override void GenerateValues(double[] array, int size)
         {
             int offset = size / 2;
-            double feL_2 = 2.0 * (this.FrequencyLow / this.SamplingRate);
-            double feH_2 = 2.0 * (this.FrequencyHigh / this.SamplingRate);
+            double feL_2 = 2.0 * (FrequencyLow / SamplingRate);
+            double feH_2 = 2.0 * (FrequencyHigh / SamplingRate);
             double feL_PI2 = Math.PI * feL_2;
             double feH_PI2 = Math.PI * feH_2;
 

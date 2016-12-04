@@ -39,7 +39,7 @@ namespace SoundUtils.Filtering.FIR
         /// <returns>インパルス応答が格納された配列。</returns>
         public double[] Generate(double delta)
         {
-            return base.Generate(FiniteImpulseResponse.GetFilterSize(this.SamplingRate, delta));
+            return base.Generate(FiniteImpulseResponse.GetFilterSize(SamplingRate, delta));
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace SoundUtils.Filtering.FIR
         /// <param name="delta">デルタ値。</param>
         public void Generate(double[] array, double delta)
         {
-            base.Generate(array, FiniteImpulseResponse.GetFilterSize(this.SamplingRate, delta));
+            base.Generate(array, FiniteImpulseResponse.GetFilterSize(SamplingRate, delta));
         }
         #endregion
 

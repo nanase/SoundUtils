@@ -57,12 +57,12 @@ namespace SoundUtils.Filtering
             if (stereo)
             {
                 bufferSize /= 2;
-                this.rfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
-                this.rbuffer = new double[bufferSize];
+                rfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+                rbuffer = new double[bufferSize];
             }
 
-            this.lfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
-            this.lbuffer = new double[bufferSize];
+            lfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+            lbuffer = new double[bufferSize];
         }
         #endregion
 
@@ -76,10 +76,10 @@ namespace SoundUtils.Filtering
             if (impulseResponses == null)
                 throw new ArgumentNullException(nameof(impulseResponses));
 
-            this.lfilter.SetFilter(impulseResponses);
+            lfilter.SetFilter(impulseResponses);
 
-            if (this.stereo)
-                this.rfilter.SetFilter(impulseResponses);
+            if (stereo)
+                rfilter.SetFilter(impulseResponses);
         }
 
         /// <summary>
@@ -91,16 +91,16 @@ namespace SoundUtils.Filtering
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
 
-            if (this.stereo)
+            if (stereo)
             {
-                Channel.Split(buffer, this.lbuffer, this.rbuffer);
-                this.lfilter.Apply(this.lbuffer);
-                this.rfilter.Apply(this.rbuffer);
-                Channel.Join(this.lbuffer, this.rbuffer, buffer);
+                Channel.Split(buffer, lbuffer, rbuffer);
+                lfilter.Apply(lbuffer);
+                rfilter.Apply(rbuffer);
+                Channel.Join(lbuffer, rbuffer, buffer);
             }
             else
             {
-                this.lfilter.Apply(buffer);
+                lfilter.Apply(buffer);
             }
         }
 
@@ -120,17 +120,17 @@ namespace SoundUtils.Filtering
             if (input.Length != output.Length)
                 throw new ArgumentOutOfRangeException(nameof(input));
 
-            if (this.stereo)
+            if (stereo)
             {
-                Channel.Split(input, this.lbuffer, this.rbuffer);
-                this.lfilter.Apply(this.lbuffer);
-                this.rfilter.Apply(this.rbuffer);
-                Channel.Join(this.lbuffer, this.rbuffer, output);
+                Channel.Split(input, lbuffer, rbuffer);
+                lfilter.Apply(lbuffer);
+                rfilter.Apply(rbuffer);
+                Channel.Join(lbuffer, rbuffer, output);
             }
             else
             {
                 input.CopyTo(output, 0);
-                this.lfilter.Apply(output);
+                lfilter.Apply(output);
             }
         }
         #endregion

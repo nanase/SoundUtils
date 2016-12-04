@@ -43,12 +43,12 @@ namespace SoundUtils.Filtering
         /// <summary>
         /// バッファに対する生の配列を取得します。
         /// </summary>
-        public T[] Data { get { return this.data; } }
+        public T[] Data { get { return data; } }
 
         /// <summary>
         /// バッファの長さを取得します。
         /// </summary>
-        public int Length { get { return this.length; } }
+        public int Length { get { return length; } }
         #endregion
 
         #region -- Constructors --
@@ -60,7 +60,7 @@ namespace SoundUtils.Filtering
         public FilterBuffer(int length, Action<T[]> action)
         {
             this.length = length;
-            this.data = new T[length];
+            data = new T[length];
             this.action = action;
         }
         #endregion
@@ -79,17 +79,17 @@ namespace SoundUtils.Filtering
 
             while (inputIndex < input.Length)
             {
-                int copyLength = Math.Min(this.length - this.index, input.Length - inputIndex);
+                int copyLength = Math.Min(length - index, input.Length - inputIndex);
 
-                Array.Copy(input, inputIndex, this.data, this.index, copyLength);
+                Array.Copy(input, inputIndex, data, index, copyLength);
 
-                this.index += copyLength;
+                index += copyLength;
                 inputIndex += copyLength;
 
-                if (this.index + 1 >= this.length)
+                if (index + 1 >= length)
                 {
-                    this.action(this.data);
-                    this.index = 0;
+                    action(data);
+                    index = 0;
                 }
             }
         }
@@ -99,12 +99,12 @@ namespace SoundUtils.Filtering
         /// </summary>
         public void Close()
         {
-            if (this.index > 0)
+            if (index > 0)
             {
-                Array.Clear(this.data, this.index, this.length - this.index);
-                this.action(this.data);
+                Array.Clear(data, index, length - index);
+                action(data);
 
-                this.index = 0;
+                index = 0;
             }
         }
         #endregion

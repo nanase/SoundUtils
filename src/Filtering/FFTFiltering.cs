@@ -68,17 +68,17 @@ namespace SoundUtils.Filtering
             this.filterSize = filterSize;
             this.segmentSize = segmentSize;
             this.fftSize = fftSize;
-            this.overlapSize = fftSize - segmentSize;
+            overlapSize = fftSize - segmentSize;
             this.bufferSize = bufferSize;
 
-            this.fr = new double[fftSize];
-            this.fi = new double[fftSize];
-            this.xr = new double[fftSize];
-            this.fftC = new double[fftSize * 2];
-            this.overlap = new double[overlapSize];
-            this.output = new double[bufferSize];
+            fr = new double[fftSize];
+            fi = new double[fftSize];
+            xr = new double[fftSize];
+            fftC = new double[fftSize * 2];
+            overlap = new double[overlapSize];
+            output = new double[bufferSize];
 
-            this.fft = new FastFourier(fftSize * 2);
+            fft = new FastFourier(fftSize * 2);
         }
         #endregion
 
@@ -92,13 +92,13 @@ namespace SoundUtils.Filtering
             if (impulseResponses == null)
                 throw new ArgumentNullException(nameof(impulseResponses));
 
-            Array.Clear(this.fr, 0, this.fftSize);
-            Array.Clear(this.fi, 0, this.fftSize);
-            Array.Clear(this.overlap, 0, this.overlapSize);
-            Array.Clear(this.output, 0, this.bufferSize);
+            Array.Clear(fr, 0, fftSize);
+            Array.Clear(fi, 0, fftSize);
+            Array.Clear(overlap, 0, overlapSize);
+            Array.Clear(output, 0, bufferSize);
 
-            Array.Copy(impulseResponses, this.fr, Math.Min(impulseResponses.Length, this.fftSize));
-            this.fft.TransformComplex(false, this.fr, this.fi);
+            Array.Copy(impulseResponses, fr, Math.Min(impulseResponses.Length, fftSize));
+            fft.TransformComplex(false, fr, fi);
         }
 
         /// <summary>
@@ -115,10 +115,10 @@ namespace SoundUtils.Filtering
 
             for (int iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {
-                Array.Clear(this.fftC, this.segmentSize, fftSize * 2 - this.segmentSize);
-                Channel.Interleave(buffer, iOffset, this.fftC, 0, this.segmentSize);
+                Array.Clear(fftC, segmentSize, fftSize * 2 - segmentSize);
+                Channel.Interleave(buffer, iOffset, fftC, 0, segmentSize);
 
-                this.fft.TransformComplex(false, this.fftC);
+                fft.TransformComplex(false, fftC);
 
                 for (int i = 0, j = 1, k = 0, l = fftSize * 2; i < l; i += 2, j += 2, k++)
                 {
@@ -128,8 +128,8 @@ namespace SoundUtils.Filtering
                     fftC[j] = dblI;
                 }
 
-                this.fft.TransformComplex(true, this.fftC);
-                Channel.Deinterleave(this.fftC, this.xr, this.fftSize);
+                fft.TransformComplex(true, fftC);
+                Channel.Deinterleave(fftC, xr, fftSize);
 
                 for (int i = 0; i < overlapSize; i++)
                     xr[i] += overlap[i];

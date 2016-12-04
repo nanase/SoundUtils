@@ -60,11 +60,11 @@ namespace SoundUtils.IO
         /// <param name="count">書き込まれるデータ数。</param>
         public override void Write(byte[] buffer, int offset, int count)
         {
-            if (this.Disposed)
+            if (Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            this.BaseStream.Write(buffer, offset, count);
-            this.WrittenBytes += count;
+            BaseStream.Write(buffer, offset, count);
+            WrittenBytes += count;
         }
 
         /// <summary>
@@ -75,21 +75,21 @@ namespace SoundUtils.IO
         /// <param name="count">書き込まれるデータ数。</param>
         public override void Write(short[] buffer, int offset, int count)
         {
-            if (this.Disposed)
+            if (Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            if (this.BitPerSample == 16)
+            if (BitPerSample == 16)
                 count *= 2;
 
             byte[] buf = new byte[count];
 
-            if (this.BitPerSample == 8)
+            if (BitPerSample == 8)
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
             else
                 ArrayConvert.ToByte(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
-            this.BaseStream.Write(buf, offset, count);
-            this.WrittenBytes += count;
+            BaseStream.Write(buf, offset, count);
+            WrittenBytes += count;
         }
 
         /// <summary>
@@ -100,21 +100,21 @@ namespace SoundUtils.IO
         /// <param name="count">書き込まれるデータ数。</param>
         public override void Write(double[] buffer, int offset, int count)
         {
-            if (this.Disposed)
+            if (Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            if (this.BitPerSample == 16)
+            if (BitPerSample == 16)
                 count *= 2;
 
             byte[] buf = new byte[count];
 
-            if (this.BitPerSample == 8)
+            if (BitPerSample == 8)
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
             else
                 ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
-            this.BaseStream.Write(buf, offset, count);
-            this.WrittenBytes += count;
+            BaseStream.Write(buf, offset, count);
+            WrittenBytes += count;
         }
 
         /// <summary>
@@ -125,21 +125,21 @@ namespace SoundUtils.IO
         /// <param name="count">書き込まれるデータ数。</param>
         public override void Write(float[] buffer, int offset, int count)
         {
-            if (this.Disposed)
+            if (Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            if (this.BitPerSample == 16)
+            if (BitPerSample == 16)
                 count *= 2;
 
             byte[] buf = new byte[count];
 
-            if (this.BitPerSample == 8)
+            if (BitPerSample == 8)
                 ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
             else
                 ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
 
-            this.BaseStream.Write(buf, offset, count);
-            this.WrittenBytes += count;
+            BaseStream.Write(buf, offset, count);
+            WrittenBytes += count;
         }
 
         /// <summary>
@@ -147,22 +147,22 @@ namespace SoundUtils.IO
         /// </summary>
         public override void Flush()
         {
-            if (this.Disposed)
+            if (Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
             bool little = BitConverter.IsLittleEndian;
             bool big = !little;
-            long position = this.BaseStream.Position;
+            long position = BaseStream.Position;
 
-            this.BaseStream.Seek(0L, SeekOrigin.Begin);
+            BaseStream.Seek(0L, SeekOrigin.Begin);
 
-            using (BinaryWriter bw = new BinaryWriter(this.BaseStream))
+            using (BinaryWriter bw = new BinaryWriter(BaseStream))
             {
                 // 4 bytes, offset 4
                 bw.Write(BitOperate.ReverseBytes((int)0x52494646, little));
 
                 // 4 bytes, offset 8
-                bw.Write(BitOperate.ReverseBytes((int)(this.WrittenBytes + 36), big));
+                bw.Write(BitOperate.ReverseBytes((int)(WrittenBytes + 36), big));
 
                 // 8 bytes, offset 16
                 bw.Write(BitOperate.ReverseBytes((long)0x57415645666D7420, little));
@@ -174,29 +174,29 @@ namespace SoundUtils.IO
                 bw.Write(BitOperate.ReverseBytes((short)1, big));
 
                 // 2 bytes, offset 24
-                bw.Write(BitOperate.ReverseBytes((short)this.ChannelCount, big));
+                bw.Write(BitOperate.ReverseBytes((short)ChannelCount, big));
 
                 // 4 bytes, offset 28
-                bw.Write(BitOperate.ReverseBytes((int)this.SamplingRate, big));
+                bw.Write(BitOperate.ReverseBytes((int)SamplingRate, big));
 
                 // 4 bytes, offset 32
-                bw.Write(BitOperate.ReverseBytes((int)(this.SamplingRate * this.ChannelCount * (this.BitPerSample / 8)), big));
+                bw.Write(BitOperate.ReverseBytes((int)(SamplingRate * ChannelCount * (BitPerSample / 8)), big));
 
                 // 2 bytes, offset 34
-                bw.Write(BitOperate.ReverseBytes((short)(this.ChannelCount * (this.BitPerSample / 8)), big));
+                bw.Write(BitOperate.ReverseBytes((short)(ChannelCount * (BitPerSample / 8)), big));
 
                 // 2 bytes, offset 36
-                bw.Write(BitOperate.ReverseBytes((short)this.BitPerSample, big));
+                bw.Write(BitOperate.ReverseBytes((short)BitPerSample, big));
 
                 // 4 bytes, offset 40
                 bw.Write(BitOperate.ReverseBytes((int)0x64617461, little));
 
                 // 4 bytes, offset 44
-                bw.Write(BitOperate.ReverseBytes((int)this.WrittenBytes, big));
+                bw.Write(BitOperate.ReverseBytes((int)WrittenBytes, big));
             }
 
-            this.BaseStream.Seek(position, SeekOrigin.Begin);
-            this.BaseStream.Flush();
+            BaseStream.Seek(position, SeekOrigin.Begin);
+            BaseStream.Flush();
         }
         #endregion
     }

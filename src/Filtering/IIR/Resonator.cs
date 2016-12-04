@@ -54,9 +54,9 @@ namespace SoundUtils.Filtering.IIR
         /// </summary>
         public Resonator()
         {
-            this.Amplifier = 1.0;
-            this.Strength = double.PositiveInfinity;
-            this.Frequencies = new double[0];
+            Amplifier = 1.0;
+            Strength = double.PositiveInfinity;
+            Frequencies = new double[0];
         }
         #endregion
 
@@ -68,17 +68,17 @@ namespace SoundUtils.Filtering.IIR
         /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
-            double amp = this.Amplifier / (size / 2);
+            double amp = Amplifier / (size / 2);
 
             Array.Clear(array, 0, size);
 
-            if (this.Strength == 0.0)
+            if (Strength == 0.0)
                 array[0] = amp;
             else
-                for (int j = 0; j < this.Frequencies.Length; j++)
+                for (int j = 0; j < Frequencies.Length; j++)
                     for (int i = 0; i < size; i++)
-                        array[i] += Math.Sin(i * this.Frequencies[j] * 2.0 * Math.PI / this.SamplingRate) * amp *
-                                    Math.Exp(-Math.Pow(i, 2.0) / Math.Pow(this.Strength, 2.0));
+                        array[i] += Math.Sin(i * Frequencies[j] * 2.0 * Math.PI / SamplingRate) * amp *
+                                    Math.Exp(-Math.Pow(i, 2.0) / Math.Pow(Strength, 2.0));
         }
         #endregion
     }

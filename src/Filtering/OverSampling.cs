@@ -67,7 +67,7 @@ namespace SoundUtils.Filtering
             this.stereo = stereo;
             this.filterSize = filterSize;
 
-            this.filter = new SoundFilter(stereo, filterSize);
+            filter = new SoundFilter(stereo, filterSize);
 
             var filterGenerator = new LowPassFilter()
             {
@@ -93,18 +93,18 @@ namespace SoundUtils.Filtering
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
 
-            if (this.magnification == 1)
-                return this.filterSize;
+            if (magnification == 1)
+                return filterSize;
 
             filter.Filtering(buffer);
 
-            for (int i = 0, j = 0, inc = this.magnification * (this.stereo ? 2 : 1); i < filterSize; i += inc)
+            for (int i = 0, j = 0, inc = magnification * (stereo ? 2 : 1); i < filterSize; i += inc)
             {
                 buffer[j++] = buffer[i];
                 buffer[j++] = buffer[i + 1];
             }
 
-            return this.filterSize / this.magnification;
+            return filterSize / magnification;
         }
         #endregion
     }

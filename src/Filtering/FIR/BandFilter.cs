@@ -51,8 +51,8 @@ namespace SoundUtils.Filtering.FIR
         /// <param name="bandwidth">帯域幅。</param>
         public void SetFrequency(double centerFrequecy, double bandwidth)
         {
-            this.FrequencyLow = centerFrequecy - bandwidth / 2.0;
-            this.FrequencyHigh = centerFrequecy + bandwidth / 2.0;
+            FrequencyLow = centerFrequecy - bandwidth / 2.0;
+            FrequencyHigh = centerFrequecy + bandwidth / 2.0;
         }
         #endregion
     }

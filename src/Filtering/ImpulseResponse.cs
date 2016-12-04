@@ -51,7 +51,7 @@ namespace SoundUtils.Filtering
 
             double[] array = new double[length];
 
-            this.GenerateValues(array, length);
+            GenerateValues(array, length);
 
             return array;
         }
@@ -67,7 +67,7 @@ namespace SoundUtils.Filtering
 
             int length = array.Length;
 
-            this.GenerateValues(array, length);
+            GenerateValues(array, length);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace SoundUtils.Filtering
 
             int arrayLength = array.Length;
 
-            this.GenerateValues(array, Math.Min(arrayLength, length));
+            GenerateValues(array, Math.Min(arrayLength, length));
         }
         #endregion
 
