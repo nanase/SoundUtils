@@ -32,15 +32,11 @@ namespace SoundUtils.IO
     /// </summary>
     public abstract class WaveWriter : IDisposable
     {
-        #region -- Private Fields --
-        private bool disposed;
-        #endregion
-
         #region -- Public Properties --
         /// <summary>
         /// 継承されたクラスで書き込まれるストリームを取得します。
         /// </summary>
-        public Stream BaseStream { get; private set; }
+        public Stream BaseStream { get; }
 
         /// <summary>
         /// サンプリング周波数を取得します。単位は ヘルツ (Hz) です。
@@ -70,7 +66,8 @@ namespace SoundUtils.IO
         /// <summary>
         /// このインスタンスが Dispose メソッドで破棄されたかの真偽値を取得します。
         /// </summary>
-        public bool Disposed { get { return disposed; } }
+        public bool Disposed { get; private set; }
+
         #endregion
 
         #region -- Constructor --
@@ -163,12 +160,12 @@ namespace SoundUtils.IO
         /// <param name="disposing">マネージリソースとアンマネージリソースの両方を解放する場合は true。アンマネージリソースだけを解放する場合は false。</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!Disposed)
             {
                 Flush();
                 BaseStream.Dispose();
 
-                disposed = true;
+                Disposed = true;
             }
         }
         #endregion
