@@ -96,7 +96,7 @@ namespace SoundUtils
         /// <param name="count">読み取られる要素数。</param>
         /// <param name="dst">変換された値が格納される System.Byte 型配列。</param>
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
-        unsafe public static void ToByte(short[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void ToByte(short[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
@@ -182,7 +182,7 @@ namespace SoundUtils
             RegulateAsInt16(src, 0, src.Length, dst, reverse);
         }
 
-        unsafe public static void RegulateAsInt16(float[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void RegulateAsInt16(float[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
@@ -222,7 +222,7 @@ namespace SoundUtils
             RegulateAsInt16(src, 0, src.Length, dst, reverse);
         }
 
-        unsafe public static void RegulateAsInt16(double[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void RegulateAsInt16(double[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;

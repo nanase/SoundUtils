@@ -73,7 +73,7 @@ namespace SoundUtils.IO
         /// <param name="buffer">書き込まれるデータが格納された short 型配列。</param>
         /// <param name="offset">書き込みを開始する配列のオフセット。</param>
         /// <param name="count">書き込まれるデータ数。</param>
-        unsafe public override void Write(short[] buffer, int offset, int count)
+        public override unsafe void Write(short[] buffer, int offset, int count)
         {
             if (this.Disposed)
                 throw new ObjectDisposedException("BaseStream");
@@ -98,7 +98,7 @@ namespace SoundUtils.IO
         /// <param name="buffer">書き込まれるデータが格納された double 型配列。</param>
         /// <param name="offset">書き込みを開始する配列のオフセット。</param>
         /// <param name="count">書き込まれるデータ数。</param>
-        unsafe public override void Write(double[] buffer, int offset, int count)
+        public override unsafe void Write(double[] buffer, int offset, int count)
         {
             if (this.Disposed)
                 throw new ObjectDisposedException("BaseStream");
@@ -123,7 +123,7 @@ namespace SoundUtils.IO
         /// <param name="buffer">書き込まれるデータが格納された float 型配列。</param>
         /// <param name="offset">書き込みを開始する配列のオフセット。</param>
         /// <param name="count">書き込まれるデータ数。</param>
-        unsafe public override void Write(float[] buffer, int offset, int count)
+        public override unsafe void Write(float[] buffer, int offset, int count)
         {
             if (this.Disposed)
                 throw new ObjectDisposedException("BaseStream");
