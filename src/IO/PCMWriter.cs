@@ -159,16 +159,16 @@ namespace SoundUtils.IO
             using (BinaryWriter bw = new BinaryWriter(BaseStream))
             {
                 // 4 bytes, offset 4
-                bw.Write(BitOperate.ReverseBytes((int)0x52494646, little));
+                bw.Write(BitOperate.ReverseBytes(0x52494646, little));
 
                 // 4 bytes, offset 8
                 bw.Write(BitOperate.ReverseBytes((int)(WrittenBytes + 36), big));
 
                 // 8 bytes, offset 16
-                bw.Write(BitOperate.ReverseBytes((long)0x57415645666D7420, little));
+                bw.Write(BitOperate.ReverseBytes(0x57415645666D7420, little));
 
                 // 4 bytes, offset 20
-                bw.Write(BitOperate.ReverseBytes((int)16, big));
+                bw.Write(BitOperate.ReverseBytes(16, big));
 
                 // 2 bytes, offset 22
                 bw.Write(BitOperate.ReverseBytes((short)1, big));
@@ -177,10 +177,10 @@ namespace SoundUtils.IO
                 bw.Write(BitOperate.ReverseBytes((short)ChannelCount, big));
 
                 // 4 bytes, offset 28
-                bw.Write(BitOperate.ReverseBytes((int)SamplingRate, big));
+                bw.Write(BitOperate.ReverseBytes(SamplingRate, big));
 
                 // 4 bytes, offset 32
-                bw.Write(BitOperate.ReverseBytes((int)(SamplingRate * ChannelCount * (BitPerSample / 8)), big));
+                bw.Write(BitOperate.ReverseBytes(SamplingRate * ChannelCount * (BitPerSample / 8), big));
 
                 // 2 bytes, offset 34
                 bw.Write(BitOperate.ReverseBytes((short)(ChannelCount * (BitPerSample / 8)), big));
@@ -189,7 +189,7 @@ namespace SoundUtils.IO
                 bw.Write(BitOperate.ReverseBytes((short)BitPerSample, big));
 
                 // 4 bytes, offset 40
-                bw.Write(BitOperate.ReverseBytes((int)0x64617461, little));
+                bw.Write(BitOperate.ReverseBytes(0x64617461, little));
 
                 // 4 bytes, offset 44
                 bw.Write(BitOperate.ReverseBytes((int)WrittenBytes, big));

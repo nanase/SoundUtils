@@ -11,7 +11,7 @@ namespace UnitTest
         {
             unchecked
             {
-                const long valLong = (long)0x0123456789ABCDEF;
+                const long valLong = 0x0123456789ABCDEF;
                 const long valLongReverse = (long)0xEFCDAB8967452301;
 
                 Assert.AreEqual(valLongReverse, BitOperate.ReverseBytes(valLong, true));
@@ -25,8 +25,8 @@ namespace UnitTest
         {
             unchecked
             {
-                const int valInt = (int)0x01234567;
-                const int valIntReverse = (int)0x67452301;
+                const int valInt = 0x01234567;
+                const int valIntReverse = 0x67452301;
 
                 Assert.AreEqual(valIntReverse, BitOperate.ReverseBytes(valInt, true));
                 Assert.AreEqual(valInt, BitOperate.ReverseBytes(valInt, false));
