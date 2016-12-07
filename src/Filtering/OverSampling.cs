@@ -33,7 +33,6 @@ namespace SoundUtils.Filtering
     public class OverSampling
     {
         #region -- Private Fields --
-        private readonly double samplingRate;
         private readonly bool stereo;
         private readonly int magnification, filterSize;
 
@@ -62,7 +61,6 @@ namespace SoundUtils.Filtering
             if (filterSize % 2 != 0)
                 throw new ArgumentException();
 
-            this.samplingRate = samplingRate;
             this.magnification = magnification;
             this.stereo = stereo;
             this.filterSize = filterSize;
