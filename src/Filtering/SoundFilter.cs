@@ -57,11 +57,11 @@ namespace SoundUtils.Filtering
             if (stereo)
             {
                 bufferSize /= 2;
-                rfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+                rfilter = new FftFiltering(bufferSize / 8, bufferSize, bufferSize);
                 rbuffer = new double[bufferSize];
             }
 
-            lfilter = new FftFiltering(bufferSize / 8, bufferSize / 8, bufferSize, bufferSize);
+            lfilter = new FftFiltering(bufferSize / 8, bufferSize, bufferSize);
             lbuffer = new double[bufferSize];
         }
         #endregion

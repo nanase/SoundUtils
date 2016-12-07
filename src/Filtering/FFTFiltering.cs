@@ -40,32 +40,28 @@ namespace SoundUtils.Filtering
     public class FftFiltering
     {
         #region -- Private Fields --
-        private readonly int filterSize, segmentSize, fftSize, overlapSize, bufferSize;
+        private readonly int segmentSize, fftSize, overlapSize, bufferSize;
         private readonly double[] fr, fi, xr, fftC, overlap, output;
 
         private readonly FastFourier fft;
         #endregion
 
         #region -- Constructors --
+
         /// <summary>
         /// パラメータを指定して新しい FFTFiltering クラスのインスタンスを初期化します。
         /// </summary>
-        /// <param name="filterSize">フィルタサイズ。</param>
         /// <param name="segmentSize">セグメントサイズ。segmentSize は filterSize 未満 かつ fftSize 未満でなくてはなりません。</param>
         /// <param name="fftSize">FFT サイズ。fftSize は bufferSize 未満でなくてはなりません。</param>
         /// <param name="bufferSize">バッファサイズ。</param>
-        public FftFiltering(int filterSize, int segmentSize, int fftSize, int bufferSize)
+        public FftFiltering(int segmentSize, int fftSize, int bufferSize)
         {
-            if (segmentSize < filterSize)
-                throw new ArgumentException("segmentSize は filterSize 未満でなくてはなりません。");
-
             if (fftSize <= segmentSize)
                 throw new ArgumentException("segmentSize は fftSize 未満でなくてはなりません。");
 
             if (fftSize > bufferSize)
                 throw new ArgumentException("fftSize は bufferSize 未満でなくてはなりません。");
 
-            this.filterSize = filterSize;
             this.segmentSize = segmentSize;
             this.fftSize = fftSize;
             overlapSize = fftSize - segmentSize;
