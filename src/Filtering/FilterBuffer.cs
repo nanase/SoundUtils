@@ -33,8 +33,7 @@ namespace SoundUtils.Filtering
     public class FilterBuffer<T>
     {
         #region -- Private Fields --
-        private readonly int length;
-        private readonly T[] data;
+
         private readonly Action<T[]> action;
         private int index;
         #endregion
@@ -43,12 +42,13 @@ namespace SoundUtils.Filtering
         /// <summary>
         /// バッファに対する生の配列を取得します。
         /// </summary>
-        public T[] Data { get { return data; } }
+        public T[] Data { get; }
 
         /// <summary>
         /// バッファの長さを取得します。
         /// </summary>
-        public int Length { get { return length; } }
+        public int Length { get; }
+
         #endregion
 
         #region -- Constructors --
@@ -59,8 +59,8 @@ namespace SoundUtils.Filtering
         /// <param name="action">バッファが length に達した時に実行される処理。</param>
         public FilterBuffer(int length, Action<T[]> action)
         {
-            this.length = length;
-            data = new T[length];
+            this.Length = length;
+            Data = new T[length];
             this.action = action;
         }
         #endregion
@@ -79,16 +79,16 @@ namespace SoundUtils.Filtering
 
             while (inputIndex < input.Length)
             {
-                var copyLength = Math.Min(length - index, input.Length - inputIndex);
+                var copyLength = Math.Min(Length - index, input.Length - inputIndex);
 
-                Array.Copy(input, inputIndex, data, index, copyLength);
+                Array.Copy(input, inputIndex, Data, index, copyLength);
 
                 index += copyLength;
                 inputIndex += copyLength;
 
-                if (index + 1 >= length)
+                if (index + 1 >= Length)
                 {
-                    action(data);
+                    action(Data);
                     index = 0;
                 }
             }
@@ -101,8 +101,8 @@ namespace SoundUtils.Filtering
         {
             if (index > 0)
             {
-                Array.Clear(data, index, length - index);
-                action(data);
+                Array.Clear(Data, index, Length - index);
+                action(Data);
 
                 index = 0;
             }
