@@ -23,15 +23,12 @@ namespace UnitTest
         [TestMethod]
         public void ReverseBytesInt32Test()
         {
-            unchecked
-            {
-                const int valInt = 0x01234567;
-                const int valIntReverse = 0x67452301;
+            const int valInt = 0x01234567;
+            const int valIntReverse = 0x67452301;
 
-                Assert.AreEqual(valIntReverse, BitOperate.ReverseBytes(valInt, true));
-                Assert.AreEqual(valInt, BitOperate.ReverseBytes(valInt, false));
-                Assert.AreEqual(valInt, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valInt, true), true));
-            }
+            Assert.AreEqual(valIntReverse, BitOperate.ReverseBytes(valInt, true));
+            Assert.AreEqual(valInt, BitOperate.ReverseBytes(valInt, false));
+            Assert.AreEqual(valInt, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valInt, true), true));
         }
 
         [TestMethod]
