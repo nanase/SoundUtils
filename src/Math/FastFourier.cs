@@ -154,7 +154,7 @@ namespace SoundUtils
         #region -- Private Static Methods --
         private static void Cdft(int n, bool invert, double[] a, int[] ip, double[] w)
         {
-            if (n > (ip[0] << 2))
+            if (n > ip[0] << 2)
                 Makewt(n >> 2, ip, w);
 
             if (n > 4)
@@ -179,7 +179,7 @@ namespace SoundUtils
         {
             var nw = ip[0];
 
-            if (n > (nw << 2))
+            if (n > nw << 2)
             {
                 nw = n >> 2;
                 Makewt(nw, ip, w);
@@ -187,7 +187,7 @@ namespace SoundUtils
 
             var nc = ip[1];
 
-            if (n > (nc << 2))
+            if (n > nc << 2)
             {
                 nc = n >> 2;
                 Makect(nc, ip, w, nw);
@@ -284,7 +284,7 @@ namespace SoundUtils
             var l = n;
             var m = 1;
 
-            while ((m << 3) < l)
+            while (m << 3 < l)
             {
                 l >>= 1;
 
@@ -298,7 +298,7 @@ namespace SoundUtils
 
             var m2 = 2 * m;
 
-            if ((m << 3) == l)
+            if (m << 3 == l)
             {
                 for (var k = 0; k < m; k++)
                 {
@@ -398,7 +398,7 @@ namespace SoundUtils
             var l = n;
             var m = 1;
 
-            while ((m << 3) < l)
+            while (m << 3 < l)
             {
                 l >>= 1;
 
@@ -412,7 +412,7 @@ namespace SoundUtils
 
             var m2 = 2 * m;
 
-            if ((m << 3) == l)
+            if (m << 3 == l)
             {
                 for (var k = 0; k < m; k++)
                 {
@@ -522,14 +522,14 @@ namespace SoundUtils
             {
                 Cft1St(n, a, w);
                 l = 8;
-                while ((l << 2) < n)
+                while (l << 2 < n)
                 {
                     Cftmdl(n, l, a, w);
                     l <<= 2;
                 }
             }
 
-            if ((l << 2) == n)
+            if (l << 2 == n)
             {
                 for (var j = 0; j < l; j += 2)
                 {
@@ -581,14 +581,14 @@ namespace SoundUtils
                 Cft1St(n, a, w);
                 l = 8;
 
-                while ((l << 2) < n)
+                while (l << 2 < n)
                 {
                     Cftmdl(n, l, a, w);
                     l <<= 2;
                 }
             }
 
-            if ((l << 2) == n)
+            if (l << 2 == n)
             {
                 for (var j = 0; j < l; j += 2)
                 {
@@ -834,7 +834,7 @@ namespace SoundUtils
                 wk3R = wk1R - 2 * wk2R * wk1I;
                 wk3I = 2 * wk2R * wk1R - wk1I;
 
-                for (var j = k + m; j < l + (k + m); j += 2)
+                for (var j = k + m; j < l + k + m; j += 2)
                 {
                     var j1 = j + l;
                     var j2 = j1 + l;

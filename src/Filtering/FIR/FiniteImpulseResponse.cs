@@ -64,7 +64,7 @@ namespace SoundUtils.Filtering.FIR
             if ((delayer & 1) == 0)
                 delayer--;
 
-            return (3.1 / (delayer - 0.5)) * samplingRate;
+            return 3.1 / (delayer - 0.5) * samplingRate;
         }
 
         /// <summary>

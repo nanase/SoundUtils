@@ -95,8 +95,8 @@ namespace SoundUtils
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            if ((src.Length - srcOffset) < count / 2 ||
-                (dest.Length - destOffset) < count)
+            if (src.Length - srcOffset < count / 2 ||
+                dest.Length - destOffset < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             for (int i = 0, j = srcOffset, k = destOffset; i < count; i++, j++, k++)
@@ -153,9 +153,9 @@ namespace SoundUtils
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            if ((srcR.Length - srcROffset) < count / 2 ||
-                (srcI.Length - srcIOffset) < count / 2 ||
-                (dest.Length - destOffset) < count)
+            if (srcR.Length - srcROffset < count / 2 ||
+                srcI.Length - srcIOffset < count / 2 ||
+                dest.Length - destOffset < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             for (int i = 0, j = srcROffset, k = srcIOffset, l = destOffset; i < count; i++, j++, k++)
@@ -205,7 +205,7 @@ namespace SoundUtils
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            if ((src.Length - srcOffset) < count ||
+            if (src.Length - srcOffset < count ||
                 (dest.Length - destOffset) * 2 < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
@@ -260,9 +260,9 @@ namespace SoundUtils
             if (count < 0)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
-            if ((src.Length - srcOffset) < count * 2 ||
-                (destR.Length - destROffset) < count ||
-                (destI.Length - destIOffset) < count)
+            if (src.Length - srcOffset < count * 2 ||
+                destR.Length - destROffset < count ||
+                destI.Length - destIOffset < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             for (int i = 0, j = srcOffset, k = destROffset, l = destIOffset; i < count; i++, k++, l++)

@@ -62,7 +62,7 @@ namespace SoundUtils
             {
                 var f = InvertedFactorial(i);
 
-                y += (f * f) * Math.Pow(x / 2.0, 2.0 * i);
+                y += f * f * Math.Pow(x / 2.0, 2.0 * i);
             }
 
             return y;
