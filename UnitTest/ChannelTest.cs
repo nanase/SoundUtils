@@ -11,11 +11,11 @@ namespace UnitTest
         [Test]
         public void SplitTest()
         {
-            var src0 = Enumerable.Range(0, 8).ToArray();
+            var src = Enumerable.Range(0, 8).ToArray();
             var lch = new int[4];
             var rch = new int[4];
 
-            Channel.Split(src0, lch, rch);
+            Channel.Split(src, lch, rch);
 
             Assert.That(lch, Is.EqualTo(new[] { 0, 2, 4, 6 }));
             Assert.That(rch, Is.EqualTo(new[] { 1, 3, 5, 7 }));
@@ -26,11 +26,11 @@ namespace UnitTest
         {
             var lch = Enumerable.Range(0, 4).ToArray();
             var rch = Enumerable.Range(4, 4).ToArray();
-            var dst0 = new int[8];
+            var dst = new int[8];
 
-            Channel.Join(lch, rch, dst0);
+            Channel.Join(lch, rch, dst);
             
-            Assert.That(dst0, Is.EqualTo(new[] { 0, 4, 1, 5, 2, 6, 3, 7 }));
+            Assert.That(dst, Is.EqualTo(new[] { 0, 4, 1, 5, 2, 6, 3, 7 }));
         }
 
         [Test]
