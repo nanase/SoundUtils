@@ -34,15 +34,12 @@ namespace UnitTest
         [Test]
         public void ReverseBytesInt16Test()
         {
-            unchecked
-            {
-                const short valShort = 0x0123;
-                const short valShortReverse = 0x2301;
+            const short valShort = 0x0123;
+            const short valShortReverse = 0x2301;
 
-                Assert.That(BitOperate.ReverseBytes(valShort, true), Is.EqualTo(valShortReverse));
-                Assert.That(BitOperate.ReverseBytes(valShort, false), Is.EqualTo(valShort));
-                Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valShort, true), true), Is.EqualTo(valShort));
-            }
+            Assert.That(BitOperate.ReverseBytes(valShort, true), Is.EqualTo(valShortReverse));
+            Assert.That(BitOperate.ReverseBytes(valShort, false), Is.EqualTo(valShort));
+            Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valShort, true), true), Is.EqualTo(valShort));
         }
     }
 }
