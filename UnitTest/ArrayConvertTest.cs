@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using SoundUtils;
 
 namespace UnitTest
 {
-    [TestClass]
+    [TestFixture]
     public class ArrayConvertTest
     {
-        [TestMethod]
+        [Test]
         public void CastToDoubleTest()
         {
             var input = new[] { 3.0f, -2.5f, 1.76f, 2.97e-10f };
@@ -14,10 +14,10 @@ namespace UnitTest
             var expect = new double[] { 3.0f, -2.5f, 1.76f, 2.97e-10f };
 
             ArrayConvert.CastToDouble(input, output);
-            CollectionAssert.AreEqual(expect, output);
+            Assert.That(output, Is.EqualTo(expect));
         }
 
-        [TestMethod]
+        [Test]
         public void CastToSingleTest()
         {
             var input = new[] { 3.0, -2.5, 1.76, 2.97e-10 };
@@ -25,7 +25,7 @@ namespace UnitTest
             var expect = new[] { 3.0f, -2.5f, 1.76f, 2.97e-10f };
 
             ArrayConvert.CastToSingle(input, output);
-            CollectionAssert.AreEqual(expect, output);
+            Assert.That(output, Is.EqualTo(expect));
         }
     }
 }

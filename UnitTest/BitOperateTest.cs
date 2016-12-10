@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using SoundUtils;
 
 namespace UnitTest
 {
-    [TestClass]
+    [TestFixture]
     public class BitOperateTest
     {
-        [TestMethod]
+        [Test]
         public void ReverseBytesInt64Test()
         {
             unchecked
@@ -14,24 +14,24 @@ namespace UnitTest
                 const long valLong = 0x0123456789ABCDEF;
                 const long valLongReverse = (long)0xEFCDAB8967452301;
 
-                Assert.AreEqual(valLongReverse, BitOperate.ReverseBytes(valLong, true));
-                Assert.AreEqual(valLong, BitOperate.ReverseBytes(valLong, false));
-                Assert.AreEqual(valLong, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valLong, true), true));
+                Assert.That(BitOperate.ReverseBytes(valLong, true), Is.EqualTo(valLongReverse));
+                Assert.That(BitOperate.ReverseBytes(valLong, false), Is.EqualTo(valLong));
+                Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valLong, true), true), Is.EqualTo(valLong));
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ReverseBytesInt32Test()
         {
             const int valInt = 0x01234567;
             const int valIntReverse = 0x67452301;
 
-            Assert.AreEqual(valIntReverse, BitOperate.ReverseBytes(valInt, true));
-            Assert.AreEqual(valInt, BitOperate.ReverseBytes(valInt, false));
-            Assert.AreEqual(valInt, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valInt, true), true));
+            Assert.That(BitOperate.ReverseBytes(valInt, true), Is.EqualTo(valIntReverse));
+            Assert.That(BitOperate.ReverseBytes(valInt, false), Is.EqualTo(valInt));
+            Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valInt, true), true), Is.EqualTo(valInt));
         }
 
-        [TestMethod]
+        [Test]
         public void ReverseBytesInt16Test()
         {
             unchecked
@@ -39,9 +39,9 @@ namespace UnitTest
                 const short valShort = (short)0x0123;
                 const short valShortReverse = (short)0x2301;
 
-                Assert.AreEqual(valShortReverse, BitOperate.ReverseBytes(valShort, true));
-                Assert.AreEqual(valShort, BitOperate.ReverseBytes(valShort, false));
-                Assert.AreEqual(valShort, BitOperate.ReverseBytes(BitOperate.ReverseBytes(valShort, true), true));
+                Assert.That(BitOperate.ReverseBytes(valShort, true), Is.EqualTo(valShortReverse));
+                Assert.That(BitOperate.ReverseBytes(valShort, false), Is.EqualTo(valShort));
+                Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valShort, true), true), Is.EqualTo(valShort));
             }
         }
     }
