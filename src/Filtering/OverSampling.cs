@@ -73,7 +73,7 @@ namespace SoundUtils.Filtering
                 CutoffFrequency = samplingRate / 2 -
                                   FiniteImpulseResponse.GetDelta(samplingRate * magnification, filterSize)
             };
-            var impulse = filterGenerator.Generate(filterSize / 2);
+            var impulse = filterGenerator.Generate(filterSize / 2.0);
 
             Window.Blackman(impulse);
             filter.SetFilter(impulse);

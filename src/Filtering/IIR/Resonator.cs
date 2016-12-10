@@ -68,7 +68,7 @@ namespace SoundUtils.Filtering.IIR
         /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
-            var amp = Amplifier / (size / 2);
+            var amp = Amplifier / (size / 2.0);
 
             Array.Clear(array, 0, size);
 
