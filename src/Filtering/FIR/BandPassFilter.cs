@@ -40,13 +40,13 @@ namespace SoundUtils.Filtering.FIR
         protected override void GenerateValues(double[] array, int size)
         {
             var offset = size / 2;
-            var feL_2 = 2.0 * (FrequencyLow / SamplingRate);
-            var feH_2 = 2.0 * (FrequencyHigh / SamplingRate);
-            var feL_PI2 = Math.PI * feL_2;
-            var feH_PI2 = Math.PI * feH_2;
+            var feL2 = 2.0 * (FrequencyLow / SamplingRate);
+            var feH2 = 2.0 * (FrequencyHigh / SamplingRate);
+            var feLPi2 = Math.PI * feL2;
+            var feHPi2 = Math.PI * feH2;
 
             for (int i = 0, j = -offset; i < size && j <= offset; i++, j++)
-                array[i] = feH_2 * SoundMath.Sinc(feH_PI2 * j) - feL_2 * SoundMath.Sinc(feL_PI2 * j);
+                array[i] = feH2 * SoundMath.Sinc(feHPi2 * j) - feL2 * SoundMath.Sinc(feLPi2 * j);
         }
         #endregion
     }

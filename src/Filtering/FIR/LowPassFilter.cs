@@ -40,11 +40,11 @@ namespace SoundUtils.Filtering.FIR
         protected override void GenerateValues(double[] array, int size)
         {
             var offset = size / 2;
-            var fe_2 = 2.0 * (CutoffFrequency / SamplingRate);
-            var fe_PI2 = Math.PI * fe_2;
+            var fe2 = 2.0 * (CutoffFrequency / SamplingRate);
+            var fePi2 = Math.PI * fe2;
 
             for (int i = 0, j = -offset; i < size && j <= offset; i++, j++)
-                array[i] = fe_2 * SoundMath.Sinc(fe_PI2 * j);
+                array[i] = fe2 * SoundMath.Sinc(fePi2 * j);
         }
         #endregion
     }
