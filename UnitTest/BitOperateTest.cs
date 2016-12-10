@@ -36,8 +36,8 @@ namespace UnitTest
         {
             unchecked
             {
-                const short valShort = (short)0x0123;
-                const short valShortReverse = (short)0x2301;
+                const short valShort = 0x0123;
+                const short valShortReverse = 0x2301;
 
                 Assert.That(BitOperate.ReverseBytes(valShort, true), Is.EqualTo(valShortReverse));
                 Assert.That(BitOperate.ReverseBytes(valShort, false), Is.EqualTo(valShort));
