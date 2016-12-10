@@ -175,6 +175,7 @@ namespace SoundUtils
         /// 配列にカイザー窓を畳み込みます。
         /// </summary>
         /// <param name="array">畳み込まれる配列。</param>
+        /// <param name="alpha">カイザー窓の alpha 係数。</param>
         public static void Kaiser(double[] array, double alpha)
         {
             var length = array.Length;
