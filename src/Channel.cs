@@ -41,6 +41,9 @@ namespace SoundUtils
         /// <param name="rch">R チャネルに分割される T 型配列。</param>
         public static void Split<T>(T[] source, T[] lch, T[] rch)
         {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
             Deinterleave(source, lch, rch, source.Length / 2);
         }
 
@@ -53,6 +56,9 @@ namespace SoundUtils
         /// <param name="dest">合成先の T 型配列。</param>
         public static void Join<T>(T[] lch, T[] rch, T[] dest)
         {
+            if (dest == null)
+                throw new ArgumentNullException(nameof(dest));
+
             Interleave(lch, rch, dest, dest.Length / 2);
         }
 
