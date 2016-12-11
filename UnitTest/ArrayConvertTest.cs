@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using SoundUtils;
 
 namespace UnitTest
@@ -15,6 +16,10 @@ namespace UnitTest
 
             ArrayConvert.CastToDouble(input, output);
             Assert.That(output, Is.EqualTo(expect));
+
+            Assert.That(() => ArrayConvert.CastToDouble(null, output), Throws.ArgumentNullException);
+            Assert.That(() => ArrayConvert.CastToDouble(input, null), Throws.ArgumentNullException);
+            Assert.That(() => ArrayConvert.CastToDouble(new float[1], new double[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
@@ -26,6 +31,10 @@ namespace UnitTest
 
             ArrayConvert.CastToSingle(input, output);
             Assert.That(output, Is.EqualTo(expect));
+
+            Assert.That(() => ArrayConvert.CastToSingle(null, output), Throws.ArgumentNullException);
+            Assert.That(() => ArrayConvert.CastToSingle(input, null), Throws.ArgumentNullException);
+            Assert.That(() => ArrayConvert.CastToSingle(new double[1], new float[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
     }
 }
