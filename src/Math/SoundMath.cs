@@ -39,7 +39,7 @@ namespace SoundUtils
         /// <returns>Sinc(x) の結果。</returns>
         public static double Sinc(double x)
         {
-            return x == 0.0 ? 1.0 : Math.Sin(x) / x;
+            return Math.Abs(x) < double.Epsilon ? 1.0 : Math.Sin(x) / x;
         }
 
         /// <summary>

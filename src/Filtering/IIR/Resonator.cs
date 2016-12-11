@@ -72,7 +72,7 @@ namespace SoundUtils.Filtering.IIR
 
             Array.Clear(array, 0, size);
 
-            if (Strength == 0.0)
+            if (Math.Abs(Strength) < double.Epsilon)
                 array[0] = amp;
             else
                 for (var j = 0; j < Frequencies.Length; j++)

@@ -182,7 +182,7 @@ namespace SoundUtils
             var n = 2.0 / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
 
-            if (alpha == 0.0)
+            if (Math.Abs(alpha) < double.Epsilon)
                 return;
 
             alpha *= Math.PI;
