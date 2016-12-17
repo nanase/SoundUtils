@@ -19,6 +19,13 @@ namespace UnitTest
 
             Assert.That(lch, Is.EqualTo(new[] { 0, 2, 4, 6 }));
             Assert.That(rch, Is.EqualTo(new[] { 1, 3, 5, 7 }));
+
+            Assert.That(() => Channel.Split(src, null, null), Throws.ArgumentNullException);
+            Assert.That(() => Channel.Split(null, lch, null), Throws.ArgumentNullException);
+            Assert.That(() => Channel.Split(null, null, rch), Throws.ArgumentNullException);
+            Assert.That(() => Channel.Split(new int[2], new int[0], new int[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => Channel.Split(new int[0], new int[1], new int[1]), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => Channel.Split(new int[2], new int[1], new int[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
@@ -29,8 +36,15 @@ namespace UnitTest
             var dst = new int[8];
 
             Channel.Join(lch, rch, dst);
-            
+
             Assert.That(dst, Is.EqualTo(new[] { 0, 4, 1, 5, 2, 6, 3, 7 }));
+
+            Assert.That(() => Channel.Join(lch, null, null), Throws.ArgumentNullException);
+            Assert.That(() => Channel.Join(null, rch, null), Throws.ArgumentNullException);
+            Assert.That(() => Channel.Join(null, null, dst), Throws.ArgumentNullException);
+            Assert.That(() => Channel.Join(new int[1], new int[1], new int[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => Channel.Join(new int[0], new int[1], new int[1]), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => Channel.Join(new int[1], new int[0], new int[1]), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
@@ -40,7 +54,7 @@ namespace UnitTest
             var dst = new int[8];
 
             Channel.Interleave(src, dst, 4);
-            
+
             Assert.That(dst, Is.EqualTo(new[] { 0, 0, 1, 0, 2, 0, 3, 0 }));
 
             Array.Clear(dst, 0, 8);
@@ -73,7 +87,7 @@ namespace UnitTest
             var dst = new int[4];
 
             Channel.Deinterleave(src, dst, 4);
-            
+
             Assert.That(dst, Is.EqualTo(new[] { 0, 2, 4, 6 }));
 
             Array.Clear(dst, 0, 4);
