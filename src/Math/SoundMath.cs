@@ -75,6 +75,9 @@ namespace SoundUtils
         /// <returns>n の階乗の逆数の値。</returns>
         public static double InvertedFactorial(int n)
         {
+            if (n < 0)
+                throw new ArgumentOutOfRangeException(nameof(n));
+
             var y = 1.0;
 
             while (n > 1)
