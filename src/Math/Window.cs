@@ -203,7 +203,10 @@ namespace SoundUtils
             var k = (length & 1) == 0 ? 0.0 : 0.5;
 
             if (Math.Abs(alpha) < double.Epsilon)
+            {
+                Array.Clear(array, 0, length);
                 return;
+            }
 
             alpha *= Math.PI;
 
