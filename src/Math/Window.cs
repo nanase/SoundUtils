@@ -38,6 +38,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Hanning(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 2.0 * Math.PI / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -52,6 +54,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Hamming(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 2.0 * Math.PI / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -66,6 +70,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Bartlett(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
             var n = 1.0 / length;
@@ -80,6 +86,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Nuttall(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 2.0 * Math.PI / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -97,6 +105,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Blackman(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 2.0 * Math.PI / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -111,6 +121,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void BlackmanHarris(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 2.0 * Math.PI / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -128,6 +140,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void BlackmanNuttall(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 2.0 * Math.PI / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -145,6 +159,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void FlatTop(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 2.0 * Math.PI / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -163,6 +179,8 @@ namespace SoundUtils
         /// <param name="array">畳み込まれる配列。</param>
         public static void Welch(double[] array)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var factor = 1.0 / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -178,6 +196,8 @@ namespace SoundUtils
         /// <param name="alpha">カイザー窓の alpha 係数。</param>
         public static void Kaiser(double[] array, double alpha)
         {
+            CheckArrayIsNotNull(array);
+
             var length = array.Length;
             var n = 2.0 / length;
             var k = (length & 1) == 0 ? 0.0 : 0.5;
@@ -192,6 +212,16 @@ namespace SoundUtils
             for (var i = 0; i < length; i++, k++)
                 array[i] *= SoundMath.Bessel0(alpha * Math.Sqrt(1.0 - Math.Pow(k * n - 1.0, 2.0))) * alphaTmp;
         }
+        #endregion
+
+        #region -- Private Static Methods --
+
+        private static void CheckArrayIsNotNull<T>(T[] array)
+        {
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+        }
+
         #endregion
     }
 }
