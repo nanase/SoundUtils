@@ -5,7 +5,19 @@ using SoundUtils;
 
 namespace UnitTest
 {
-    using CaseType = Tuple<Action<double[]>, IEnumerable<double>>;
+    internal class CaseType
+    {
+        public Action<double[]> WindowMethod { get; }
+        public IEnumerable<double> ConvolutedResult { get;}
+
+        public CaseType(Action<double[]> windowMethod, IEnumerable<double> convolutedResult)
+        {
+            WindowMethod = windowMethod;
+            ConvolutedResult = convolutedResult;
+        }
+
+        public override string ToString() => $"{WindowMethod.Method.Name}: {string.Join(", ", ConvolutedResult)}";
+    }
 
     [TestFixture]
     internal class WindowTest
@@ -27,15 +39,15 @@ namespace UnitTest
         [TestCaseSource(typeof(WindowTest), nameof(WindowTestCase))]
         public void NoParameterWindowTest(CaseType testCase)
         {
-            Assert.That(() => testCase.Item1(null), Throws.ArgumentNullException);
+            Assert.That(() => testCase.WindowMethod(null), Throws.ArgumentNullException);
 
             var emptyArray = new double[0];
-            testCase.Item1(emptyArray);
+            testCase.WindowMethod(emptyArray);
             Assert.That(emptyArray, Is.Empty);
 
             var testArray = new[] { 1.0, 1.0, 1.0 };
-            testCase.Item1(testArray);
-            Assert.That(testArray, Is.EqualTo(testCase.Item2).Within(1e-10));
+            testCase.WindowMethod(testArray);
+            Assert.That(testArray, Is.EqualTo(testCase.ConvolutedResult).Within(1e-10));
         }
     }
 }
