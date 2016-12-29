@@ -22,6 +22,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+
 namespace SoundUtils
 {
     /// <summary>
@@ -30,17 +32,66 @@ namespace SoundUtils
     public static unsafe class BitOperate
     {
         #region -- Public Static Methods --
+
+        public readonly static bool IsLittleEndian = BitConverter.IsLittleEndian;
+
+        public readonly static bool IsBigEndian = !BitConverter.IsLittleEndian;
+
+        public static long ToLittleEndian(this long value)
+        {
+            if (IsBigEndian)
+                return value.ReverseBytes();
+
+            return value;
+        }
+
+        public static int ToLittleEndian(this int value)
+        {
+            if (IsBigEndian)
+                return value.ReverseBytes();
+
+            return value;
+        }
+
+        public static short ToLittleEndian(this short value)
+        {
+            if (IsBigEndian)
+                return value.ReverseBytes();
+
+            return value;
+        }
+
+        public static long ToBigEndian(this long value)
+        {
+            if (IsLittleEndian)
+                return value.ReverseBytes();
+
+            return value;
+        }
+
+        public static int ToBigEndian(this int value)
+        {
+            if (IsLittleEndian)
+                return value.ReverseBytes();
+
+            return value;
+        }
+
+        public static short ToBigEndian(this short value)
+        {
+            if (IsLittleEndian)
+                return value.ReverseBytes();
+
+            return value;
+        }
+
         /// <summary>
         /// 指定された値のバイトオーダを逆転させます。
         /// </summary>
         /// <param name="value">逆転されるデータ値。</param>
-        /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
         /// <returns>逆転されたデータ値。</returns>
-        public static long ReverseBytes(this long value, bool reverse)
+        public static long ReverseBytes(this long value)
         {
-            if (!reverse)
-                return value;
-
             byte* x = stackalloc byte[8];
             var bp = (byte*)&value;
             x[0] = bp[7];
@@ -59,13 +110,9 @@ namespace SoundUtils
         /// 指定された値のバイトオーダを逆転させます。
         /// </summary>
         /// <param name="value">逆転されるデータ値。</param>
-        /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
         /// <returns>逆転されたデータ値。</returns>
-        public static int ReverseBytes(this int value, bool reverse)
+        public static int ReverseBytes(this int value)
         {
-            if (!reverse)
-                return value;
-
             byte* x = stackalloc byte[4];
             var bp = (byte*)&value;
             x[0] = bp[3];
@@ -80,13 +127,9 @@ namespace SoundUtils
         /// 指定された値のバイトオーダを逆転させます。
         /// </summary>
         /// <param name="value">逆転されるデータ値。</param>
-        /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
         /// <returns>逆転されたデータ値。</returns>
-        public static short ReverseBytes(this short value, bool reverse)
+        public static short ReverseBytes(this short value)
         {
-            if (!reverse)
-                return value;
-
             byte* b0 = (byte*)&value, b1 = b0 + 1;
             return (short)(*b0 * 256 + *b1);
         }

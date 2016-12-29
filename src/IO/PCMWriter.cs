@@ -150,8 +150,6 @@ namespace SoundUtils.IO
             if (Disposed)
                 throw new ObjectDisposedException("BaseStream");
 
-            var little = BitConverter.IsLittleEndian;
-            var big = !little;
             var position = BaseStream.Position;
 
             BaseStream.Seek(0L, SeekOrigin.Begin);
@@ -159,40 +157,40 @@ namespace SoundUtils.IO
             using (var bw = new BinaryWriter(BaseStream))
             {
                 // 4 bytes, offset 4
-                bw.Write(BitOperate.ReverseBytes(0x52494646, little));
+                bw.Write(0x52494646.ToLittleEndian());
 
                 // 4 bytes, offset 8
-                bw.Write(BitOperate.ReverseBytes((int)(WrittenBytes + 36), big));
+                bw.Write(((int)(WrittenBytes + 36)).ToBigEndian());
 
                 // 8 bytes, offset 16
-                bw.Write(BitOperate.ReverseBytes(0x57415645666D7420, little));
+                bw.Write(0x57415645666D7420.ToLittleEndian());
 
                 // 4 bytes, offset 20
-                bw.Write(BitOperate.ReverseBytes(16, big));
+                bw.Write(16.ToBigEndian());
 
                 // 2 bytes, offset 22
-                bw.Write(BitOperate.ReverseBytes((short)1, big));
+                bw.Write(((short)1).ToBigEndian());
 
                 // 2 bytes, offset 24
-                bw.Write(BitOperate.ReverseBytes((short)ChannelCount, big));
+                bw.Write(((short)ChannelCount).ToBigEndian());
 
                 // 4 bytes, offset 28
-                bw.Write(BitOperate.ReverseBytes(SamplingRate, big));
+                bw.Write(SamplingRate.ToBigEndian());
 
                 // 4 bytes, offset 32
-                bw.Write(BitOperate.ReverseBytes(SamplingRate * ChannelCount * (BitPerSample / 8), big));
+                bw.Write((SamplingRate * ChannelCount * (BitPerSample / 8)).ToBigEndian());
 
                 // 2 bytes, offset 34
-                bw.Write(BitOperate.ReverseBytes((short)(ChannelCount * (BitPerSample / 8)), big));
+                bw.Write(((short)(ChannelCount * (BitPerSample / 8))).ToBigEndian());
 
                 // 2 bytes, offset 36
-                bw.Write(BitOperate.ReverseBytes((short)BitPerSample, big));
+                bw.Write(((short)BitPerSample).ToBigEndian());
 
                 // 4 bytes, offset 40
-                bw.Write(BitOperate.ReverseBytes(0x64617461, little));
+                bw.Write(0x64617461.ToLittleEndian());
 
                 // 4 bytes, offset 44
-                bw.Write(BitOperate.ReverseBytes((int)WrittenBytes, big));
+                bw.Write(((int)WrittenBytes).ToBigEndian());
             }
 
             BaseStream.Seek(position, SeekOrigin.Begin);
