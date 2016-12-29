@@ -36,7 +36,7 @@ namespace SoundUtils
         /// <param name="value">逆転されるデータ値。</param>
         /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
         /// <returns>逆転されたデータ値。</returns>
-        public static long ReverseBytes(long value, bool reverse)
+        public static long ReverseBytes(this long value, bool reverse)
         {
             if (!reverse)
                 return value;
@@ -61,7 +61,7 @@ namespace SoundUtils
         /// <param name="value">逆転されるデータ値。</param>
         /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
         /// <returns>逆転されたデータ値。</returns>
-        public static int ReverseBytes(int value, bool reverse)
+        public static int ReverseBytes(this int value, bool reverse)
         {
             if (!reverse)
                 return value;
@@ -82,7 +82,7 @@ namespace SoundUtils
         /// <param name="value">逆転されるデータ値。</param>
         /// <param name="reverse">逆転させる場合は true、しない場合は false。</param>
         /// <returns>逆転されたデータ値。</returns>
-        public static short ReverseBytes(short value, bool reverse)
+        public static short ReverseBytes(this short value, bool reverse)
         {
             if (!reverse)
                 return value;
