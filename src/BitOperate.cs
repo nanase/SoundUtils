@@ -32,11 +32,21 @@ namespace SoundUtils
     public static unsafe class BitOperate
     {
         #region -- Public Static Methods --
-
+        /// <summary>
+        /// 実行中のマシンのバイト順がリトルエンディアンであるかを表す真偽値を表します。この変数は読み取り専用です。
+        /// </summary>
         public readonly static bool IsLittleEndian = BitConverter.IsLittleEndian;
 
+        /// <summary>
+        /// 実行中のマシンのバイト順がビッグエンディアンであるかを表す真偽値を表します。この変数は読み取り専用です。
+        /// </summary>
         public readonly static bool IsBigEndian = !BitConverter.IsLittleEndian;
 
+        /// <summary>
+        /// 指定された数値をリトルエンディアンに並べ替えます。
+        /// </summary>
+        /// <returns>リトルエンディアンで表された変換後の <see cref="long"/> 型の値。</returns>
+        /// <param name="value">変換前の <see cref="long"/> 型の値。</param>
         public static long ToLittleEndian(this long value)
         {
             if (IsBigEndian)
@@ -45,6 +55,11 @@ namespace SoundUtils
             return value;
         }
 
+        /// <summary>
+        /// 指定された数値をリトルエンディアンに並べ替えます。
+        /// </summary>
+        /// <returns>リトルエンディアンで表された変換後の <see cref="int"/> 型の値。</returns>
+        /// <param name="value">変換前の <see cref="int"/> 型の値。</param>
         public static int ToLittleEndian(this int value)
         {
             if (IsBigEndian)
@@ -53,6 +68,11 @@ namespace SoundUtils
             return value;
         }
 
+        /// <summary>
+        /// 指定された数値をリトルエンディアンに並べ替えます。
+        /// </summary>
+        /// <returns>リトルエンディアンで表された変換後の <see cref="short"/> 型の値。</returns>
+        /// <param name="value">変換前の <see cref="short"/> 型の値。</param>
         public static short ToLittleEndian(this short value)
         {
             if (IsBigEndian)
@@ -61,6 +81,11 @@ namespace SoundUtils
             return value;
         }
 
+        /// <summary>
+        /// 指定された数値をビッグエンディアンに並べ替えます。
+        /// </summary>
+        /// <returns>ビッグエンディアンで表された変換後の <see cref="long"/> 型の値。</returns>
+        /// <param name="value">変換前の <see cref="long"/> 型の値。</param>
         public static long ToBigEndian(this long value)
         {
             if (IsLittleEndian)
@@ -69,6 +94,11 @@ namespace SoundUtils
             return value;
         }
 
+        /// <summary>
+        /// 指定された数値をビッグエンディアンに並べ替えます。
+        /// </summary>
+        /// <returns>ビッグエンディアンで表された変換後の <see cref="int"/> 型の値。</returns>
+        /// <param name="value">変換前の <see cref="int"/> 型の値。</param>
         public static int ToBigEndian(this int value)
         {
             if (IsLittleEndian)
@@ -77,6 +107,11 @@ namespace SoundUtils
             return value;
         }
 
+        /// <summary>
+        /// 指定された数値をビッグエンディアンに並べ替えます。
+        /// </summary>
+        /// <returns>ビッグエンディアンで表された変換後の <see cref="short"/> 型の値。</returns>
+        /// <param name="value">変換前の <see cref="short"/> 型の値。</param>
         public static short ToBigEndian(this short value)
         {
             if (IsLittleEndian)
