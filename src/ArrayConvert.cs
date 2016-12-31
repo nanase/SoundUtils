@@ -34,10 +34,10 @@ namespace SoundUtils
         #region -- Public Static Methods --
         #region CastToDouble
         /// <summary>
-        /// 配列を System.Double 型に変換します。
+        /// 配列を <see cref="double"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換元の配列。</param>
-        /// <param name="dst">変換先の配列。</param>
+        /// <param name="src">変換元の <see cref="float"/> 型の配列。</param>
+        /// <param name="dst">変換先の <see cref="float"/> 型の配列。</param>
         public static void CastToDouble(float[] src, double[] dst)
         {
             if (src == null)
@@ -56,10 +56,10 @@ namespace SoundUtils
 
         #region CastToSingle
         /// <summary>
-        /// 配列を System.Single 型に変換します。
+        /// 配列を <see cref="float"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換元の配列。</param>
-        /// <param name="dst">変換先の配列。</param>
+        /// <param name="src">変換元の <see cref="double"/> 型の配列。</param>
+        /// <param name="dst">変換先の <see cref="float"/> 型の配列。</param>
         public static void CastToSingle(double[] src, float[] dst)
         {
             if (src == null)
@@ -78,10 +78,10 @@ namespace SoundUtils
 
         #region ToByte
         /// <summary>
-        /// System.Int16 型の配列の値を System.Byte 型に変換します。
+        /// <see cref="short"/> 型の配列の値を <see cref="byte"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換される System.Int16 型配列。</param>
-        /// <param name="dst">変換された値が格納される System.Byte 型配列。</param>
+        /// <param name="src">変換される <see cref="short"/> 型配列。</param>
+        /// <param name="dst">変換された値が格納される <see cref="byte"/> 型配列。</param>
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
         public static void ToByte(short[] src, byte[] dst, bool reverse = false)
         {
@@ -89,12 +89,12 @@ namespace SoundUtils
         }
 
         /// <summary>
-        /// System.Int16 型の配列の値を System.Byte 型に変換します。
+        /// <see cref="short"/> 型の配列の値を <see cref="byte"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換される System.Int16 型配列。</param>
+        /// <param name="src">変換される <see cref="short"/> 型配列。</param>
         /// <param name="offset">読み取りが開始されるインデックスのオフセット。</param>
         /// <param name="count">読み取られる要素数。</param>
-        /// <param name="dst">変換された値が格納される System.Byte 型配列。</param>
+        /// <param name="dst">変換された値が格納される <see cref="byte"/> 型配列。</param>
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
         public static unsafe void ToByte(short[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
