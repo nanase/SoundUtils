@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SoundUtils")]
-[assembly: AssemblyCopyright("Copyright © 2016 Tomona Nanase")]
+[assembly: AssemblyCopyright("Copyright © 2017 Tomona Nanase")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
