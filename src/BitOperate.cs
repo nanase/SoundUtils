@@ -49,10 +49,7 @@ namespace SoundUtils
         /// <param name="value">変換前の <see cref="long"/> 型の値。</param>
         public static long ToLittleEndian(this long value)
         {
-            if (IsBigEndian)
-                return value.ReverseBytes();
-
-            return value;
+            return IsBigEndian ? value.ReverseBytes() : value;
         }
 
         /// <summary>
@@ -62,10 +59,7 @@ namespace SoundUtils
         /// <param name="value">変換前の <see cref="int"/> 型の値。</param>
         public static int ToLittleEndian(this int value)
         {
-            if (IsBigEndian)
-                return value.ReverseBytes();
-
-            return value;
+            return IsBigEndian ? value.ReverseBytes() : value;
         }
 
         /// <summary>
@@ -75,10 +69,7 @@ namespace SoundUtils
         /// <param name="value">変換前の <see cref="short"/> 型の値。</param>
         public static short ToLittleEndian(this short value)
         {
-            if (IsBigEndian)
-                return value.ReverseBytes();
-
-            return value;
+            return IsBigEndian ? value.ReverseBytes() : value;
         }
 
         /// <summary>
@@ -88,10 +79,7 @@ namespace SoundUtils
         /// <param name="value">変換前の <see cref="long"/> 型の値。</param>
         public static long ToBigEndian(this long value)
         {
-            if (IsLittleEndian)
-                return value.ReverseBytes();
-
-            return value;
+            return IsLittleEndian ? value.ReverseBytes() : value;
         }
 
         /// <summary>
@@ -101,10 +89,7 @@ namespace SoundUtils
         /// <param name="value">変換前の <see cref="int"/> 型の値。</param>
         public static int ToBigEndian(this int value)
         {
-            if (IsLittleEndian)
-                return value.ReverseBytes();
-
-            return value;
+            return IsLittleEndian ? value.ReverseBytes() : value;
         }
 
         /// <summary>
@@ -114,10 +99,7 @@ namespace SoundUtils
         /// <param name="value">変換前の <see cref="short"/> 型の値。</param>
         public static short ToBigEndian(this short value)
         {
-            if (IsLittleEndian)
-                return value.ReverseBytes();
-
-            return value;
+            return IsLittleEndian ? value.ReverseBytes() : value;
         }
 
         /// <summary>
