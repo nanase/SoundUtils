@@ -35,12 +35,12 @@ namespace SoundUtils
         /// <summary>
         /// 実行中のマシンのバイト順がリトルエンディアンであるかを表す真偽値を表します。この変数は読み取り専用です。
         /// </summary>
-        public readonly static bool IsLittleEndian = BitConverter.IsLittleEndian;
+        public static readonly bool IsLittleEndian = BitConverter.IsLittleEndian;
 
         /// <summary>
         /// 実行中のマシンのバイト順がビッグエンディアンであるかを表す真偽値を表します。この変数は読み取り専用です。
         /// </summary>
-        public readonly static bool IsBigEndian = !BitConverter.IsLittleEndian;
+        public static readonly bool IsBigEndian = !BitConverter.IsLittleEndian;
 
         /// <summary>
         /// 指定された数値をリトルエンディアンに並べ替えます。
