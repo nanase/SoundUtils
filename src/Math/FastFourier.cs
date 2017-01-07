@@ -88,13 +88,13 @@ namespace SoundUtils
 
             Cdft(n, invert, data, ip, w);
 
-            if (invert)
-            {
-                var f = 2.0 / n;
+            if (!invert)
+                return;
 
-                for (var j = 0; j < n; j++)
-                    data[j] *= f;
-            }
+            var f = 2.0 / n;
+
+            for (var j = 0; j < n; j++)
+                data[j] *= f;
         }
 
         /// <summary>
@@ -141,13 +141,13 @@ namespace SoundUtils
 
             Rdft(n, invert, data, ip, w);
 
-            if (invert)
-            {
-                var f = 2.0 / n;
+            if (!invert)
+                return;
 
-                for (var j = 0; j < n; j++)
-                    data[j] *= f;
-            }
+            var f = 2.0 / n;
+
+            for (var j = 0; j < n; j++)
+                data[j] *= f;
         }
         #endregion
 
@@ -229,48 +229,48 @@ namespace SoundUtils
             ip[0] = nw;
             ip[1] = 1;
 
-            if (nw > 2)
+            if (nw <= 2)
+                return;
+
+            var nwh = nw >> 1;
+            var delta = Math.Atan(1.0) / nwh;
+            w[0] = 1;
+            w[1] = 0;
+            w[nwh] = Math.Cos(delta * nwh);
+            w[nwh + 1] = w[nwh];
+
+            if (nwh <= 2)
+                return;
+
+            for (var j = 2; j < nwh; j += 2)
             {
-                var nwh = nw >> 1;
-                var delta = Math.Atan(1.0) / nwh;
-                w[0] = 1;
-                w[1] = 0;
-                w[nwh] = Math.Cos(delta * nwh);
-                w[nwh + 1] = w[nwh];
-
-                if (nwh > 2)
-                {
-                    for (var j = 2; j < nwh; j += 2)
-                    {
-                        var x = Math.Cos(delta * j);
-                        var y = Math.Sin(delta * j);
-                        w[j] = x;
-                        w[j + 1] = y;
-                        w[nw - j] = y;
-                        w[nw - j + 1] = x;
-                    }
-
-                    Bitrv2(nw, ip, 2, w);
-                }
+                var x = Math.Cos(delta * j);
+                var y = Math.Sin(delta * j);
+                w[j] = x;
+                w[j + 1] = y;
+                w[nw - j] = y;
+                w[nw - j + 1] = x;
             }
+
+            Bitrv2(nw, ip, 2, w);
         }
 
         private static void Makect(int nc, int[] ip, double[] c, int offset)
         {
             ip[1] = nc;
 
-            if (nc > 1)
-            {
-                var nch = nc >> 1;
-                var delta = Math.Atan(1.0) / nch;
-                c[offset] = Math.Cos(delta * nch);
-                c[offset + nch] = 0.5 * c[offset];
+            if (nc <= 1)
+                return;
+
+            var nch = nc >> 1;
+            var delta = Math.Atan(1.0) / nch;
+            c[offset] = Math.Cos(delta * nch);
+            c[offset + nch] = 0.5 * c[offset];
                 
-                for (var j = 1; j < nch; j++)
-                {
-                    c[offset + j] = 0.5 * Math.Cos(delta * j);
-                    c[offset + nc - j] = 0.5 * Math.Sin(delta * j);
-                }
+            for (var j = 1; j < nch; j++)
+            {
+                c[offset + j] = 0.5 * Math.Cos(delta * j);
+                c[offset + nc - j] = 0.5 * Math.Sin(delta * j);
             }
         }
 
