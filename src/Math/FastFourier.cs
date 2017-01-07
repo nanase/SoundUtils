@@ -76,9 +76,9 @@ namespace SoundUtils
         /// <summary>
         /// 複素数がインターリーブされたデータを離散フーリエ変換します。
         /// </summary>
-        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
         /// <param name="data">複素数がインターリーブされた配列。</param>
-        public void TransformComplex(bool invert, double[] data)
+        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
+        public void TransformComplex(double[] data, bool invert = false)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
@@ -100,10 +100,10 @@ namespace SoundUtils
         /// <summary>
         /// 実数と虚数のデータを離散フーリエ変換します。
         /// </summary>
-        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
         /// <param name="real">実数データの配列。</param>
         /// <param name="imaginary">虚数データの配列。</param>
-        public void TransformComplex(bool invert, double[] real, double[] imaginary)
+        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
+        public void TransformComplex(double[] real, double[] imaginary, bool invert = false)
         {
             if (real == null)
                 throw new ArgumentNullException(nameof(real));
@@ -121,17 +121,17 @@ namespace SoundUtils
                 interleave = new double[n];
 
             Channel.Interleave(real, imaginary, interleave, n / 2);
-            TransformComplex(invert, interleave);
+            TransformComplex(interleave, invert);
             Channel.Deinterleave(interleave, real, imaginary, n / 2);
         }
 
         /// <summary>
         /// 実数データを離散フーリエ変換します。
         /// </summary>
-        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
         /// <param name="data">入力は連続した実数データの配列。
         /// 出力は複素数のインターリーブとなり、かつサンプリング周波数の半分のデータ数です。</param>
-        public void TransformReal(bool invert, double[] data)
+        /// <param name="invert">逆離散フーリエ変換を行うかの真偽値。</param>
+        public void TransformReal(double[] data, bool invert = false)
         {
             if (data == null)
                 throw new ArgumentNullException(nameof(data));

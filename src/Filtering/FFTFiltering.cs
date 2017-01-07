@@ -94,7 +94,7 @@ namespace SoundUtils.Filtering
             Array.Clear(output, 0, bufferSize);
 
             Array.Copy(impulseResponses, fr, Math.Min(impulseResponses.Length, fftSize));
-            fft.TransformComplex(false, fr, fi);
+            fft.TransformComplex(fr, fi);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace SoundUtils.Filtering
                 Array.Clear(fftC, segmentSize, fftSize * 2 - segmentSize);
                 Channel.Interleave(buffer, iOffset, fftC, 0, segmentSize);
 
-                fft.TransformComplex(false, fftC);
+                fft.TransformComplex(fftC);
 
                 for (int i = 0, j = 1, k = 0, l = fftSize * 2; i < l; i += 2, j += 2, k++)
                 {
@@ -124,7 +124,7 @@ namespace SoundUtils.Filtering
                     fftC[j] = dblI;
                 }
 
-                fft.TransformComplex(true, fftC);
+                fft.TransformComplex(fftC);
                 Channel.Deinterleave(fftC, xr, fftSize);
 
                 for (var i = 0; i < overlapSize; i++)

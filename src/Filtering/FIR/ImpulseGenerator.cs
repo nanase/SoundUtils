@@ -59,7 +59,7 @@ namespace SoundUtils.Filtering.FIR
             Array.Reverse(output, blockSize, blockSize);
             Array.Copy(input, 0, output, 0, blockSize);
 
-            fft.TransformComplex(true, output, imDummy);
+            fft.TransformComplex(output, imDummy, true);
 
             Array.Reverse(output, 0, blockSize);
             Array.Reverse(output, blockSize, blockSize);
