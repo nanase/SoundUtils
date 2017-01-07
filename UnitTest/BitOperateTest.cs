@@ -38,9 +38,8 @@ namespace UnitTest
                 const long valLong = 0x0123456789ABCDEF;
                 const long valLongReverse = (long)0xEFCDAB8967452301;
 
-                Assert.That(BitOperate.ReverseBytes(valLong, true), Is.EqualTo(valLongReverse));
-                Assert.That(BitOperate.ReverseBytes(valLong, false), Is.EqualTo(valLong));
-                Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valLong, true), true), Is.EqualTo(valLong));
+                Assert.That(valLong.ReverseBytes(), Is.EqualTo(valLongReverse));
+                Assert.That(valLong.ReverseBytes().ReverseBytes(), Is.EqualTo(valLong));
             }
         }
 
@@ -50,9 +49,8 @@ namespace UnitTest
             const int valInt = 0x01234567;
             const int valIntReverse = 0x67452301;
 
-            Assert.That(BitOperate.ReverseBytes(valInt, true), Is.EqualTo(valIntReverse));
-            Assert.That(BitOperate.ReverseBytes(valInt, false), Is.EqualTo(valInt));
-            Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valInt, true), true), Is.EqualTo(valInt));
+            Assert.That(valInt.ReverseBytes(), Is.EqualTo(valIntReverse));
+            Assert.That(valInt.ReverseBytes().ReverseBytes(), Is.EqualTo(valInt));
         }
 
         [Test]
@@ -61,9 +59,8 @@ namespace UnitTest
             const short valShort = 0x0123;
             const short valShortReverse = 0x2301;
 
-            Assert.That(BitOperate.ReverseBytes(valShort, true), Is.EqualTo(valShortReverse));
-            Assert.That(BitOperate.ReverseBytes(valShort, false), Is.EqualTo(valShort));
-            Assert.That(BitOperate.ReverseBytes(BitOperate.ReverseBytes(valShort, true), true), Is.EqualTo(valShort));
+            Assert.That(valShort.ReverseBytes(), Is.EqualTo(valShortReverse));
+            Assert.That(valShort.ReverseBytes().ReverseBytes(), Is.EqualTo(valShort));
         }
     }
 }
