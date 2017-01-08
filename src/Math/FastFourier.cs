@@ -161,7 +161,6 @@ namespace SoundUtils
             {
                 if (invert)
                 {
-
                     Bitrv2Conj(n, ip, 2, a);
                     Cftbsub(n, a, w);
                 }
@@ -266,7 +265,7 @@ namespace SoundUtils
             var delta = Math.Atan(1.0) / nch;
             c[offset] = Math.Cos(delta * nch);
             c[offset + nch] = 0.5 * c[offset];
-                
+
             for (var j = 1; j < nch; j++)
             {
                 c[offset + j] = 0.5 * Math.Cos(delta * j);
