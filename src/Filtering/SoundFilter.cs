@@ -47,10 +47,10 @@ namespace SoundUtils.Filtering
         public SoundFilter(bool stereo, int bufferSize)
         {
             if (bufferSize < 0)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException(nameof(bufferSize));
 
             if (bufferSize % 2 != 0)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException(nameof(bufferSize));
 
             this.stereo = stereo;
 
