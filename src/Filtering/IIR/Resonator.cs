@@ -81,9 +81,9 @@ namespace SoundUtils.Filtering.IIR
             if (Math.Abs(Strength) < double.Epsilon)
                 array[0] = amp;
             else
-                for (var j = 0; j < Frequencies.Length; j++)
+                foreach (var frequency in Frequencies)
                     for (var i = 0; i < size; i++)
-                        array[i] += Math.Sin(i * Frequencies[j] * 2.0 * Math.PI / SamplingRate) * amp *
+                        array[i] += Math.Sin(i * frequency * 2.0 * Math.PI / SamplingRate) * amp *
                                     Math.Exp(-Math.Pow(i, 2.0) / Math.Pow(Strength, 2.0));
         }
         #endregion
