@@ -90,7 +90,7 @@ namespace SoundUtils.IO
             if (samplingRate <= 0)
                 throw new ArgumentOutOfRangeException(nameof(samplingRate));
 
-            if (bitPerSample < 8)
+            if (bitPerSample < 2)
                 throw new ArgumentOutOfRangeException(nameof(bitPerSample));
 
             if (channelCount < 1)
