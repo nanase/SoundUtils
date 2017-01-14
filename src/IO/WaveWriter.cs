@@ -160,13 +160,13 @@ namespace SoundUtils.IO
         /// <param name="disposing">マネージリソースとアンマネージリソースの両方を解放する場合は true。アンマネージリソースだけを解放する場合は false。</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!Disposed)
-            {
-                Flush();
-                BaseStream.Dispose();
+            if (Disposed)
+                return;
 
-                Disposed = true;
-            }
+            Flush();
+            BaseStream.Dispose();
+
+            Disposed = true;
         }
         #endregion
     }
