@@ -44,10 +44,10 @@ namespace SoundUtils.IO
             : base(stream, samplingRate, bitPerSample, channelCount, 44L)
         {
             if (bitPerSample != 8 && bitPerSample != 16)
-                throw new ArgumentOutOfRangeException(nameof(bitPerSample));
+                throw new ArgumentOutOfRangeException(nameof(bitPerSample), "無効なビット数が指定されました。ビット数は 8 または 16 である必要があります。");
 
             if (channelCount < 1 || channelCount > 2)
-                throw new ArgumentOutOfRangeException(nameof(channelCount));
+                throw new ArgumentOutOfRangeException(nameof(channelCount), "無効なチャネル数が指定されました。チャネル数は 1 または 2 である必要があります。");
         }
         #endregion
 

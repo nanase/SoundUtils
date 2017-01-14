@@ -85,16 +85,16 @@ namespace SoundUtils.IO
                 throw new ArgumentNullException(nameof(stream));
 
             if (!stream.CanSeek || !stream.CanWrite)
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("シークができないか、読み取りのできないストリームは使用できません。");
 
             if (samplingRate <= 0)
-                throw new ArgumentOutOfRangeException(nameof(samplingRate));
+                throw new ArgumentOutOfRangeException(nameof(samplingRate), "無効なサンプリング周波数が指定されました。サンプリング周波数は 1(Hz) 以上の整数である必要があります。");
 
             if (bitPerSample < 2)
-                throw new ArgumentOutOfRangeException(nameof(bitPerSample));
+                throw new ArgumentOutOfRangeException(nameof(bitPerSample), "無効なビット数が指定されました。ビット数は 2 以上である必要があります。");
 
             if (channelCount < 1)
-                throw new ArgumentOutOfRangeException(nameof(channelCount));
+                throw new ArgumentOutOfRangeException(nameof(channelCount), "無効なチャネル数が指定されました。チャネル数は 1 以上である必要があります。");
 
             BaseStream = stream;
             SamplingRate = samplingRate;
