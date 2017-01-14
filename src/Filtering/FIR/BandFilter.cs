@@ -22,6 +22,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+
 namespace SoundUtils.Filtering.FIR
 {
     /// <summary>
@@ -49,8 +51,23 @@ namespace SoundUtils.Filtering.FIR
         /// <param name="bandwidth">帯域幅。</param>
         public void SetFrequency(double centerFrequecy, double bandwidth)
         {
+            if (centerFrequecy <= 0.0)
+                throw new ArgumentOutOfRangeException(nameof(centerFrequecy), "中心周波数は 0.0 (Hz) よりも大きな実数である必要があります。");
+
+            if (double.IsInfinity(centerFrequecy))
+                throw new ArgumentOutOfRangeException(nameof(centerFrequecy), "中心周波数は有限の実数値である必要があります。");
+
+            if (bandwidth <= 0.0)
+                throw new ArgumentOutOfRangeException(nameof(bandwidth), "帯域幅は 0.0 (Hz) よりも大きな実数である必要があります。");
+
+            if (double.IsInfinity(bandwidth))
+                throw new ArgumentOutOfRangeException(nameof(bandwidth), "中心周波数は有限の実数値である必要があります。");
+            
             FrequencyLow = centerFrequecy - bandwidth / 2.0;
             FrequencyHigh = centerFrequecy + bandwidth / 2.0;
+
+            if (FrequencyLow < 0.0)
+                throw new ArgumentOutOfRangeException(nameof(bandwidth), "帯域幅が大きすぎます。帯域幅の下限は 0.0 (Hz) 以上である必要があります。");
         }
         #endregion
     }
