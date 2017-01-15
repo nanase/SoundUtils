@@ -50,7 +50,7 @@ namespace SoundUtils.Filtering
         public OverSampling(double samplingRate, int magnification, bool stereo, int filterSize)
         {
             if (samplingRate <= 0.0)
-                throw new ArgumentOutOfRangeException(nameof(samplingRate));
+                throw new InvalidSamplingRateException(nameof(samplingRate), samplingRate);
 
             if (magnification <= 0)
                 throw new ArgumentOutOfRangeException(nameof(magnification));

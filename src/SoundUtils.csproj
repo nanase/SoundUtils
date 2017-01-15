@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="BitOperate.cs" />
     <Compile Include="Channel.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="Filtering\FIR\FiniteImpulseResponse.cs" />
     <Compile Include="Filtering\FIR\LowPassFilter.cs" />
     <Compile Include="Filtering\FIR\HighPassFilter.cs" />

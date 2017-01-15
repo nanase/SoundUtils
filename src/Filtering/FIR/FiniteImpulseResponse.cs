@@ -60,6 +60,9 @@ namespace SoundUtils.Filtering.FIR
         /// <returns>デルタ値。</returns>
         public static double GetDelta(double samplingRate, int delayer)
         {
+            if (samplingRate <= 0.0)
+                throw new InvalidSamplingRateException(nameof(samplingRate), samplingRate);
+
             // 奇数で返す
             if ((delayer & 1) == 0)
                 delayer--;
@@ -75,6 +78,9 @@ namespace SoundUtils.Filtering.FIR
         /// <returns>フィルタサイズ。</returns>
         public static int GetFilterSize(double samplingRate, double delta)
         {
+            if (samplingRate <= 0.0)
+                throw new InvalidSamplingRateException(nameof(samplingRate), samplingRate);
+
             delta /= samplingRate;
             var delayer = (int)(3.1 / delta + 0.5) - 1;
 
