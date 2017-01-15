@@ -22,6 +22,8 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+
 namespace SoundUtils.Filtering.FIR
 {
     /// <summary>
@@ -37,6 +39,9 @@ namespace SoundUtils.Filtering.FIR
         /// <returns>インパルス応答が格納された配列。</returns>
         public double[] Generate(double delta)
         {
+            if (delta < 0.0 || double.IsInfinity(delta))
+                throw new ArgumentOutOfRangeException(nameof(delta), "デルタ値は 0.0 以上かつ有限の実数である必要があります。");
+
             return base.Generate(GetFilterSize(SamplingRate, delta));
         }
 
@@ -47,6 +52,15 @@ namespace SoundUtils.Filtering.FIR
         /// <param name="delta">デルタ値。</param>
         public void Generate(double[] array, double delta)
         {
+            if (delta < 0.0 || double.IsInfinity(delta))
+                throw new ArgumentOutOfRangeException(nameof(delta), "デルタ値は 0.0 以上かつ有限の実数である必要があります。");
+
+            if (array == null)
+                throw new ArgumentNullException(nameof(array));
+
+            if (array.Length == 0)
+                throw new ArgumentOutOfRangeException(nameof(array));
+
             base.Generate(array, GetFilterSize(SamplingRate, delta));
         }
         #endregion
@@ -62,6 +76,9 @@ namespace SoundUtils.Filtering.FIR
         {
             if (samplingRate <= 0.0)
                 throw new InvalidSamplingRateException(nameof(samplingRate), samplingRate);
+
+            if (delayer > 0)
+                throw new ArgumentOutOfRangeException(nameof(delayer), "遅延器の数は 1 以上の整数である必要があります。");
 
             // 奇数で返す
             if ((delayer & 1) == 0)
@@ -80,6 +97,9 @@ namespace SoundUtils.Filtering.FIR
         {
             if (samplingRate <= 0.0)
                 throw new InvalidSamplingRateException(nameof(samplingRate), samplingRate);
+
+            if (delta < 0.0 || double.IsInfinity(delta))
+                throw new ArgumentOutOfRangeException(nameof(delta), "デルタ値は 0.0 以上かつ有限の実数である必要があります。");
 
             delta /= samplingRate;
             var delayer = (int)(3.1 / delta + 0.5) - 1;
