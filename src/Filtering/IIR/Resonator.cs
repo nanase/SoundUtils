@@ -23,6 +23,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 using System;
+using System.Linq;
 
 namespace SoundUtils.Filtering.IIR
 {
@@ -68,6 +69,8 @@ namespace SoundUtils.Filtering.IIR
         /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
+            CheckFrequencies();
+
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
 
@@ -86,6 +89,16 @@ namespace SoundUtils.Filtering.IIR
                         array[i] += Math.Sin(i * frequency * 2.0 * Math.PI / SamplingRate) * amp *
                                     Math.Exp(-Math.Pow(i, 2.0) / Math.Pow(Strength, 2.0));
         }
+        #endregion
+
+        #region -- Private Methods --
+
+        private void CheckFrequencies()
+        {
+            foreach (var frequency in Frequencies.Where(frequency => frequency < 0.0 || frequency > SamplingRate))
+                throw new InvalidFrequencyException(nameof(Frequencies), frequency);
+        }
+
         #endregion
     }
 }
