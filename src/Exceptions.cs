@@ -42,4 +42,21 @@ namespace SoundUtils
 
         #endregion
     }
+
+    public class InvalidFrequencyException : ArgumentOutOfRangeException
+    {
+        #region -- Constructors --
+
+        public InvalidFrequencyException(string paramName)
+            : base(paramName, "与えられた周波数は有効な範囲にありません。")
+        {
+        }
+
+        public InvalidFrequencyException(string paramName, double actualValue)
+            : base(paramName, actualValue, "与えられた周波数は有効な範囲にありません。")
+        {
+        }
+
+        #endregion
+    }
 }
