@@ -88,7 +88,7 @@ namespace SoundUtils.IO
                 throw new InvalidOperationException("シークができないか、読み取りのできないストリームは使用できません。");
 
             if (samplingRate <= 0)
-                throw new ArgumentOutOfRangeException(nameof(samplingRate), "無効なサンプリング周波数が指定されました。サンプリング周波数は 1(Hz) 以上の整数である必要があります。");
+                throw new InvalidSamplingRateException(nameof(samplingRate));
 
             if (bitPerSample < 2)
                 throw new ArgumentOutOfRangeException(nameof(bitPerSample), "無効なビット数が指定されました。ビット数は 2 以上である必要があります。");
