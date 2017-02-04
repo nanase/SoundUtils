@@ -84,9 +84,9 @@ namespace SoundUtils.IO
             var buf = new byte[count];
 
             if (BitPerSample == 8)
-                ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
+                buffer.RegulateAsInt8(offset, count, buf);
             else
-                ArrayConvert.ToByte(buffer, offset, count, buf, BitConverter.IsLittleEndian);
+                buffer.ToByte(offset, count, buf, BitConverter.IsLittleEndian);
 
             BaseStream.Write(buf, offset, count);
             WrittenBytes += count;
@@ -109,9 +109,9 @@ namespace SoundUtils.IO
             var buf = new byte[count];
 
             if (BitPerSample == 8)
-                ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
+                buffer.RegulateAsInt8(offset, count, buf);
             else
-                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
+                buffer.RegulateAsInt16(offset, count, buf, BitConverter.IsLittleEndian);
 
             BaseStream.Write(buf, offset, count);
             WrittenBytes += count;
@@ -134,9 +134,9 @@ namespace SoundUtils.IO
             var buf = new byte[count];
 
             if (BitPerSample == 8)
-                ArrayConvert.RegulateAsInt8(buffer, offset, count, buf);
+                buffer.RegulateAsInt8(offset, count, buf);
             else
-                ArrayConvert.RegulateAsInt16(buffer, offset, count, buf, BitConverter.IsLittleEndian);
+                buffer.RegulateAsInt16(offset, count, buf, BitConverter.IsLittleEndian);
 
             BaseStream.Write(buf, offset, count);
             WrittenBytes += count;

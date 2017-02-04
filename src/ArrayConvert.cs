@@ -83,7 +83,7 @@ namespace SoundUtils
         /// <param name="src">変換される <see cref="short"/> 型配列。</param>
         /// <param name="dst">変換された値が格納される <see cref="byte"/> 型配列。</param>
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
-        public static void ToByte(short[] src, byte[] dst, bool reverse = false)
+        public static void ToByte(this short[] src, byte[] dst, bool reverse = false)
         {
             ToByte(src, 0, src.Length, dst, reverse);
         }
@@ -96,7 +96,7 @@ namespace SoundUtils
         /// <param name="count">読み取られる要素数。</param>
         /// <param name="dst">変換された値が格納される <see cref="byte"/> 型配列。</param>
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
-        public static unsafe void ToByte(short[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void ToByte(this short[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
@@ -120,23 +120,23 @@ namespace SoundUtils
         #endregion
 
         #region RegulateAsInt8
-        public static void RegulateAsInt8(short[] src, byte[] dst)
+        public static void RegulateAsInt8(this short[] src, byte[] dst)
         {
             RegulateAsInt8(src, 0, src.Length, dst);
         }
 
-        public static void RegulateAsInt8(short[] src, int offset, int count, byte[] dst)
+        public static void RegulateAsInt8(this short[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
                 dst[j] = (byte)Math.Round((src[i] / 65536.0 + 0.5) * 255);
         }
 
-        public static void RegulateAsInt8(float[] src, byte[] dst)
+        public static void RegulateAsInt8(this float[] src, byte[] dst)
         {
             RegulateAsInt8(src, 0, src.Length, dst);
         }
 
-        public static void RegulateAsInt8(float[] src, int offset, int count, byte[] dst)
+        public static void RegulateAsInt8(this float[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
             {
@@ -153,12 +153,12 @@ namespace SoundUtils
             }
         }
 
-        public static void RegulateAsInt8(double[] src, byte[] dst)
+        public static void RegulateAsInt8(this double[] src, byte[] dst)
         {
             RegulateAsInt8(src, 0, src.Length, dst);
         }
 
-        public static void RegulateAsInt8(double[] src, int offset, int count, byte[] dst)
+        public static void RegulateAsInt8(this double[] src, int offset, int count, byte[] dst)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
             {
@@ -177,12 +177,12 @@ namespace SoundUtils
         #endregion
 
         #region RegulateAsInt16
-        public static void RegulateAsInt16(float[] src, byte[] dst, bool reverse = false)
+        public static void RegulateAsInt16(this float[] src, byte[] dst, bool reverse = false)
         {
             RegulateAsInt16(src, 0, src.Length, dst, reverse);
         }
 
-        public static unsafe void RegulateAsInt16(float[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void RegulateAsInt16(this float[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
@@ -217,12 +217,12 @@ namespace SoundUtils
             }
         }
 
-        public static void RegulateAsInt16(double[] src, byte[] dst, bool reverse = false)
+        public static void RegulateAsInt16(this double[] src, byte[] dst, bool reverse = false)
         {
             RegulateAsInt16(src, 0, src.Length, dst, reverse);
         }
 
-        public static unsafe void RegulateAsInt16(double[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void RegulateAsInt16(this double[] src, int offset, int count, byte[] dst, bool reverse = false)
         {
             short tmp;
             byte* b0 = (byte*)&tmp, b1 = b0 + 1;
