@@ -32,7 +32,7 @@ namespace UnitTest
     public class ArrayConvertTest
     {
         [Test]
-        public void CastToDoubleTest()
+        public void ToDoubleTest()
         {
             var input = new[] { 3.0f, -2.5f, 1.76f, 2.97e-10f };
             var output = new double[4];
@@ -47,7 +47,7 @@ namespace UnitTest
         }
 
         [Test]
-        public void CastToSingleTest()
+        public void ToSingleTest()
         {
             var input = new[] { 3.0, -2.5, 1.76, 2.97e-10 };
             var output = new float[4];
