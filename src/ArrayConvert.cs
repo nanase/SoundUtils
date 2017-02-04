@@ -54,13 +54,13 @@ namespace SoundUtils
         }
         #endregion
 
-        #region CastToSingle
+        #region ToSingle
         /// <summary>
         /// 配列を <see cref="float"/> 型に変換します。
         /// </summary>
         /// <param name="src">変換元の <see cref="double"/> 型の配列。</param>
         /// <param name="dst">変換先の <see cref="float"/> 型の配列。</param>
-        public static void CastToSingle(double[] src, float[] dst)
+        public static void ToSingle(this double[] src, float[] dst)
         {
             if (src == null)
                 throw new ArgumentNullException(nameof(src));

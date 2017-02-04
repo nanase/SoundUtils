@@ -53,12 +53,12 @@ namespace UnitTest
             var output = new float[4];
             var expect = new[] { 3.0f, -2.5f, 1.76f, 2.97e-10f };
 
-            ArrayConvert.CastToSingle(input, output);
+            input.ToSingle(output);
             Assert.That(output, Is.EqualTo(expect));
 
-            Assert.That(() => ArrayConvert.CastToSingle(null, output), Throws.ArgumentNullException);
-            Assert.That(() => ArrayConvert.CastToSingle(input, null), Throws.ArgumentNullException);
-            Assert.That(() => ArrayConvert.CastToSingle(new double[1], new float[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => ArrayConvert.ToSingle(null, output), Throws.ArgumentNullException);
+            Assert.That(() => input.ToSingle(null), Throws.ArgumentNullException);
+            Assert.That(() => new double[1].ToSingle(new float[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
     }
 }
