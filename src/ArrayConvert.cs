@@ -32,13 +32,13 @@ namespace SoundUtils
     public static class ArrayConvert
     {
         #region -- Public Static Methods --
-        #region CastToDouble
+        #region ToDouble
         /// <summary>
         /// 配列を <see cref="double"/> 型に変換します。
         /// </summary>
         /// <param name="src">変換元の <see cref="float"/> 型の配列。</param>
         /// <param name="dst">変換先の <see cref="float"/> 型の配列。</param>
-        public static void CastToDouble(float[] src, double[] dst)
+        public static void ToDouble(this float[] src, double[] dst)
         {
             if (src == null)
                 throw new ArgumentNullException(nameof(src));

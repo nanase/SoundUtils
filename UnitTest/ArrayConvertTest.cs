@@ -38,12 +38,12 @@ namespace UnitTest
             var output = new double[4];
             var expect = new double[] { 3.0f, -2.5f, 1.76f, 2.97e-10f };
 
-            ArrayConvert.CastToDouble(input, output);
+            input.ToDouble(output);
             Assert.That(output, Is.EqualTo(expect));
 
-            Assert.That(() => ArrayConvert.CastToDouble(null, output), Throws.ArgumentNullException);
-            Assert.That(() => ArrayConvert.CastToDouble(input, null), Throws.ArgumentNullException);
-            Assert.That(() => ArrayConvert.CastToDouble(new float[1], new double[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => ArrayConvert.ToDouble(null, output), Throws.ArgumentNullException);
+            Assert.That(() => input.ToDouble(null), Throws.ArgumentNullException);
+            Assert.That(() => new float[1].ToDouble(new double[0]), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
