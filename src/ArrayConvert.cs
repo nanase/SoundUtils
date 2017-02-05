@@ -33,229 +33,254 @@ namespace SoundUtils
     {
         #region -- Public Static Methods --
         #region ToDouble
+
         /// <summary>
         /// 配列を <see cref="double"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換元の <see cref="float"/> 型の配列。</param>
-        /// <param name="dst">変換先の <see cref="float"/> 型の配列。</param>
-        public static void ToDouble(this float[] src, double[] dst)
+        /// <param name="source">変換元の <see cref="float"/> 型の配列。</param>
+        /// <param name="destination">変換先の <see cref="float"/> 型の配列。</param>
+        public static void ToDouble(this float[] source, double[] destination)
         {
-            if (src == null)
-                throw new ArgumentNullException(nameof(src));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
-            if (dst == null)
-                throw new ArgumentNullException(nameof(dst));
+            if (destination == null)
+                throw new ArgumentNullException(nameof(destination));
 
-            if (src.Length != dst.Length)
-                throw new ArgumentOutOfRangeException(nameof(dst));
+            if (source.Length != destination.Length)
+                throw new ArgumentOutOfRangeException(nameof(destination));
 
-            for (int i = 0, l = src.Length; i < l; i++)
-                dst[i] = src[i];
+            for (int i = 0, length = source.Length; i < length; i++)
+                destination[i] = source[i];
         }
+
         #endregion
 
         #region ToSingle
+
         /// <summary>
         /// 配列を <see cref="float"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換元の <see cref="double"/> 型の配列。</param>
-        /// <param name="dst">変換先の <see cref="float"/> 型の配列。</param>
-        public static void ToSingle(this double[] src, float[] dst)
+        /// <param name="source">変換元の <see cref="double"/> 型の配列。</param>
+        /// <param name="destination">変換先の <see cref="float"/> 型の配列。</param>
+        public static void ToSingle(this double[] source, float[] destination)
         {
-            if (src == null)
-                throw new ArgumentNullException(nameof(src));
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
-            if (dst == null)
-                throw new ArgumentNullException(nameof(dst));
+            if (destination == null)
+                throw new ArgumentNullException(nameof(destination));
 
-            if (src.Length != dst.Length)
-                throw new ArgumentOutOfRangeException(nameof(dst));
+            if (source.Length != destination.Length)
+                throw new ArgumentOutOfRangeException(nameof(destination));
 
-            for (int i = 0, l = src.Length; i < l; i++)
-                dst[i] = (float)src[i];
+            for (int i = 0, length = source.Length; i < length; i++)
+                destination[i] = (float)source[i];
         }
+
         #endregion
 
         #region ToByte
+
         /// <summary>
         /// <see cref="short"/> 型の配列の値を <see cref="byte"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換される <see cref="short"/> 型配列。</param>
-        /// <param name="dst">変換された値が格納される <see cref="byte"/> 型配列。</param>
+        /// <param name="source">変換される <see cref="short"/> 型配列。</param>
+        /// <param name="destination">変換された値が格納される <see cref="byte"/> 型配列。</param>
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
-        public static void ToByte(this short[] src, byte[] dst, bool reverse = false)
+        public static void ToByte(this short[] source, byte[] destination, bool reverse = false)
         {
-            ToByte(src, 0, src.Length, dst, reverse);
+            ToByte(source, 0, source.Length, destination, reverse);
         }
 
         /// <summary>
         /// <see cref="short"/> 型の配列の値を <see cref="byte"/> 型に変換します。
         /// </summary>
-        /// <param name="src">変換される <see cref="short"/> 型配列。</param>
+        /// <param name="source">変換される <see cref="short"/> 型配列。</param>
         /// <param name="offset">読み取りが開始されるインデックスのオフセット。</param>
         /// <param name="count">読み取られる要素数。</param>
-        /// <param name="dst">変換された値が格納される <see cref="byte"/> 型配列。</param>
+        /// <param name="destination">変換された値が格納される <see cref="byte"/> 型配列。</param>
         /// <param name="reverse">バイトオーダを判定するかどうかの真偽値。</param>
-        public static unsafe void ToByte(this short[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void ToByte(
+            this short[] source,
+            int offset,
+            int count,
+            byte[] destination,
+            bool reverse = false)
         {
-            short tmp;
-            byte* b0 = (byte*)&tmp, b1 = b0 + 1;
+            short temp;
+            byte* b0 = (byte*)&temp, b1 = b0 + 1;
 
             for (int i = offset, j = 0, length = offset + count; i < length; i++)
             {
-                tmp = src[i];
+                temp = source[i];
 
                 if (reverse)
                 {
-                    dst[j++] = *b0;
-                    dst[j++] = *b1;
+                    destination[j++] = *b0;
+                    destination[j++] = *b1;
                 }
                 else
                 {
-                    dst[j++] = *b1;
-                    dst[j++] = *b0;
+                    destination[j++] = *b1;
+                    destination[j++] = *b0;
                 }
             }
         }
+
         #endregion
 
         #region RegulateAsInt8
-        public static void RegulateAsInt8(this short[] src, byte[] dst)
+
+        public static void RegulateAsInt8(this short[] source, byte[] destination)
         {
-            RegulateAsInt8(src, 0, src.Length, dst);
+            RegulateAsInt8(source, 0, source.Length, destination);
         }
 
-        public static void RegulateAsInt8(this short[] src, int offset, int count, byte[] dst)
-        {
-            for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
-                dst[j] = (byte)Math.Round((src[i] / 65536.0 + 0.5) * 255);
-        }
-
-        public static void RegulateAsInt8(this float[] src, byte[] dst)
-        {
-            RegulateAsInt8(src, 0, src.Length, dst);
-        }
-
-        public static void RegulateAsInt8(this float[] src, int offset, int count, byte[] dst)
+        public static void RegulateAsInt8(this short[] source, int offset, int count, byte[] destination)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
-            {
-                var dtmp = src[i];
-
-                if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
-                    dst[j] = 127;
-                else if (dtmp > 1.0f)
-                    dst[j] = 255;
-                else if (dtmp < -1.0f)
-                    dst[j] = 0;
-                else
-                    dst[j] = (byte)Math.Round((dtmp + 1.0f) * 127.5f);
-            }
+                destination[j] = (byte)Math.Round((source[i] / 65536.0 + 0.5) * 255);
         }
 
-        public static void RegulateAsInt8(this double[] src, byte[] dst)
+        public static void RegulateAsInt8(this float[] source, byte[] destination)
         {
-            RegulateAsInt8(src, 0, src.Length, dst);
+            RegulateAsInt8(source, 0, source.Length, destination);
         }
 
-        public static void RegulateAsInt8(this double[] src, int offset, int count, byte[] dst)
+        public static void RegulateAsInt8(this float[] source, int offset, int count, byte[] destination)
         {
             for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
             {
-                var dtmp = src[i];
+                var tempFloat = source[i];
 
-                if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
-                    dst[j] = 127;
-                else if (dtmp > 1.0)
-                    dst[j] = 255;
-                else if (dtmp < -1.0)
-                    dst[j] = 0;
+                if (float.IsNaN(tempFloat) || float.IsInfinity(tempFloat))
+                    destination[j] = 127;
+                else if (tempFloat > 1.0f)
+                    destination[j] = 255;
+                else if (tempFloat < -1.0f)
+                    destination[j] = 0;
                 else
-                    dst[j] = (byte)Math.Round((dtmp + 1.0) * 127.5);
+                    destination[j] = (byte)Math.Round((tempFloat + 1.0f) * 127.5f);
             }
         }
+
+        public static void RegulateAsInt8(this double[] source, byte[] destination)
+        {
+            RegulateAsInt8(source, 0, source.Length, destination);
+        }
+
+        public static void RegulateAsInt8(this double[] source, int offset, int count, byte[] destination)
+        {
+            for (int i = offset, j = 0, length = offset + count; i < length; i++, j++)
+            {
+                var tempDouble = source[i];
+
+                if (double.IsNaN(tempDouble) || double.IsInfinity(tempDouble))
+                    destination[j] = 127;
+                else if (tempDouble > 1.0)
+                    destination[j] = 255;
+                else if (tempDouble < -1.0)
+                    destination[j] = 0;
+                else
+                    destination[j] = (byte)Math.Round((tempDouble + 1.0) * 127.5);
+            }
+        }
+
         #endregion
 
         #region RegulateAsInt16
-        public static void RegulateAsInt16(this float[] src, byte[] dst, bool reverse = false)
+
+        public static void RegulateAsInt16(this float[] source, byte[] destination, bool reverse = false)
         {
-            RegulateAsInt16(src, 0, src.Length, dst, reverse);
+            RegulateAsInt16(source, 0, source.Length, destination, reverse);
         }
 
-        public static unsafe void RegulateAsInt16(this float[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void RegulateAsInt16(
+            this float[] source,
+            int offset,
+            int count,
+            byte[] destination,
+            bool reverse = false)
         {
-            short tmp;
-            byte* b0 = (byte*)&tmp, b1 = b0 + 1;
+            short temp;
+            byte* b0 = (byte*)&temp, b1 = b0 + 1;
 
             for (int i = offset, j = 0, length = offset + count; i < length; i++)
             {
-                var dtmp = src[i];
+                var tempFloat = source[i];
 
-                if (float.IsNaN(dtmp) || float.IsInfinity(dtmp))
+                if (float.IsNaN(tempFloat) || float.IsInfinity(tempFloat))
                 {
                     j += 2;
                     continue;
                 }
 
-                if (dtmp > 1.0f)
-                    tmp = short.MaxValue;
-                else if (dtmp < -1.0f)
-                    tmp = short.MinValue;
+                if (tempFloat > 1.0f)
+                    temp = short.MaxValue;
+                else if (tempFloat < -1.0f)
+                    temp = short.MinValue;
                 else
-                    tmp = (short)(dtmp * 32767.5f);
+                    temp = (short)(tempFloat * 32767.5f);
 
                 if (reverse)
                 {
-                    dst[j++] = *b0;
-                    dst[j++] = *b1;
+                    destination[j++] = *b0;
+                    destination[j++] = *b1;
                 }
                 else
                 {
-                    dst[j++] = *b1;
-                    dst[j++] = *b0;
+                    destination[j++] = *b1;
+                    destination[j++] = *b0;
                 }
             }
         }
 
-        public static void RegulateAsInt16(this double[] src, byte[] dst, bool reverse = false)
+        public static void RegulateAsInt16(this double[] source, byte[] destination, bool reverse = false)
         {
-            RegulateAsInt16(src, 0, src.Length, dst, reverse);
+            RegulateAsInt16(source, 0, source.Length, destination, reverse);
         }
 
-        public static unsafe void RegulateAsInt16(this double[] src, int offset, int count, byte[] dst, bool reverse = false)
+        public static unsafe void RegulateAsInt16(
+            this double[] source,
+            int offset,
+            int count,
+            byte[] destination,
+            bool reverse = false)
         {
-            short tmp;
-            byte* b0 = (byte*)&tmp, b1 = b0 + 1;
+            short temp;
+            byte* b0 = (byte*)&temp, b1 = b0 + 1;
 
             for (int i = offset, j = 0, length = offset + count; i < length; i++)
             {
-                var dtmp = src[i];
+                var tempDouble = source[i];
 
-                if (double.IsNaN(dtmp) || double.IsInfinity(dtmp))
+                if (double.IsNaN(tempDouble) || double.IsInfinity(tempDouble))
                 {
                     j += 2;
                     continue;
                 }
 
-                if (dtmp > 1.0)
-                    tmp = short.MaxValue;
-                else if (dtmp < -1.0)
-                    tmp = short.MinValue;
+                if (tempDouble > 1.0)
+                    temp = short.MaxValue;
+                else if (tempDouble < -1.0)
+                    temp = short.MinValue;
                 else
-                    tmp = (short)(dtmp * 32767.5);
+                    temp = (short)(tempDouble * 32767.5);
 
                 if (reverse)
                 {
-                    dst[j++] = *b0;
-                    dst[j++] = *b1;
+                    destination[j++] = *b0;
+                    destination[j++] = *b1;
                 }
                 else
                 {
-                    dst[j++] = *b1;
-                    dst[j++] = *b0;
+                    destination[j++] = *b1;
+                    destination[j++] = *b0;
                 }
             }
         }
+
         #endregion
         #endregion
     }
