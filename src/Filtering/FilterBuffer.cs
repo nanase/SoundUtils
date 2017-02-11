@@ -59,7 +59,7 @@ namespace SoundUtils.Filtering
         /// <param name="action">バッファが length に達した時に実行される処理。</param>
         public FilterBuffer(int length, Action<T[]> action)
         {
-            this.Length = length;
+            Length = length;
             Data = new T[length];
             this.action = action;
         }
