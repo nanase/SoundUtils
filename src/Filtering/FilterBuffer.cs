@@ -86,11 +86,11 @@ namespace SoundUtils.Filtering
                 index += copyLength;
                 inputIndex += copyLength;
 
-                if (index + 1 >= Length)
-                {
-                    action(Data);
-                    index = 0;
-                }
+                if (index + 1 < Length)
+                    continue;
+
+                action(Data);
+                index = 0;
             }
         }
 
@@ -99,13 +99,13 @@ namespace SoundUtils.Filtering
         /// </summary>
         public void Close()
         {
-            if (index > 0)
-            {
-                Array.Clear(Data, index, Length - index);
-                action(Data);
+            if (index <= 0)
+                return;
 
-                index = 0;
-            }
+            Array.Clear(Data, index, Length - index);
+            action(Data);
+
+            index = 0;
         }
         #endregion
     }
