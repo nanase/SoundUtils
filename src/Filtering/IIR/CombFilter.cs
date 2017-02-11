@@ -51,12 +51,6 @@ namespace SoundUtils.Filtering.IIR
         /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
-            if (array == null)
-                throw new ArgumentNullException(nameof(array));
-
-            if (size < 0 || size > array.Length)
-                throw new ArgumentOutOfRangeException(nameof(size));
-
             var progress = Delay;
 
             for (int i = 0, j = 0; i < size; j++)

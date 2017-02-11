@@ -80,7 +80,7 @@ namespace SoundUtils.Filtering
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
 
-            if (array.Length < length)
+            if (array.Length < 2 || length < 2 || array.Length < length)
                 throw new ArgumentOutOfRangeException(nameof(length));
 
             var arrayLength = array.Length;

@@ -71,12 +71,6 @@ namespace SoundUtils.Filtering.IIR
         {
             CheckFrequencies();
 
-            if (array == null)
-                throw new ArgumentNullException(nameof(array));
-
-            if (size < 1 || size > array.Length)
-                throw new ArgumentOutOfRangeException(nameof(size));
-
             var amp = Amplifier / (size / 2.0);
 
             Array.Clear(array, 0, size);

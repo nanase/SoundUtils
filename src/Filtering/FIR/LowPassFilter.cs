@@ -39,12 +39,6 @@ namespace SoundUtils.Filtering.FIR
         /// <param name="size">生成される長さ。</param>
         protected override void GenerateValues(double[] array, int size)
         {
-            if (array == null)
-                throw new ArgumentNullException(nameof(array));
-
-            if (size < 0 || size > array.Length)
-                throw new ArgumentOutOfRangeException(nameof(size));
-
             var offset = size / 2;
             var fe2 = 2.0 * (CutoffFrequency / SamplingRate);
             var fePi2 = Math.PI * fe2;
