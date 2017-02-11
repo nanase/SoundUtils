@@ -27,7 +27,7 @@ using System;
 namespace SoundUtils.Filtering
 {
     /// <summary>
-    /// データ型 T の配列に対する固定バッファを提供します。
+    /// バッファ配列に要素がすべて格納されたときに、指定されたメソッドを実行する機能を提供します。
     /// </summary>
     /// <typeparam name="T">バッファとして確保されるデータ型。</typeparam>
     public class FilterBuffer<T>
@@ -36,9 +36,11 @@ namespace SoundUtils.Filtering
 
         private readonly Action<T[]> action;
         private int index;
+
         #endregion
 
         #region -- Public Properties --
+
         /// <summary>
         /// バッファに対する生の配列を取得します。
         /// </summary>
@@ -52,6 +54,7 @@ namespace SoundUtils.Filtering
         #endregion
 
         #region -- Constructors --
+
         /// <summary>
         /// バッファの長さと実行される処理を指定して新しい FilterBuffer クラスのインスタンスを初期化します。
         /// </summary>
@@ -63,9 +66,11 @@ namespace SoundUtils.Filtering
             Data = new T[length];
             this.action = action;
         }
+
         #endregion
 
         #region -- Public Methods --
+
         /// <summary>
         /// バッファにデータを格納します。
         /// </summary>
@@ -107,6 +112,7 @@ namespace SoundUtils.Filtering
 
             index = 0;
         }
+
         #endregion
     }
 }
