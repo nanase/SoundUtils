@@ -112,7 +112,7 @@ namespace SoundUtils.Filtering
             for (var iOffset = 0; iOffset < bufferSize; iOffset += segmentSize)
             {
                 Array.Clear(fftC, segmentSize, fftSize * 2 - segmentSize);
-                Channel.Interleave(buffer, iOffset, fftC, 0, segmentSize);
+                buffer.Interleave(iOffset, fftC, 0, segmentSize);
 
                 fft.TransformComplex(fftC);
 
@@ -125,7 +125,7 @@ namespace SoundUtils.Filtering
                 }
 
                 fft.TransformComplex(fftC);
-                Channel.Deinterleave(fftC, xr, fftSize);
+                fftC.Deinterleave(xr, fftSize);
 
                 for (var i = 0; i < overlapSize; i++)
                     xr[i] += overlap[i];

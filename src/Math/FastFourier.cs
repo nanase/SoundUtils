@@ -122,7 +122,7 @@ namespace SoundUtils
 
             Channel.Interleave(real, imaginary, interleave, n / 2);
             TransformComplex(interleave, invert);
-            Channel.Deinterleave(interleave, real, imaginary, n / 2);
+            interleave.Deinterleave(real, imaginary, n / 2);
         }
 
         /// <summary>

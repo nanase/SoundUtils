@@ -93,10 +93,10 @@ namespace SoundUtils.Filtering
 
             if (stereo)
             {
-                Channel.Split(buffer, lbuffer, rbuffer);
+                buffer.Split(lbuffer, rbuffer);
                 lfilter.Apply(lbuffer);
                 rfilter.Apply(rbuffer);
-                Channel.Join(lbuffer, rbuffer, buffer);
+                lbuffer.Join(rbuffer, buffer);
             }
             else
             {
@@ -122,10 +122,10 @@ namespace SoundUtils.Filtering
 
             if (stereo)
             {
-                Channel.Split(input, lbuffer, rbuffer);
+                input.Split(lbuffer, rbuffer);
                 lfilter.Apply(lbuffer);
                 rfilter.Apply(rbuffer);
-                Channel.Join(lbuffer, rbuffer, output);
+                lbuffer.Join(rbuffer, output);
             }
             else
             {

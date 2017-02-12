@@ -40,7 +40,7 @@ namespace SoundUtils
         /// <param name="source">分割される T 型の配列。</param>
         /// <param name="channelL">L チャネルに分割される T 型配列。</param>
         /// <param name="channelR">R チャネルに分割される T 型配列。</param>
-        public static void Split<T>(T[] source, T[] channelL, T[] channelR)
+        public static void Split<T>(this T[] source, T[] channelL, T[] channelR)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -55,7 +55,7 @@ namespace SoundUtils
         /// <param name="channelL">合成元の L チャネルの T 型配列。</param>
         /// <param name="channelR">合成元の R チャネルの T 型配列。</param>
         /// <param name="destination">合成先の T 型配列。</param>
-        public static void Join<T>(T[] channelL, T[] channelR, T[] destination)
+        public static void Join<T>(this T[] channelL, T[] channelR, T[] destination)
         {
             if (destination == null)
                 throw new ArgumentNullException(nameof(destination));
@@ -72,7 +72,7 @@ namespace SoundUtils
         /// <param name="source">インターリーブされる T 型配列。</param>
         /// <param name="destination">インターリーブされた結果が格納されるの T 型配列</param>
         /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
-        public static void Interleave<T>(T[] source, T[] destination, int count)
+        public static void Interleave<T>(this T[] source, T[] destination, int count)
         {
             Interleave(source, 0, destination, 0, count);
         }
@@ -86,7 +86,7 @@ namespace SoundUtils
         /// <param name="destination">インターリーブされた結果が格納される T 型配列</param>
         /// <param name="destOffset">書き込みが開始されるインデックスのオフセット。</param>
         /// <param name="count">インターリーブされる配列から読み取られるデータ数。</param>
-        public static void Interleave<T>(T[] source, int srcOffset, T[] destination, int destOffset, int count)
+        public static void Interleave<T>(this T[] source, int srcOffset, T[] destination, int destOffset, int count)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -184,7 +184,7 @@ namespace SoundUtils
         /// <param name="source">インターリーブされた入力となる T 型配列。</param>
         /// <param name="destination">インターリーブ解除の結果が格納される T 型配列。</param>
         /// <param name="count">読み取り元配列のデータ数。</param>
-        public static void Deinterleave<T>(T[] source, T[] destination, int count)
+        public static void Deinterleave<T>(this T[] source, T[] destination, int count)
         {
             Deinterleave(source, 0, destination, 0, count);
         }
@@ -198,7 +198,7 @@ namespace SoundUtils
         /// <param name="destination">インターリーブ解除の結果が格納される T 型配列。</param>
         /// <param name="destinationOffset">結果の T 型配列の格納が開始されるインデックスのオフセット。</param>
         /// <param name="count">読み取り元配列のデータ数。</param>
-        public static void Deinterleave<T>(T[] source, int sourceOffset, T[] destination, int destinationOffset, int count)
+        public static void Deinterleave<T>(this T[] source, int sourceOffset, T[] destination, int destinationOffset, int count)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -231,7 +231,7 @@ namespace SoundUtils
         /// <param name="destinationR">インターリーブ解除の結果が格納される 1つ目の T 型配列。</param>
         /// <param name="destinationI">インターリーブ解除の結果が格納される 2つ目の T 型配列。</param>
         /// <param name="count">読み取り元配列のデータ数。</param>
-        public static void Deinterleave<T>(T[] source, T[] destinationR, T[] destinationI, int count)
+        public static void Deinterleave<T>(this T[] source, T[] destinationR, T[] destinationI, int count)
         {
             Deinterleave(source, 0, destinationR, 0, destinationI, 0, count);
         }
@@ -248,7 +248,7 @@ namespace SoundUtils
         /// <param name="destinationIOffset">2つ目の T 型配列の格納が開始されるインデックスのオフセット。</param>
         /// <param name="count">読み取り元配列のデータ数。</param>
         public static void Deinterleave<T>(
-            T[] source,
+            this T[] source,
             int sourceOffset,
             T[] destinationR, 
             int destinationROffset,
